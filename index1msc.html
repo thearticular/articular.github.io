@@ -637,6 +637,7 @@
                                     margin: 20px;
                                     border: 2px solid #fff;
                                 }
+
                                 iframe {
                                     width: 100%;
                                     height: 100%;
@@ -645,9 +646,11 @@
                                     transform: scale(1.1);
                                     transition: transform 0.3s ease;
                                 }
+
                                 iframe:hover {
                                     transform: scale(1);
                                 }
+
                                 .custom-box {
                                     position: relative;
                                     width: 100%;
@@ -658,10 +661,11 @@
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
-                                    border-radius: 10px;
+                                    border-radius: 20px;
                                     margin: 20px;
                                     border: 2px solid #fff;
                                 }
+
                                 .sparkle {
                                     position: absolute;
                                     width: 5px;
@@ -672,6 +676,7 @@
                                     opacity: 0;
                                     animation: sparkleAnimation 1s infinite;
                                 }
+
                                 @keyframes sparkleAnimation {
                                     0% {
                                         transform: scale(0);
@@ -688,6 +693,7 @@
                                         opacity: 0;
                                     }
                                 }
+
                                 .sparkles {
                                     position: absolute;
                                     width: 5px;
@@ -699,6 +705,7 @@
                                     filter: blur(3px);
                                     animation: sparkleAnimations 1s infinite;
                                 }
+
                                 @keyframes sparkleAnimations {
                                     0% {
                                         transform: scale(0);
@@ -715,6 +722,7 @@
                                         opacity: 0;
                                     }
                                 }
+
                                 @media (max-width: 600px) {
                                     .video-container {
                                         height: 250px;
@@ -761,6 +769,121 @@
                                     setInterval(createSparkleElement, 200);
                                 }
                                 generateSparkle();
+                            </script>
+
+                            <style>
+                                body {
+                                    margin: 0;
+                                    padding: 0;
+                                    overflow: hidden;
+                                    position: relative;
+                                }
+
+                                .shape {
+                                    position: absolute;
+                                    animation-duration: 2s;
+                                    animation-iteration-count: 1;
+                                }
+
+                                @keyframes moveRight {
+                                    0% {
+                                        left: -50px;
+                                    }
+
+                                    100% {
+                                        left: calc(100vw + 50px);
+                                    }
+                                }
+
+                                @keyframes moveLeft {
+                                    0% {
+                                        left: calc(100vw + 50px);
+                                    }
+
+                                    100% {
+                                        left: -50px;
+                                    }
+                                }
+
+                                @keyframes moveDown {
+                                    0% {
+                                        top: -50px;
+                                    }
+
+                                    100% {
+                                        top: calc(100vh + 50px);
+                                    }
+                                }
+
+                                @keyframes moveUp {
+                                    0% {
+                                        top: calc(100vh + 50px);
+                                    }
+
+                                    100% {
+                                        top: -50px;
+                                    }
+                                }
+                            </style>
+                            <script>
+                                function createShape(type, color) {
+                                    const shape = document.createElement("div");
+                                    shape.className = "shape";
+                                    shape.style.width = "50px";
+                                    shape.style.height = "50px";
+                                    shape.style.backgroundColor = color;
+                                    shape.style.borderRadius = type === "circle" ? "50%" : "0";
+                                    shape.style.clipPath = type === "triangle" ? "polygon(50% 0%, 0% 100%, 100% 100%)" : "none";
+                                    document.body.appendChild(shape);
+                                    return shape;
+                                }
+                                function moveShape(shape, from, to) {
+                                    shape.style.top = from.y + "px";
+                                    shape.style.left = from.x + "px";
+                                    const distanceX = to.x - from.x;
+                                    const distanceY = to.y - from.y;
+                                    shape.style.animationName = distanceX > 0 ? "moveRight" : distanceX < 0 ? "moveLeft" : distanceY > 0 ? "moveDown" : "moveUp";
+                                    shape.style.animationTimingFunction = "linear";
+                                    shape.style.animationFillMode = "forwards";
+                                    shape.style.animationPlayState = "running";
+                                    setTimeout(() => {
+                                        shape.remove();
+                                    }, 2000);
+                                }
+                                function randomInt(min, max) {
+                                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                                }
+                                function randomColor() {
+                                    const letters = "0123456789ABCDEF";
+                                    let color = "#";
+                                    for (let i = 0; i < 6; i++) {
+                                        color += letters[Math.floor(Math.random() * 16)];
+                                    }
+                                    return color;
+                                }
+                                function randomMovementOnClick() {
+                                    const shapes = ["square", "circle", "triangle"];
+                                    const numShapes = randomInt(5, 20);
+                                    for (let i = 0; i < numShapes; i++) {
+                                        const movements = [
+                                            { from: { x: -50, y: randomInt(0, window.innerHeight - 50) }, to: { x: window.innerWidth + 50, y: randomInt(0, window.innerHeight - 50) } },
+                                            { from: { x: randomInt(0, window.innerWidth - 50), y: -50 }, to: { x: randomInt(0, window.innerWidth - 50), y: window.innerHeight + 50 } },
+                                            { from: { x: randomInt(0, window.innerWidth - 50), y: window.innerHeight + 50 }, to: { x: randomInt(0, window.innerWidth - 50), y: -50 } },
+                                            {
+                                                from: { x: window.innerWidth + 50, y: randomInt(0, window.innerHeight - 50) }, to: { x: -50, y: randomInt(0, window.innerHeight - 50) }
+                                            }
+                                        ];
+                                        const shape = createShape(shapes[randomInt(0, 2)], randomColor());
+                                        const movement = movements[randomInt(0, 3)];
+                                        moveShape(shape, movement.from, movement.to);
+                                    }
+                                }
+                                document.addEventListener("mousedown", function (event) {
+                                    randomMovementOnClick();
+                                });
+                                document.addEventListener("touchstart", function (event) {
+                                    randomMovementOnClick();
+                                });
                             </script>
 
 
