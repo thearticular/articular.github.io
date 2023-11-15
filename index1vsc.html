@@ -616,83 +616,165 @@
                                 </div>
                             </div>
                             <p class="has-text-align-center">Here, some song, because my work is not finished yet.</p>
+
+
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/xorgqoL_t0k"
+                                    allowfullscreen></iframe>
+                            </div>
+                            <div class="custom-box"
+                                id="customBox">
+                                <p>Bowling For Soup - 1985 - May 21, 2004</p>
+                            </div>
                             <style>
                                 .video-container {
-                                    position: relative;
-                                    width: 800px;
+                                    width: 100%;
+                                    max-width: 800px;
                                     height: 450px;
-                                    border-radius: 10px;
                                     overflow: hidden;
+                                    border-radius: 20px;
                                     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+                                    margin: 20px;
+                                    border: 2px solid #fff;
                                 }
-                                .video-frame {
+
+                                iframe {
                                     width: 100%;
                                     height: 100%;
                                     border: none;
+                                    border-radius: 20px;
+                                    transform: scale(1.1);
+                                    transition: transform 0.3s ease;
                                 }
-                                .video-overlay {
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
+
+                                iframe:hover {
+                                    transform: scale(1);
+                                }
+
+                                .custom-box {
+                                    position: relative;
                                     width: 100%;
-                                    height: 100%;
+                                    max-width: 800px;
+                                    height: 200px;
+                                    background-color: #000;
+                                    color: #fff;
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
-                                    background-color: rgba(0, 0, 0, 0.5);
-                                    opacity: 0;
-                                    transition: opacity 0.3s ease;
+                                    border-radius: 10px;
+                                    margin: 20px;
+                                    border: 2px solid #fff;
                                 }
-                                .video-container:hover .video-overlay {
-                                    opacity: 1;
-                                }
-                                .play-icon {
-                                    color: #fff;
-                                    font-size: 60px;
-                                    transition: transform 0.3s ease;
-                                }
-                                .video-container:hover .play-icon {
-                                    transform: scale(1.2);
-                                }
-                                .video-title {
+
+                                .sparkle {
                                     position: absolute;
-                                    bottom: 0;
-                                    left: 0;
-                                    width: 100%;
-                                    padding: 20px;
-                                    background-color: rgba(0, 0, 0, 0.7);
-                                    color: #fff;
-                                    font-size: 18px;
-                                    font-weight: bold;
-                                    text-align: center;
-                                    border-bottom-left-radius: 10px;
-                                    border-bottom-right-radius: 10px;
-                                }
-                                .video-title::before {
-                                    content: "";
-                                    position: absolute;
-                                    bottom: -10px;
-                                    left: 50%;
-                                    transform: translateX(-50%);
-                                    width: 20px;
-                                    height: 20px;
-                                    background-color: rgba(0, 0, 0, 0.7);
+                                    width: 5px;
+                                    height: 5px;
+                                    background-color: #fff;
                                     border-radius: 50%;
+                                    pointer-events: none;
+                                    opacity: 0;
+                                    animation: sparkleAnimation 1s infinite;
+                                }
+
+                                @keyframes sparkleAnimation {
+                                    0% {
+                                        transform: scale(0);
+                                        opacity: 0;
+                                    }
+
+                                    50% {
+                                        transform: scale(2);
+                                        opacity: 1;
+                                    }
+
+                                    100% {
+                                        transform: scale(0);
+                                        opacity: 0;
+                                    }
+                                }
+
+                                .sparkles {
+                                    position: absolute;
+                                    width: 5px;
+                                    height: 5px;
+                                    background-color: #fff;
+                                    border-radius: 50%;
+                                    pointer-events: none;
+                                    opacity: 0;
+                                    filter: blur(3px);
+                                    animation: sparkleAnimations 1s infinite;
+                                }
+
+                                @keyframes sparkleAnimations {
+                                    0% {
+                                        transform: scale(0);
+                                        opacity: 0;
+                                    }
+
+                                    50% {
+                                        transform: scale(8);
+                                        opacity: 1;
+                                    }
+
+                                    100% {
+                                        transform: scale(0);
+                                        opacity: 0;
+                                    }
+                                }
+
+                                @media (max-width: 600px) {
+                                    .video-container {
+                                        height: 250px;
+                                    }
+
+                                    .custom-box {
+                                        height: 150px;
+                                    }
                                 }
                             </style>
-                            <div class="video-container">
-                                <iframe class="video-frame"
-                                    src="https://www.youtube.com/embed/xorgqoL_t0k"
-                                    frameborder="0"
-                                    allowfullscreen></iframe>
-                                <div class="video-overlay">
-                                    <i class="play-icon fas fa-play-circle"></i>
-                                </div>
-                                <div class="video-title">Bowling For Soup - 1985 - May 21, 2004</div>
-                            </div>
-                            <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"
-                                crossorigin="anonymous"></script>
-                            <br><br><br><p class="has-text-align-center"><i>Not goodbye, just see you down the way.</i></p>
+                            <script>
+                                function createSparkle() {
+                                    const sparkle = document.createElement('div');
+                                    sparkle.classList.add('sparkle');
+                                    sparkle.style.left = Math.random() * 100 + '%';
+                                    sparkle.style.top = Math.random() * 100 + '%';
+                                    sparkle.style.backgroundColor = getRandomColor();
+                                    document.getElementById('customBox').appendChild(sparkle);
+                                    setTimeout(() => {
+                                        sparkle.remove();
+                                    }, Math.random() * 5000 + 1000);
+                                }
+                                function getRandomColor() {
+                                    const letters = '0123456789ABCDEF';
+                                    let color = '#';
+                                    for (let i = 0; i < 6; i++) {
+                                        color += letters[Math.floor(Math.random() * 16)];
+                                    }
+                                    return color;
+                                }
+                                setInterval(createSparkle, 100);
+                                function createSparkleElement() {
+                                    const sparkleElement = document.createElement('div');
+                                    sparkleElement.classList.add('sparkles');
+                                    sparkleElement.style.left = Math.random() * window.innerWidth + 'px';
+                                    sparkleElement.style.top = Math.random() * window.innerHeight + 'px';
+                                    sparkleElement.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                                    document.body.appendChild(sparkleElement);
+                                    setTimeout(() => {
+                                        sparkleElement.remove();
+                                    }, Math.random() * 1000);
+                                }
+                                function generateSparkle() {
+                                    setInterval(createSparkleElement, 200);
+                                }
+                                generateSparkle();
+                            </script>
+
+
+
+                            <br><br><br>
+                            <p class="has-text-align-center"><i>Not goodbye, just see you down the way.</i></p>
                         </div><!-- .entry-content -->
                     </article><!-- #post-1228 -->
                 </main><!-- #main -->
