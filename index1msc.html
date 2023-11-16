@@ -564,8 +564,8 @@
         }
 
         body {
-            background-color: #000000;
-            color: white;
+            background-color: #3d3d3d;
+            color: rgb(0, 0, 0);
         }
 
         img {
@@ -615,281 +615,179 @@
                                         Random</a>
                                 </div>
                             </div>
-                            <p class="has-text-align-center">Here some song, because my work is not finished yet.</p>
+                            <p class="has-text-align-center">For this music, I spent my time crafting tracks in FL Studio. I browsed samples, chopping bits. Arranging them in the playlist, adding drums and synths, tweaking presets until sounds are right. Adobe Audition helped refine elements with EQ, compression and effects. Once finished, it is here on my site with an interactive visualizer. Using HTML, CSS and Javascript, the Web Audio API analyzes frequencies in real-time, mapping properties like lows/mids/highs to graphics in Canvas. It took me production, coding and testing the visuals, capturing the musical experience. But seeing the final result is satisfying.</p>
 
 
-                            <div class="video-container">
-                                <iframe src="https://www.youtube.com/embed/QhztLGBskt0"
-                                    allowfullscreen></iframe>
-                            </div>
-                            <div class="custom-box"
-                                id="customBox">
-                                <p>Nine Days - Absolutely (Story of a Girl) - March 21, 2000</p>
-                            </div>
                             <style>
-                                .video-container {
-                                    width: 100%;
-                                    max-width: 800px;
-                                    height: 450px;
-                                    overflow: hidden;
-                                    border-radius: 20px;
-                                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-                                    margin: 20px;
-                                    border: 2px solid #fff;
+                                .container {
+                                    text-align: center;
+                                    color: #ffffff;
+                                    position: relative;
                                 }
 
-                                iframe {
+                                #audio-player {
+                                    width: 100%;
+                                    max-width: 800px;
+                                    height: 60px;
+                                    margin: 20px;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                    display: block;
+                                }
+
+                                #audio-visualizer {
+                                    width: 100%;
+                                    max-width: 800px;
+                                    height: 400px;
+                                    background-color: #1a1a1a;
+                                    border-radius: 20px;
+                                    margin: 20px;
+                                    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
+                                    position: relative;
+                                    overflow: hidden;
+                                    margin-left: auto;
+                                    margin-right: auto;
+                                    display: block;
+                                }
+
+                                #audio-visualizer:after {
+                                    content: "";
+                                    position: absolute;
+                                    top: 100%;
+                                    left: 0;
+                                    right: 0;
+                                    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(196, 144, 144, 0));
+                                    transform: scaleY(-1);
+                                    transform-origin: bottom;
+                                }
+
+                                #particles-container {
+                                    position: fixed;
+                                    top: 0;
+                                    left: 0;
                                     width: 100%;
                                     height: 100%;
-                                    border: none;
-                                    border-radius: 20px;
-                                    transform: scale(1.1);
-                                    transition: transform 0.3s ease;
-                                }
-
-                                iframe:hover {
-                                    transform: scale(1);
-                                }
-
-                                .custom-box {
-                                    position: relative;
-                                    width: 100%;
-                                    max-width: 800px;
-                                    height: 200px;
-                                    background-color: #000;
-                                    color: #fff;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    border-radius: 20px;
-                                    margin: 20px;
-                                    border: 2px solid #fff;
-                                }
-
-                                .sparkle {
-                                    position: absolute;
-                                    width: 5px;
-                                    height: 5px;
-                                    background-color: #fff;
-                                    border-radius: 50%;
                                     pointer-events: none;
-                                    opacity: 0;
-                                    animation: sparkleAnimation 1s infinite;
-                                }
-
-                                @keyframes sparkleAnimation {
-                                    0% {
-                                        transform: scale(0);
-                                        opacity: 0;
-                                    }
-
-                                    50% {
-                                        transform: scale(2);
-                                        opacity: 1;
-                                    }
-
-                                    100% {
-                                        transform: scale(0);
-                                        opacity: 0;
-                                    }
-                                }
-
-                                .sparkles {
-                                    position: absolute;
-                                    width: 5px;
-                                    height: 5px;
-                                    background-color: #fff;
-                                    border-radius: 50%;
-                                    pointer-events: none;
-                                    opacity: 0;
-                                    filter: blur(3px);
-                                    animation: sparkleAnimations 1s infinite;
-                                }
-
-                                @keyframes sparkleAnimations {
-                                    0% {
-                                        transform: scale(0);
-                                        opacity: 0;
-                                    }
-
-                                    50% {
-                                        transform: scale(8);
-                                        opacity: 1;
-                                    }
-
-                                    100% {
-                                        transform: scale(0);
-                                        opacity: 0;
-                                    }
+                                    filter: blur(40px);
+                                    transform-origin: center;
+                                    transition: transform 0.1s ease;
+                                    overflow: hidden;
                                 }
 
                                 @media (max-width: 600px) {
-                                    .video-container {
-                                        height: 250px;
+                                    .container {
+                                        padding: 0 10px;
                                     }
 
-                                    .custom-box {
-                                        height: 150px;
-                                    }
-                                }
-                            </style>
-                            <script>
-                                function createSparkle() {
-                                    const sparkle = document.createElement('div');
-                                    sparkle.classList.add('sparkle');
-                                    sparkle.style.left = Math.random() * 100 + '%';
-                                    sparkle.style.top = Math.random() * 100 + '%';
-                                    sparkle.style.backgroundColor = getRandomColor();
-                                    document.getElementById('customBox').appendChild(sparkle);
-                                    setTimeout(() => {
-                                        sparkle.remove();
-                                    }, Math.random() * 5000 + 1000);
-                                }
-                                function getRandomColor() {
-                                    const letters = '0123456789ABCDEF';
-                                    let color = '#';
-                                    for (let i = 0; i < 6; i++) {
-                                        color += letters[Math.floor(Math.random() * 16)];
-                                    }
-                                    return color;
-                                }
-                                setInterval(createSparkle, 100);
-                                function createSparkleElement() {
-                                    const sparkleElement = document.createElement('div');
-                                    sparkleElement.classList.add('sparkles');
-                                    sparkleElement.style.left = Math.random() * window.innerWidth + 'px';
-                                    sparkleElement.style.top = Math.random() * window.innerHeight + 'px';
-                                    sparkleElement.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-                                    document.body.appendChild(sparkleElement);
-                                    setTimeout(() => {
-                                        sparkleElement.remove();
-                                    }, Math.random() * 1000);
-                                }
-                                function generateSparkle() {
-                                    setInterval(createSparkleElement, 200);
-                                }
-                                generateSparkle();
-                            </script>
-
-                            <style>
-                                body {
-                                    margin: 0;
-                                    padding: 0;
-                                    overflow: hidden;
-                                    position: relative;
-                                }
-
-                                .shape {
-                                    position: absolute;
-                                    animation-duration: 2s;
-                                    animation-iteration-count: 1;
-                                }
-
-                                @keyframes moveRight {
-                                    0% {
-                                        left: -50px;
-                                    }
-
-                                    100% {
-                                        left: calc(100vw + 50px);
-                                    }
-                                }
-
-                                @keyframes moveLeft {
-                                    0% {
-                                        left: calc(100vw + 50px);
-                                    }
-
-                                    100% {
-                                        left: -50px;
-                                    }
-                                }
-
-                                @keyframes moveDown {
-                                    0% {
-                                        top: -50px;
-                                    }
-
-                                    100% {
-                                        top: calc(100vh + 50px);
-                                    }
-                                }
-
-                                @keyframes moveUp {
-                                    0% {
-                                        top: calc(100vh + 50px);
-                                    }
-
-                                    100% {
-                                        top: -50px;
+                                    #audio-player,
+                                    #audio-visualizer {
+                                        max-width: calc(100% - 20px);
                                     }
                                 }
                             </style>
-                            <script>
-                                function createShape(type, color) {
-                                    const shape = document.createElement("div");
-                                    shape.className = "shape";
-                                    shape.style.width = "50px";
-                                    shape.style.height = "50px";
-                                    shape.style.backgroundColor = color;
-                                    shape.style.borderRadius = type === "circle" ? "50%" : "0";
-                                    shape.style.clipPath = type === "triangle" ? "polygon(50% 0%, 0% 100%, 100% 100%)" : "none";
-                                    document.body.appendChild(shape);
-                                    return shape;
-                                }
-                                function moveShape(shape, from, to) {
-                                    shape.style.top = from.y + "px";
-                                    shape.style.left = from.x + "px";
-                                    const distanceX = to.x - from.x;
-                                    const distanceY = to.y - from.y;
-                                    shape.style.animationName = distanceX > 0 ? "moveRight" : distanceX < 0 ? "moveLeft" : distanceY > 0 ? "moveDown" : "moveUp";
-                                    shape.style.animationTimingFunction = "linear";
-                                    shape.style.animationFillMode = "forwards";
-                                    shape.style.animationPlayState = "running";
-                                    setTimeout(() => {
-                                        shape.remove();
-                                    }, 2000);
-                                }
-                                function randomInt(min, max) {
-                                    return Math.floor(Math.random() * (max - min + 1)) + min;
-                                }
-                                function randomColor() {
-                                    const letters = "0123456789ABCDEF";
-                                    let color = "#";
-                                    for (let i = 0; i < 6; i++) {
-                                        color += letters[Math.floor(Math.random() * 16)];
+                            </head>
+
+                            <body>
+                                <div class="container">
+                                    <audio id="audio-player"
+                                        controls>
+                                        <source src="https://thearticular.github.io/articular/wp-content/uploads/tribbler.mp3"
+                                            type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <canvas id="audio-visualizer"
+                                        width="800"
+                                        height="400px"></canvas>
+                                </div>
+                                <div id="particles-container"></div>
+                                <script>
+                                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                                    const audioElement = document.getElementById('audio-player');
+                                    const audioSrc = audioContext.createMediaElementSource(audioElement);
+                                    const analyser = audioContext.createAnalyser();
+                                    const canvas = document.getElementById('audio-visualizer');
+                                    const ctx = canvas.getContext('2d');
+                                    audioSrc.connect(analyser);
+                                    audioSrc.connect(audioContext.destination);
+                                    const bufferLength = analyser.frequencyBinCount;
+                                    const dataArray = new Uint8Array(bufferLength);
+                                    function draw() {
+                                        const WIDTH = canvas.width;
+                                        const maxBarHeight = Math.max(...dataArray) * 1.5;
+                                        canvas.height = maxBarHeight;
+                                        const HEIGHT = canvas.height;
+                                        requestAnimationFrame(draw);
+                                        analyser.getByteFrequencyData(dataArray);
+                                        ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                                        ctx.fillRect(0, 0, WIDTH, HEIGHT);
+                                        const barWidth = (WIDTH / bufferLength) * 2.5;
+                                        let x = 0;
+                                        for (let i = 0; i < bufferLength; i++) {
+                                            const barHeight = dataArray[i] * 1.5;
+                                            const barHeightAdjusted = Math.max(2, barHeight);
+                                            const hue = -(i / bufferLength * 800 + 360) % 360;
+                                            const saturation = 100;
+                                            const lightness = 50;
+                                            const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                                            ctx.fillStyle = color;
+                                            ctx.fillRect(x, HEIGHT - barHeightAdjusted, barWidth, barHeightAdjusted);
+                                            x += barWidth + 1;
+                                        }
+                                        for (let i = 0; i < bufferLength; i += 10) {
+                                            const sparkX = Math.random() * WIDTH;
+                                            const sparkY = Math.random() * HEIGHT;
+                                            const sparkRadius = Math.random() * (dataArray[i] / 15);
+                                            const frequencyBasedRadius = sparkRadius * (i / bufferLength);
+                                            const sparkColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                                            ctx.beginPath();
+                                            ctx.arc(sparkX, sparkY, frequencyBasedRadius, 0, Math.PI * 2);
+                                            ctx.fillStyle = sparkColor;
+                                            ctx.fill();
+                                        }
                                     }
-                                    return color;
-                                }
-                                function randomMovementOnClick() {
-                                    const shapes = ["square", "circle", "triangle"];
-                                    const numShapes = randomInt(5, 20);
-                                    for (let i = 0; i < numShapes; i++) {
-                                        const movements = [
-                                            { from: { x: -50, y: randomInt(0, window.innerHeight - 50) }, to: { x: window.innerWidth + 50, y: randomInt(0, window.innerHeight - 50) } },
-                                            { from: { x: randomInt(0, window.innerWidth - 50), y: -50 }, to: { x: randomInt(0, window.innerWidth - 50), y: window.innerHeight + 50 } },
-                                            { from: { x: randomInt(0, window.innerWidth - 50), y: window.innerHeight + 50 }, to: { x: randomInt(0, window.innerWidth - 50), y: -50 } },
-                                            {
-                                                from: { x: window.innerWidth + 50, y: randomInt(0, window.innerHeight - 50) }, to: { x: -50, y: randomInt(0, window.innerHeight - 50) }
-                                            }
-                                        ];
-                                        const shape = createShape(shapes[randomInt(0, 2)], randomColor());
-                                        const movement = movements[randomInt(0, 3)];
-                                        moveShape(shape, movement.from, movement.to);
+                                    draw();
+                                    const particlesContainer = document.getElementById('particles-container');
+                                    const particleColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
+                                    function createParticle(container) {
+                                        const particle = document.createElement('div');
+                                        particle.classList.add('particle');
+                                        particle.style.backgroundColor = particleColors[Math.floor(Math.random() * particleColors.length)];
+                                        particle.style.width = '50px';
+                                        particle.style.height = '50px';
+                                        particle.style.borderRadius = '50%';
+                                        particle.style.position = 'absolute';
+                                        const maxTop = container.clientHeight;
+                                        const maxLeft = container.clientWidth;
+
+                                        particle.style.top = `${Math.random() * maxTop}px`;
+                                        particle.style.left = `${Math.random() * maxLeft}px`;
+                                        container.appendChild(particle);
+                                        setTimeout(() => {
+                                            particle.style.transform = 'scale(1)';
+                                            particle.style.opacity = '0%';
+                                        }, 5000);
                                     }
-                                }
-                                document.addEventListener("mousedown", function (event) {
-                                    randomMovementOnClick();
-                                });
-                                document.addEventListener("touchstart", function (event) {
-                                    randomMovementOnClick();
-                                });
-                            </script>
+                                    function createRandomParticles(container) {
+                                        const interval = Math.random() * 2000 + 500;
+                                        createParticle(container);
+                                        setTimeout(() => createRandomParticles(container), interval);
+                                    }
+                                    createRandomParticles(particlesContainer);
+                                    function updateParticlesPosition() {
+                                        requestAnimationFrame(updateParticlesPosition);
+                                        analyser.getByteFrequencyData(dataArray);
+                                        const average = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+                                        const scaleFactor = 1 + average / 500;
+                                        particlesContainer.style.transform = `scale(${scaleFactor})`;
+                                    }
+                                    updateParticlesPosition();
+                                </script>
 
 
-                            <br><br><br>
-                            <p class="has-text-align-center"><i>This pause won't last, our tale's left half untold.</i>
-                            </p>
+                                <br><br><br>
+                                <p class="has-text-align-center"><i>This pause won't last, our tale's left half
+                                        untold.</i>
+                                </p>
                         </div><!-- .entry-content -->
                     </article><!-- #post-1228 -->
                 </main><!-- #main -->
