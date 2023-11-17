@@ -564,8 +564,8 @@
         }
 
         body {
-            background-color: #3d3d3d;
-            color: rgb(0, 0, 0);
+            background-color: #292929;
+            color: rgb(255, 255, 255);
         }
 
         img {
@@ -648,6 +648,7 @@
                                     margin-left: auto;
                                     margin-right: auto;
                                     display: block;
+                                    border: 2px solid white;
                                 }
 
                                 #audio-visualizer:after {
@@ -691,10 +692,11 @@
                                 <div class="container">
                                     <audio id="audio-player"
                                         controls>
-                                        <source src="https://thearticular.github.io/articular/wp-content/uploads/tribbler.mp3"
+                                        <source src="wp-content/uploads/tribbler.mp3"
                                             type="audio/mpeg">
                                         Your browser does not support the audio element.
                                     </audio>
+                                    <p>Trembling roll</p>
                                     <canvas id="audio-visualizer"
                                         width="800"
                                         height="400px"></canvas>
@@ -722,10 +724,11 @@
                                         ctx.fillRect(0, 0, WIDTH, HEIGHT);
                                         const barWidth = (WIDTH / bufferLength) * 2.5;
                                         let x = 0;
-                                        for (let i = 0; i < bufferLength; i++) {
+                                        for (let i = 0; i < bufferLength; i+=4) {
+                                            const barWidth = (WIDTH / (bufferLength/4)) * 1;
                                             const barHeight = dataArray[i] * 1.5;
                                             const barHeightAdjusted = Math.max(2, barHeight);
-                                            const hue = -(i / bufferLength * 800 + 360) % 360;
+                                            const hue = -(i / bufferLength * 400 + 360) % 360;
                                             const saturation = 100;
                                             const lightness = 50;
                                             const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
