@@ -728,7 +728,7 @@
                                             const barWidth = (WIDTH / (bufferLength/4)) * 1;
                                             const barHeight = dataArray[i] * 1.5;
                                             const barHeightAdjusted = Math.max(2, barHeight);
-                                            const hue = -(i / bufferLength * 400 + 360) % 360;
+                                            const hue = -(i / bufferLength * 200 + 360) % 360;
                                             const saturation = 100;
                                             const lightness = 50;
                                             const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
