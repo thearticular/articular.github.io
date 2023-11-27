@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
     <title>Polynomial Regression Calculator</title>
 </head>
+
 <body>
     <div>
         <style>
             * {
                 font-size: 16px;
             }
+
             body {
                 display: flex;
                 justify-content: center;
@@ -19,12 +22,14 @@
                 margin: 0;
                 color: white;
             }
+
             label {
                 display: block;
                 margin-top: 5px;
                 font-size: 0.9em;
                 text-align: center;
             }
+
             input {
                 margin-top: 5px;
                 font-size: 0.9em;
@@ -35,9 +40,11 @@
                 border-width: 2px;
                 text-align: center;
             }
+
             input::placeholder {
                 text-align: center;
             }
+
             button {
                 width: 250px;
                 height: 40px;
@@ -50,22 +57,26 @@
                 border-color: white;
                 color: white;
             }
+
             #dataPointInputs {
                 margin-bottom: 5px;
                 font-size: 0.9em;
                 padding: 2px;
             }
+
             #equation,
             #result {
                 margin-top: 5px;
                 font-size: 0.9em;
                 padding: 2px;
             }
+
             #plot {
                 margin-top: 5px;
                 font-size: 0.9em;
                 padding: 2px;
             }
+
             .container {
                 height: 100%;
                 display: flex;
@@ -125,6 +136,9 @@
                 var dataPointInputs = document.getElementById('dataPointInputs');
                 var inputElements = dataPointInputs.getElementsByTagName('input');
                 if (inputElements.length > 1) {
+                    var dataPointLabels = dataPointInputs.getElementsByTagName('label');
+                    var lastDataPointLabel = dataPointLabels[dataPointLabels.length - 1];
+                    dataPointInputs.removeChild(lastDataPointLabel);
                     dataPointInputs.removeChild(inputElements[inputElements.length - 1]);
                     dataPointInputs.removeChild(inputElements[inputElements.length - 1]);
                     dataPointInputs.removeChild(dataPointInputs.getElementsByTagName('br')[dataPointInputs.getElementsByTagName('br').length - 1]);
@@ -182,8 +196,8 @@
                     type: 'scatter'
                 };
                 var layout = {
-                    xaxis: { title: 'x' },
-                    yaxis: { title: 'y' },
+                    xaxis: { title: 'X' },
+                    yaxis: { title: 'Y' },
                     width: 380,
                 };
                 var data = [trace];
@@ -221,5 +235,7 @@
             }
         </script>
     </div>
+
     <body>
+
 </html>
