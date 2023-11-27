@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>Polynomial Regression Calculator</title>
+</head>
+<body>
+    <div>
+        <style>
+            * {
+                font-size: 16px;
+            }
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                color: white;
+            }
+            label {
+                display: block;
+                margin-top: 5px;
+                font-size: 0.9em;
+                text-align: center;
+            }
+            input {
+                margin-top: 5px;
+                font-size: 0.9em;
+                padding: 2px;
+                width: 150px;
+                height: 35px;
+                border-radius: 20px;
+                border-width: 2px;
+            }
+            input::placeholder {
+                text-align: center;
+            }
+            button {
+                width: 250px;
+                height: 40px;
+                margin-top: 5px;
+                font-size: 0.9em;
+                padding: 2px;
+                background-color: #000000;
+                border-radius: 20px;
+                border-width: 2px;
+                border-color: white;
+                color: white;
+            }
+            #dataPointInputs {
+                margin-bottom: 5px;
+                font-size: 0.9em;
+                padding: 2px;
+            }
+            #equation,
+            #result {
+                margin-top: 5px;
+                font-size: 0.9em;
+                padding: 2px;
+            }
+            #plot {
+                margin-top: 5px;
+                font-size: 0.9em;
+                padding: 2px;
+            }
+            .container {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-size: 0.9em;
+                padding: 2px;
+                color: white;
+            }
+        </style>
+        <div class="container"><br>
+            <label for="dataPoints">Enter the data points:</label>
+            <div id="dataPointInputs">
+            </div>
+            <button onclick="addDataPointInput()">Add a Data Point</button><br><br>
+            <label for="order">Enter the order:</label>
+            <input type="number"
+                id="order"
+                placeholder="Order?">
+            <button onclick="calculateEquation()">Generate the Equation</button>
+            <p id="equation"></p><br><br>
+            <label for="inputX"
+                style="text-align:center;">To Extrapolate or Interpolate<br>Enter the value of
+                a new
+                'X':</label>
+            <input type="number"
+                id="inputX"
+                placeholder="New X?">
+            <button id="calculateYButton"
+                onclick="calculateY()"
+                disabled>Calculate the new 'Y'</button>
+            <p id="result"></p><br><br>
+            <p style="font-size: 12px;">Plot of the equation: </p>
+            <div id="plot"></div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script>
+            function addDataPointInput() {
+                var dataPointInputs = document.getElementById('dataPointInputs');
+                var dataPointCount = dataPointInputs.getElementsByTagName('input').length / 2 + 1;
+                var dataPointLabel = document.createElement('label');
+                dataPointLabel.innerText = "Datapoint: " + dataPointCount;
+                dataPointInputs.appendChild(dataPointLabel);
+                var xInput = document.createElement('input');
+                xInput.type = 'number';
+                xInput.placeholder = 'X?';
+                dataPointInputs.appendChild(xInput);
+                var yInput = document.createElement('input');
+                yInput.type = 'number';
+                yInput.placeholder = 'Y?';
+                dataPointInputs.appendChild(yInput);
+                dataPointInputs.appendChild(document.createElement('br'));
+            }
+            function removeDataPointInput() {
+                var dataPointInputs = document.getElementById('dataPointInputs');
+                var inputElements = dataPointInputs.getElementsByTagName('input');
+                if (inputElements.length > 1) {
+                    dataPointInputs.removeChild(inputElements[inputElements.length - 1]);
+                    dataPointInputs.removeChild(inputElements[inputElements.length - 1]);
+                    dataPointInputs.removeChild(dataPointInputs.getElementsByTagName('br')[dataPointInputs.getElementsByTagName('br').length - 1]);
+                }
+            }
+            (function () {
+                var removeDataPointBtn = document.createElement('button');
+                removeDataPointBtn.textContent = "Remove last Data Point";
+                removeDataPointBtn.onclick = removeDataPointInput;
+                var addDataPointBtn = document.querySelector('button[onclick="addDataPointInput()"]');
+                addDataPointBtn.parentNode.insertBefore(removeDataPointBtn, addDataPointBtn.nextSibling);
+            })();
+            function calculateEquation() {
+                var x = [];
+                var y = [];
+                var dataPointInputs = document.getElementById('dataPointInputs').getElementsByTagName('input');
+                for (var i = 0; i < dataPointInputs.length; i += 2) {
+                    var xValue = parseFloat(dataPointInputs[i].value);
+                    var yValue = parseFloat(dataPointInputs[i + 1].value);
+                    if (!isNaN(xValue) && !isNaN(yValue)) {
+                        x.push(xValue);
+                        y.push(yValue);
+                    }
+                }
+                var order = document.getElementById('order').value;
+                var xMatrix = [];
+                var xTemp = [];
+                var yMatrix = numeric.transpose([y]);
+                for (var j = 0; j < x.length; j++) {
+                    xTemp = [];
+                    for (var i = 0; i <= order; i++) {
+                        xTemp.push(1 * Math.pow(x[j], i));
+                    }
+                    xMatrix.push(xTemp);
+                }
+                var xMatrixT = numeric.transpose(xMatrix);
+                var dot1 = numeric.dot(xMatrixT, xMatrix);
+                var dotInv = numeric.inv(dot1);
+                var dot2 = numeric.dot(xMatrixT, yMatrix);
+                var solution = numeric.dot(dotInv, dot2);
+                var equation = "Equation: ";
+                for (var i = 0; i < solution.length; i++) {
+                    equation += solution[i][0].toFixed(2) + "x^" + i + " ";
+                    if (i !== solution.length - 1) {
+                        equation += "+ ";
+                    }
+                }
+                document.getElementById('equation').innerText = equation;
+                var xValues = generateXValues(Math.min(...x), Math.max(...x), 0.1);
+                var yValues = calculateYValues(xValues, solution);
+                var trace = {
+                    x: xValues,
+                    y: yValues,
+                    mode: 'lines',
+                    type: 'scatter'
+                };
+                var layout = {
+                    xaxis: { title: 'x' },
+                    yaxis: { title: 'y' },
+                    width: 380,
+                };
+                var data = [trace];
+                Plotly.newPlot('plot', data, layout);
+                document.getElementById('calculateYButton').removeAttribute('disabled');
+            }
+            function generateXValues(start, end, step) {
+                var xValues = [];
+                for (var x = start; x <= end; x += step) {
+                    xValues.push(x);
+                }
+                return xValues;
+            }
+            function calculateYValues(xValues, coefficients) {
+                var yValues = [];
+                for (var i = 0; i < xValues.length; i++) {
+                    var x = xValues[i];
+                    var y = 0;
+                    for (var j = 0; j < coefficients.length; j++) {
+                        y += coefficients[j] * Math.pow(x, j);
+                    }
+                    yValues.push(y);
+                }
+                return yValues;
+            }
+            function calculateY() {
+                var xValue = parseFloat(document.getElementById('inputX').value);
+                var equation = document.getElementById('equation').innerText;
+                var coefficients = equation.match(/-?\d+\.\d+/g).map(parseFloat);
+                var yValue = 0;
+                for (var i = 0; i < coefficients.length; i++) {
+                    yValue += coefficients[i] * Math.pow(xValue, i);
+                }
+                document.getElementById('result').innerText = "Y = " + yValue.toFixed(2);
+            }
+        </script>
+    </div>
+    <body>
+</html>

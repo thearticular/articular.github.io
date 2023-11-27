@@ -13,7 +13,7 @@
         content="width=device-width, initial-scale=1" />
     <link rel="profile"
         href="../gmpg.org/xfn/11" />
-    <title>Video Editing</title>
+    <title>Polynomial Regression</title>
     <meta name='robots'
         content='max-image-preview:large' />
     <link rel='dns-prefetch'
@@ -597,7 +597,7 @@
                     <article id="post-1228"
                         class="post-1228 page type-page status-publish hentry entry">
                         <header class="entry-header responsive-max-width">
-                            <h1 class="entry-title">Video Editing</h1>
+                            <h1 class="entry-title">Polynomial Regression</h1>
                         </header>
                         <div class="entry-content">
                             <div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
@@ -614,241 +614,13 @@
                                         style="border-radius:100px;background:linear-gradient(135deg,rgb(1,1,1) 0%,rgb(97,0,0) 52%,rgb(0,0,0) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous</a>
                                 </div>
                             </div>
-                            <p class="has-text-align-center">For video editing, In my workflow, I primarily use Adobe
-                                Premiere Pro to assemble footages and arrange shots into a cohesive sequence. Premiere's
-                                robust toolkit helps me to refine the timing of cuts, apply subtle transitions like
-                                cross dissolves for continuity, and overlay custom graphics, titles, and lower thirds
-                                designed in Adobe Illustrator. For color correction and additional visual effects, I
-                                often turn to Adobe Photoshop to utilize filters like Lumetri Color to enhance mood or
-                                apply particle effects for ambiance. I also sample music beds and foley effects,
-                                carefully adjusting levels with keyframes in Premiere's audio mixer. Overall, the goal
-                                is to employ the editing tools at my disposal to craft an immersive video that resonates
-                                with viewers.</p>
+                            <p class="has-text-align-center">I created this web application for polynomial regression. JavaScript was used for handling user input, performing calculations, and generating the equation. Also used numeric.js and Plotly to help in matrix operations and plotting the equation. I wanted to create this to faciliate the process to interpolate and extrapolate data based on stock market, GDP, population and other data trends.</p>                              
 
-
-                            <style>
-                                .container {
-                                    position: relative;
-                                    width: 100%;
-                                    max-width: 800px;
-                                    height: 100px;
-                                    overflow: hidden;
-                                    border-radius: 20px;
-                                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-                                    margin: 40px;
-                                    border: 2px solid #fff;
-                                    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
-                                    justify-content: center;
-                                }
-
-                                #audio-player {
-                                    width: 100%;
-                                    height: 100%;
-                                    border: none;
-                                    border-radius: 20px;
-                                    display: block;
-                                    margin: auto;
-                                    border: 2px solid #fff;
-                                    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
-                                    justify-content: center;
-                                }
-
-                                #audio-visualizer {
-                                    width: 100%;
-                                    max-width: 800px;
-                                    height: 150px;
-                                    background-color: #000000;
-                                    border-radius: 20px;
-                                    margin: 20px;
-                                    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
-                                    position: relative;
-                                    overflow: hidden;
-                                    margin-left: auto;
-                                    margin-right: auto;
-                                    display: block;
-                                    border: 2px solid white;
-                                }
-
-                                #audio-visualizer:after {
-                                    content: "";
-                                    position: absolute;
-                                    top: 100%;
-                                    left: 0;
-                                    right: 0;
-                                    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(196, 144, 144, 0));
-                                    transform: scaleY(-1);
-                                    transform-origin: bottom;
-                                }
-
-                                #particles-container {
-                                    position: fixed;
-                                    top: 0;
-                                    left: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    pointer-events: none;
-                                    filter: blur(40px);
-                                    transform-origin: center;
-                                    transition: transform 0.1s ease;
-                                    overflow: hidden;
-                                }
-
-                                @media (max-width: 600px) {
-                                    .container {
-                                        padding: 0px;
-                                    }
-
-                                    #audio-player,
-                                    #audio-visualizer {
-                                        max-width: calc(100%);
-                                    }
-                                }
-                            </style>
-                            <div class="video-container">
-                                <video id="audio-player"
-                                    width="320"
-                                    height="240"
-                                    controls
-                                    controlsList="nodownload">
-                                    <source
-                                        src="https://thearticular.github.io/articular/wp-content/uploads/invitation.mp4"
-                                        type="video/mp4">
-                                    <!-- <source
-                                        src="wp-content/uploads/invitation.mp4"
-                                        type="video/mp4"> -->
-                                    Your browser does not support the video tag.
-                                </video>
-                                <canvas id="audio-visualizer"
-                                    width="800"
-                                    height="400px"></canvas>
-                            </div>
-                            <div id="particles-container"></div>
-                            <p style="text-align: center;">The Wedding Invitation</p>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    const video = document.getElementById('audio-player');
-                                    let isPlaying = false;
-                                    video.addEventListener('click', function () {
-                                        if (isPlaying) {
-                                            video.pause();
-                                            isPlaying = false;
-                                        } else {
-                                            video.play();
-                                            isPlaying = true;
-                                        }
-                                    });
-                                    video.addEventListener('touchstart', function (e) {
-                                        e.preventDefault();
-                                        if (isPlaying) {
-                                            video.pause();
-                                            isPlaying = false;
-                                        } else {
-                                            video.play();
-                                            isPlaying = true;
-                                        }
-                                    });
-                                });
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    const video = document.getElementById('audio-player');
-                                    const container = document.querySelector('.container');
-
-                                    video.addEventListener('loadeddata', function () {
-                                        container.style.height = video.offsetHeight + 'px';
-                                    });
-
-                                    window.addEventListener('resize', function () {
-                                        container.style.height = video.offsetHeight + 'px';
-                                    });
-                                });
-
-                                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                                const audioElement = document.getElementById('audio-player');
-                                const audioSrc = audioContext.createMediaElementSource(audioElement);
-                                const analyser = audioContext.createAnalyser();
-                                const canvas = document.getElementById('audio-visualizer');
-                                const ctx = canvas.getContext('2d');
-                                audioSrc.connect(analyser);
-                                audioSrc.connect(audioContext.destination);
-                                const bufferLength = analyser.frequencyBinCount;
-                                const dataArray = new Uint8Array(bufferLength);
-                                function draw() {
-                                    const WIDTH = canvas.width;
-                                    const maxBarHeight = Math.max(...dataArray) * 1.5;
-                                    canvas.height = maxBarHeight;
-                                    const HEIGHT = canvas.height;
-                                    requestAnimationFrame(draw);
-                                    analyser.getByteFrequencyData(dataArray);
-                                    ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-                                    ctx.fillRect(0, 0, WIDTH, HEIGHT);
-                                    const barWidth = (WIDTH / bufferLength) * 2.5;
-                                    let x = 0;
-                                    for (let i = 0; i < bufferLength; i += 4) {
-                                        const barWidth = (WIDTH / (bufferLength / 4)) * 1;
-                                        const barHeight = dataArray[i] * 1.5;
-                                        const barHeightAdjusted = Math.max(2, barHeight);
-                                        const hue = -(i / bufferLength * 200 + 300) % 360;
-                                        const saturation = 100;
-                                        const lightness = 50;
-                                        const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-                                        ctx.fillStyle = color;
-                                        ctx.fillRect(x, HEIGHT - barHeightAdjusted, barWidth, barHeightAdjusted);
-                                        x += barWidth + 1;
-                                    }
-                                    for (let i = 0; i < bufferLength; i += 10) {
-                                        const sparkX = Math.random() * WIDTH;
-                                        const sparkY = Math.random() * HEIGHT;
-                                        const sparkRadius = Math.random() * (dataArray[i] / 8);
-                                        const frequencyBasedRadius = sparkRadius * (i / bufferLength);
-                                        const sparkColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                                        ctx.beginPath();
-                                        ctx.arc(sparkX, sparkY, frequencyBasedRadius, 0, Math.PI * 4);
-                                        ctx.fillStyle = sparkColor;
-                                        ctx.fill();
-                                    }
-                                }
-                                draw();
-                                const particlesContainer = document.getElementById('particles-container');
-                                const particleColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
-                                function createParticle(container) {
-                                    const particle = document.createElement('div');
-                                    particle.classList.add('particle');
-                                    particle.style.backgroundColor = particleColors[Math.floor(Math.random() * particleColors.length)];
-                                    particle.style.width = '50px';
-                                    particle.style.height = '50px';
-                                    particle.style.borderRadius = '50%';
-                                    particle.style.position = 'absolute';
-                                    const maxTop = container.clientHeight;
-                                    const maxLeft = container.clientWidth;
-
-                                    particle.style.top = `${Math.random() * maxTop}px`;
-                                    particle.style.left = `${Math.random() * maxLeft}px`;
-                                    container.appendChild(particle);
-                                    setTimeout(() => {
-                                        particle.style.transform = 'scale(1)';
-                                        particle.style.opacity = '0';
-                                    }, 10000);
-                                }
-                                function createRandomParticles(container) {
-                                    const interval = Math.random() * 2000 + 500;
-                                    createParticle(container);
-                                    setTimeout(() => createRandomParticles(container), interval);
-                                }
-                                createRandomParticles(particlesContainer);
-                                function updateParticlesPosition() {
-                                    requestAnimationFrame(updateParticlesPosition);
-                                    analyser.getByteFrequencyData(dataArray);
-                                    const average = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-                                    const scaleFactor = 1 + average / 100;
-                                    particlesContainer.style.transform = `scale(${scaleFactor})`;
-                                }
-                                updateParticlesPosition();
-
-                            </script>
-
-
+                                <iframe src="pnrc.html" style="border: none; width: 100vw; height: 100vh; overflow: hidden;"></iframe> 
 
                             <br><br><br>
-                            <p class="has-text-align-center"><i>Not goodbye, just see you down the way.</i></p>
+                            <p class="has-text-align-center"><i>Don't stop at your limit,<br>reach
+                                    infinity and beyond.</i></p>
                         </div><!-- .entry-content -->
                     </article><!-- #post-1228 -->
                 </main><!-- #main -->

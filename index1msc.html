@@ -580,7 +580,7 @@
 
 <body
     class="page-template-default page page-id-1228 wp-embed-responsive singular image-filters-enabled elementor-beta elementor-default elementor-kit-2139">
-	<!-- <div style="position: relative;">
+    <!-- <div style="position: relative;">
         <header
             style="text-align: center; padding: 2px; font-size: 1px; opacity: 0.3; color: white; position: sticky; top: 0; width: 100%; z-index: 1000; display: flex; align-items: center; justify-content: center;">
             <img src="wp-content\uploads\Picture2-1024x1017.png"
@@ -620,8 +620,7 @@
                                     class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
                                     <a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
                                         href="index53b4.html?page_id=2873/"
-                                        style="border-radius:100px;background:linear-gradient(135deg,rgb(1,1,1) 0%,rgb(97,0,0) 52%,rgb(0,0,0) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous
-                                        Random</a>
+                                        style="border-radius:100px;background:linear-gradient(135deg,rgb(1,1,1) 0%,rgb(97,0,0) 52%,rgb(0,0,0) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous</a>
                                 </div>
                             </div>
                             <p class="has-text-align-center">For this music, I spent my time crafting tracks in FL
@@ -631,7 +630,8 @@
                                 interactive visualizer. Using HTML, CSS and Javascript, the Web Audio API analyzes
                                 frequencies in real-time, mapping properties like lows/mids/highs to graphics in Canvas.
                                 It took me production, coding and testing the visuals, capturing the musical experience.
-                                But seeing the final result is satisfying. <br><br> PS, the audio won't play through link,
+                                But seeing the final result is satisfying. <br><br> PS, the audio won't play through
+                                link,
                                 navigate back here from the homepage.</p>
 
 
@@ -640,25 +640,26 @@
                                     text-align: center;
                                     color: #ffffff;
                                     position: relative;
+                                    width: 100%;
+                                    max-width: 800px;
+                                    overflow: hidden;
                                 }
 
                                 #audio-player {
                                     width: 100%;
                                     max-width: 800px;
                                     height: 60px;
-                                    margin: 20px;
-                                    margin-left: auto;
-                                    margin-right: auto;
+                                    margin: auto;
                                     display: block;
                                 }
 
                                 #audio-visualizer {
                                     width: 100%;
                                     max-width: 800px;
-                                    height: 400px;
+                                    height: 150px;
                                     background-color: #000000;
                                     border-radius: 20px;
-                                    margin: 20px;
+                                    margin-top: 20px;
                                     box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
                                     position: relative;
                                     overflow: hidden;
@@ -694,7 +695,7 @@
 
                                 @media (max-width: 600px) {
                                     .container {
-                                        padding: 0 10px;
+                                        padding: 0px;
                                     }
 
                                     #audio-player,
@@ -709,7 +710,9 @@
                                 <div class="container">
                                     <audio id="audio-player"
                                         controls
-                                        preload="auto">
+                                        preload="auto"
+                                        controls
+                                        controlsList="nodownload">
                                         <source
                                             src="https://thearticular.github.io/articular/wp-content/uploads/tribbler.mp3"
                                             type="audio/mpeg">
@@ -717,12 +720,12 @@
                                             type="audio/mpeg"> -->
                                         Your browser does not support the audio element.
                                     </audio>
-                                    <p>Trembling Roll</p>
                                     <canvas id="audio-visualizer"
                                         width="800"
                                         height="400px"></canvas>
                                 </div>
                                 <div id="particles-container"></div>
+                                <p style="text-align: center;">Trembling Roll</p>
                                 <script>
                                     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                                     const audioElement = document.getElementById('audio-player');
@@ -760,11 +763,11 @@
                                         for (let i = 0; i < bufferLength; i += 10) {
                                             const sparkX = Math.random() * WIDTH;
                                             const sparkY = Math.random() * HEIGHT;
-                                            const sparkRadius = Math.random() * (dataArray[i] / 15);
+                                            const sparkRadius = Math.random() * (dataArray[i] / 8);
                                             const frequencyBasedRadius = sparkRadius * (i / bufferLength);
                                             const sparkColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
                                             ctx.beginPath();
-                                            ctx.arc(sparkX, sparkY, frequencyBasedRadius, 0, Math.PI * 2);
+                                            ctx.arc(sparkX, sparkY, frequencyBasedRadius, 0, Math.PI * 4);
                                             ctx.fillStyle = sparkColor;
                                             ctx.fill();
                                         }
