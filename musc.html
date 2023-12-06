@@ -13,7 +13,7 @@
         content="width=device-width, initial-scale=1" />
     <link rel="profile"
         href="../gmpg.org/xfn/11" />
-    <title>Video Editing</title>
+    <title>Music</title>
     <meta name='robots'
         content='max-image-preview:large' />
     <link rel='dns-prefetch'
@@ -580,6 +580,15 @@
 
 <body
     class="page-template-default page page-id-1228 wp-embed-responsive singular image-filters-enabled elementor-beta elementor-default elementor-kit-2139">
+    <!-- <div style="position: relative;">
+        <header
+            style="text-align: center; padding: 2px; font-size: 1px; opacity: 0.3; color: white; position: sticky; top: 0; width: 100%; z-index: 1000; display: flex; align-items: center; justify-content: center;">
+            <img src="wp-content\uploads\Picture2-1024x1017.png"
+                alt="Header Image"
+                style="height: 20px;">
+            <h1 style="margin: 0; font-size: 10px;">&nbsp thearticular.github.io/articular</h1>
+        </header>
+    </div> -->
     <div id="page"
         class="site">
         <a class="skip-link screen-reader-text"
@@ -597,14 +606,14 @@
                     <article id="post-1228"
                         class="post-1228 page type-page status-publish hentry entry">
                         <header class="entry-header responsive-max-width">
-                            <h1 class="entry-title">Video Editing</h1>
+                            <h1 class="entry-title">Music</h1>
                         </header>
                         <div class="entry-content">
                             <div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
                                 <div
                                     class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
                                     <a class="wp-block-button__link has-background-color has-foreground-background-color has-text-color has-background has-link-color wp-element-button"
-                                        href="index.html"
+                                        href="index"
                                         style="border-radius:100px;padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Homepage</a>
                                 </div>
                                 <div
@@ -614,43 +623,34 @@
                                         style="border-radius:100px;background:linear-gradient(135deg,rgb(1,1,1) 0%,rgb(97,0,0) 52%,rgb(0,0,0) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous</a>
                                 </div>
                             </div>
-                            <p class="has-text-align-center">For video editing, In my workflow, I primarily use Adobe
-                                Premiere Pro to assemble footages and arrange shots into a cohesive sequence. Premiere's
-                                robust toolkit helps me to refine the timing of cuts, apply subtle transitions like
-                                cross dissolves for continuity, and overlay custom graphics, titles, and lower thirds
-                                designed in Adobe Illustrator. For color correction and additional visual effects, I
-                                often turn to Adobe Photoshop to utilize filters like Lumetri Color to enhance mood or
-                                apply particle effects for ambiance. I also sample music beds and foley effects,
-                                carefully adjusting levels with keyframes in Premiere's audio mixer. Overall, the goal
-                                is to employ the editing tools at my disposal to craft an immersive video that resonates
-                                with viewers.</p>
+                            <p class="has-text-align-center">For this music, I spent my time crafting tracks in FL
+                                Studio. I browsed samples, chopping bits. Arranging them in the playlist, adding drums
+                                and synths, tweaking presets until the sounds were right. Adobe Audition helped me to refine
+                                elements with EQ, compression and effects. Once finished, it is here on my site with an
+                                interactive visualizer. Using HTML, CSS and Javascript, I used the Web Audio API to analyzes
+                                frequencies in real-time, mapping properties like lows/mids/highs to graphics in Canvas.
+                                It took me production, coding and testing the visuals, capturing the musical experience.
+                                But seeing the final result is satisfying. <br><br> PS, the audio won't play through
+                                link,
+                                navigate back here from the homepage.</p>
 
 
                             <style>
                                 .container {
+                                    text-align: center;
+                                    color: #ffffff;
                                     position: relative;
                                     width: 100%;
                                     max-width: 800px;
-                                    height: 100px;
                                     overflow: hidden;
-                                    border-radius: 20px;
-                                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-                                    margin: 40px;
-                                    border: 2px solid #fff;
-                                    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
-                                    justify-content: center;
                                 }
 
                                 #audio-player {
                                     width: 100%;
-                                    height: 100%;
-                                    border: none;
-                                    border-radius: 20px;
-                                    display: block;
+                                    max-width: 800px;
+                                    height: 60px;
                                     margin: auto;
-                                    border: 2px solid #fff;
-                                    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
-                                    justify-content: center;
+                                    display: block;
                                 }
 
                                 #audio-visualizer {
@@ -659,7 +659,7 @@
                                     height: 150px;
                                     background-color: #000000;
                                     border-radius: 20px;
-                                    margin: 20px;
+                                    margin-top: 20px;
                                     box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
                                     position: relative;
                                     overflow: hidden;
@@ -700,152 +700,119 @@
 
                                     #audio-player,
                                     #audio-visualizer {
-                                        max-width: calc(100%);
+                                        max-width: calc(100% - 20px);
                                     }
                                 }
                             </style>
-                            <div class="video-container">
-                                <video id="audio-player"
-                                    width="320"
-                                    height="240"
-                                    controls
-                                    controlsList="nodownload">
-                                    <source
-                                        src="https://thearticular.github.io/articular/wp-content/uploads/Invitation.mp4"
-                                        type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                <canvas id="audio-visualizer"
-                                    width="800"
-                                    height="400px"></canvas>
-                            </div>
-                            <div id="particles-container"></div>
-                            <p style="text-align: center;">The Wedding Invitation</p>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    const video = document.getElementById('audio-player');
-                                    let isPlaying = false;
-                                    video.addEventListener('click', function () {
-                                        if (isPlaying) {
-                                            video.pause();
-                                            isPlaying = false;
-                                        } else {
-                                            video.play();
-                                            isPlaying = true;
+                            </head>
+
+                            <body>
+                                <div class="container">
+                                    <audio id="audio-player"
+                                        controls
+                                        preload="auto"
+                                        controls
+                                        controlsList="nodownload">
+                                        <source
+                                            src="https://thearticular.github.io/articular/wp-content/uploads/tribbler.mp3"
+                                            type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <canvas id="audio-visualizer"
+                                        width="800"
+                                        height="400px"></canvas>
+                                </div>
+                                <div id="particles-container"></div>
+                                <p style="text-align: center;">Trembling Roll</p>
+                                <script>
+                                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                                    const audioElement = document.getElementById('audio-player');
+                                    const audioSrc = audioContext.createMediaElementSource(audioElement);
+                                    const analyser = audioContext.createAnalyser();
+                                    const canvas = document.getElementById('audio-visualizer');
+                                    const ctx = canvas.getContext('2d');
+                                    audioSrc.connect(analyser);
+                                    audioSrc.connect(audioContext.destination);
+                                    const bufferLength = analyser.frequencyBinCount;
+                                    const dataArray = new Uint8Array(bufferLength);
+                                    function draw() {
+                                        const WIDTH = canvas.width;
+                                        const maxBarHeight = Math.max(...dataArray) * 1.5;
+                                        canvas.height = maxBarHeight;
+                                        const HEIGHT = canvas.height;
+                                        requestAnimationFrame(draw);
+                                        analyser.getByteFrequencyData(dataArray);
+                                        ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                                        ctx.fillRect(0, 0, WIDTH, HEIGHT);
+                                        const barWidth = (WIDTH / bufferLength) * 2.5;
+                                        let x = 0;
+                                        for (let i = 0; i < bufferLength; i += 4) {
+                                            const barWidth = (WIDTH / (bufferLength / 4)) * 1;
+                                            const barHeight = dataArray[i] * 1.5;
+                                            const barHeightAdjusted = Math.max(2, barHeight);
+                                            const hue = -(i / bufferLength * 200 + 360) % 360;
+                                            const saturation = 100;
+                                            const lightness = 50;
+                                            const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                                            ctx.fillStyle = color;
+                                            ctx.fillRect(x, HEIGHT - barHeightAdjusted, barWidth, barHeightAdjusted);
+                                            x += barWidth + 1;
                                         }
-                                    });
-                                    video.addEventListener('touchstart', function (e) {
-                                        e.preventDefault();
-                                        if (isPlaying) {
-                                            video.pause();
-                                            isPlaying = false;
-                                        } else {
-                                            video.play();
-                                            isPlaying = true;
+                                        for (let i = 0; i < bufferLength; i += 10) {
+                                            const sparkX = Math.random() * WIDTH;
+                                            const sparkY = Math.random() * HEIGHT;
+                                            const sparkRadius = Math.random() * (dataArray[i] / 8);
+                                            const frequencyBasedRadius = sparkRadius * (i / bufferLength);
+                                            const sparkColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                                            ctx.beginPath();
+                                            ctx.arc(sparkX, sparkY, frequencyBasedRadius, 0, Math.PI * 4);
+                                            ctx.fillStyle = sparkColor;
+                                            ctx.fill();
                                         }
-                                    });
-                                });
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    const video = document.getElementById('audio-player');
-                                    const container = document.querySelector('.container');
-
-                                    video.addEventListener('loadeddata', function () {
-                                        container.style.height = video.offsetHeight + 'px';
-                                    });
-
-                                    window.addEventListener('resize', function () {
-                                        container.style.height = video.offsetHeight + 'px';
-                                    });
-                                });
-
-                                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                                const audioElement = document.getElementById('audio-player');
-                                const audioSrc = audioContext.createMediaElementSource(audioElement);
-                                const analyser = audioContext.createAnalyser();
-                                const canvas = document.getElementById('audio-visualizer');
-                                const ctx = canvas.getContext('2d');
-                                audioSrc.connect(analyser);
-                                audioSrc.connect(audioContext.destination);
-                                const bufferLength = analyser.frequencyBinCount;
-                                const dataArray = new Uint8Array(bufferLength);
-                                function draw() {
-                                    const WIDTH = canvas.width;
-                                    const maxBarHeight = Math.max(...dataArray) * 1.5;
-                                    canvas.height = maxBarHeight;
-                                    const HEIGHT = canvas.height;
-                                    requestAnimationFrame(draw);
-                                    analyser.getByteFrequencyData(dataArray);
-                                    ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-                                    ctx.fillRect(0, 0, WIDTH, HEIGHT);
-                                    const barWidth = (WIDTH / bufferLength) * 2.5;
-                                    let x = 0;
-                                    for (let i = 0; i < bufferLength; i += 4) {
-                                        const barWidth = (WIDTH / (bufferLength / 4)) * 1;
-                                        const barHeight = dataArray[i] * 1.5;
-                                        const barHeightAdjusted = Math.max(2, barHeight);
-                                        const hue = -(i / bufferLength * 200 + 300) % 360;
-                                        const saturation = 100;
-                                        const lightness = 50;
-                                        const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-                                        ctx.fillStyle = color;
-                                        ctx.fillRect(x, HEIGHT - barHeightAdjusted, barWidth, barHeightAdjusted);
-                                        x += barWidth + 1;
                                     }
-                                    for (let i = 0; i < bufferLength; i += 10) {
-                                        const sparkX = Math.random() * WIDTH;
-                                        const sparkY = Math.random() * HEIGHT;
-                                        const sparkRadius = Math.random() * (dataArray[i] / 8);
-                                        const frequencyBasedRadius = sparkRadius * (i / bufferLength);
-                                        const sparkColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                                        ctx.beginPath();
-                                        ctx.arc(sparkX, sparkY, frequencyBasedRadius, 0, Math.PI * 4);
-                                        ctx.fillStyle = sparkColor;
-                                        ctx.fill();
+                                    draw();
+                                    const particlesContainer = document.getElementById('particles-container');
+                                    const particleColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
+                                    function createParticle(container) {
+                                        const particle = document.createElement('div');
+                                        particle.classList.add('particle');
+                                        particle.style.backgroundColor = particleColors[Math.floor(Math.random() * particleColors.length)];
+                                        particle.style.width = '50px';
+                                        particle.style.height = '50px';
+                                        particle.style.borderRadius = '50%';
+                                        particle.style.position = 'absolute';
+                                        const maxTop = container.clientHeight;
+                                        const maxLeft = container.clientWidth;
+
+                                        particle.style.top = `${Math.random() * maxTop}px`;
+                                        particle.style.left = `${Math.random() * maxLeft}px`;
+                                        container.appendChild(particle);
+                                        setTimeout(() => {
+                                            particle.style.transform = 'scale(1)';
+                                            particle.style.opacity = '0';
+                                        }, 10000);
                                     }
-                                }
-                                draw();
-                                const particlesContainer = document.getElementById('particles-container');
-                                const particleColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
-                                function createParticle(container) {
-                                    const particle = document.createElement('div');
-                                    particle.classList.add('particle');
-                                    particle.style.backgroundColor = particleColors[Math.floor(Math.random() * particleColors.length)];
-                                    particle.style.width = '50px';
-                                    particle.style.height = '50px';
-                                    particle.style.borderRadius = '50%';
-                                    particle.style.position = 'absolute';
-                                    const maxTop = container.clientHeight;
-                                    const maxLeft = container.clientWidth;
-
-                                    particle.style.top = `${Math.random() * maxTop}px`;
-                                    particle.style.left = `${Math.random() * maxLeft}px`;
-                                    container.appendChild(particle);
-                                    setTimeout(() => {
-                                        particle.style.transform = 'scale(1)';
-                                        particle.style.opacity = '0';
-                                    }, 10000);
-                                }
-                                function createRandomParticles(container) {
-                                    const interval = Math.random() * 2000 + 500;
-                                    createParticle(container);
-                                    setTimeout(() => createRandomParticles(container), interval);
-                                }
-                                createRandomParticles(particlesContainer);
-                                function updateParticlesPosition() {
-                                    requestAnimationFrame(updateParticlesPosition);
-                                    analyser.getByteFrequencyData(dataArray);
-                                    const average = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-                                    const scaleFactor = 1 + average / 100;
-                                    particlesContainer.style.transform = `scale(${scaleFactor})`;
-                                }
-                                updateParticlesPosition();
-
-                            </script>
+                                    function createRandomParticles(container) {
+                                        const interval = Math.random() * 2000 + 500;
+                                        createParticle(container);
+                                        setTimeout(() => createRandomParticles(container), interval);
+                                    }
+                                    createRandomParticles(particlesContainer);
+                                    function updateParticlesPosition() {
+                                        requestAnimationFrame(updateParticlesPosition);
+                                        analyser.getByteFrequencyData(dataArray);
+                                        const average = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+                                        const scaleFactor = 1 + average / 100;
+                                        particlesContainer.style.transform = `scale(${scaleFactor})`;
+                                    }
+                                    updateParticlesPosition();
+                                </script>
 
 
-
-                            <br><br><br>
-                            <p class="has-text-align-center"><i>Not goodbye, just see you down the way.</i></p>
+                                <br><br><br>
+                                <p class="has-text-align-center"><i>This pause won't last, our tale's left half
+                                        untold.</i>
+                                </p>
                         </div><!-- .entry-content -->
                     </article><!-- #post-1228 -->
                 </main><!-- #main -->
