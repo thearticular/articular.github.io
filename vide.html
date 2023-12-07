@@ -618,8 +618,6 @@
                                 carefully adjusting levels with keyframes in Premiere's audio mixer. Overall, the goal
                                 is to employ the editing tools at my disposal to craft an immersive video that resonates
                                 with viewers.</p>
-
-
                             <style>
                                 .container {
                                     position: relative;
@@ -704,8 +702,7 @@
                                     height="240"
                                     controls
                                     controlsList="nodownload">
-                                    <source
-                                        src="wp-content/uploads/Invitation.mp4"
+                                    <source src="wp-content/uploads/Invitation.mp4"
                                         type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
@@ -742,16 +739,13 @@
                                 document.addEventListener('DOMContentLoaded', function () {
                                     const video = document.getElementById('audio-player');
                                     const container = document.querySelector('.container');
-
                                     video.addEventListener('loadeddata', function () {
                                         container.style.height = video.offsetHeight + 'px';
                                     });
-
                                     window.addEventListener('resize', function () {
                                         container.style.height = video.offsetHeight + 'px';
                                     });
                                 });
-
                                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                                 const audioElement = document.getElementById('audio-player');
                                 const audioSrc = audioContext.createMediaElementSource(audioElement);
@@ -810,7 +804,6 @@
                                     particle.style.position = 'absolute';
                                     const maxTop = container.clientHeight;
                                     const maxLeft = container.clientWidth;
-
                                     particle.style.top = `${Math.random() * maxTop}px`;
                                     particle.style.left = `${Math.random() * maxLeft}px`;
                                     container.appendChild(particle);
@@ -833,11 +826,7 @@
                                     particlesContainer.style.transform = `scale(${scaleFactor})`;
                                 }
                                 updateParticlesPosition();
-
                             </script>
-
-
-
                             <br><br><br>
                             <p class="has-text-align-center"><i>Not goodbye, just see you down the way.</i></p>
                         </div><!-- .entry-content -->
