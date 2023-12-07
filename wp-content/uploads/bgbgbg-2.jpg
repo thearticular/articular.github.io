@@ -77,8 +77,8 @@ table tr.alt td,table tr.alt th{}
   </div> 
   <div id="details-right"> 
    <table border="0" cellpadding="0" cellspacing="0"> 
-    <tr class="alt"><th>Requested URL</th><td>&nbsp;&nbsp;&nbsp;http://localhost:80/wp-content/uploads/bgbgbg-2.jpg</td></tr> 
-    <tr><th>Physical Path</th><td>&nbsp;&nbsp;&nbsp;C:\inetpub\wwwroot\localhost\wp-content\uploads\bgbgbg-2.jpg</td></tr> 
+    <tr class="alt"><th>Requested URL</th><td>&nbsp;&nbsp;&nbsp;wp-content/uploads/bgbgbg-2.jpg</td></tr> 
+    <tr><th>Physical Path</th><td>&nbsp;&nbsp;&nbsp;wp-content\uploads\bgbgbg-2.jpg</td></tr> 
     <tr class="alt"><th>Logon Method</th><td>&nbsp;&nbsp;&nbsp;Anonymous</td></tr> 
     <tr><th>Logon User</th><td>&nbsp;&nbsp;&nbsp;Anonymous</td></tr> 
      
