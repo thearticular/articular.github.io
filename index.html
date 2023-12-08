@@ -532,7 +532,7 @@
 	<meta name="generator"
 		content="WordPress 6.3.2" />
 	<link rel="canonical"
-		href="index" />
+		href="https://thearticular.github.io/" />
 	<link rel='shortlink'
 		href='index.html' />
 	<!-- Custom Logo: hide header text -->
@@ -569,7 +569,7 @@
 	</style>
 	<style type="text/css"
 		id="wp-custom-css">
-		.home #page {
+		.home {
 			background-image: url("wp-content/uploads/bgbgbg.jpg");
 			background-position: center;
 			background-size: cover;
@@ -577,10 +577,12 @@
 			background-attachment: fixed;
 		}
 
+
 		body {
 			background-color: #000000;
 			color: white;
 		}
+
 
 		img {
 			border-radius: 20px;
@@ -616,11 +618,11 @@
 										fetchpriority="high"
 										width="1024"
 										height="1017"
-										src="wp-content/uploads/Picture2-1024x1017.png"
+										src="wp-content/uploads/wblg.png"
 										alt=""
 										class="wp-image-2353"
-										style="width:300px;height:auto"
-										srcset="wp-content/uploads/Picture2-1024x1017.png 1024w, wp-content/uploads/Picture2-300x298.png 300w, wp-content/uploads/Picture2-150x150.png 150w, wp-content/uploads/Picture2-768x763.png 768w, wp-content/uploads/Picture2-500x497.png 500w, wp-content/uploads/Picture2-800x795.png 800w, wp-content/uploads/Picture2-1280x1272.png 1280w, wp-content/uploads/Picture2.png 1386w"
+										style="width:400px;height:auto"
+										srcset="wp-content/uploads/wblg-1024x1017.png 1024w, wp-content/uploads/wblg-300x298.png 300w, wp-content/uploads/wblg-150x150.png 150w, wp-content/uploads/wblg-768x763.png 768w, wp-content/uploads/wblg-500x497.png 500w, wp-content/uploads/wblg-800x795.png 800w, wp-content/uploads/wblg-1280x1272.png 1280w, wp-content/uploads/wblg.png 1386w"
 										sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
 							</div>
 							<div
@@ -667,7 +669,7 @@
 									<div
 										class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-fill has-small-font-size">
 										<div class="custom-button">
-											Hey everyone, 🙂<br><br>I&#8217;m Romit, a mechanical engineering graduate,
+											Hey everyone, 😊<br><br>I&#8217;m Romit, a mechanical engineering graduate,
 											working as a system engineer. I&#8217;ve created this website to share my
 											lazy hobbies.<br><br>You&#8217;ll find some sketches, digital art, colorized
 											images, paintings, and the other stuffs I do when bored and free. I&#8217;m
@@ -692,6 +694,75 @@
 											line-height: 1.1;
 										}
 									</style>
+								</div>
+								<div>
+									<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+									<style>
+										.particles-container {
+											width: 100%;
+											height: 100%;
+											position: fixed;
+											top: 0;
+											left: 0;
+											pointer-events: none;
+										}
+									</style>
+									<div id="particles-js"
+										class="particles-container"
+										style="filter: blur(1px);"></div>
+									<div id="particles-js-2"
+										class="particles-container"
+										style="filter: blur(2px);"></div>
+									<div id="particles-js-3"
+										class="particles-container"
+										style="filter: blur(4px);"></div>
+									<div id="particles-js-4"
+										class="particles-container"
+										style="filter: blur(8px);"></div>
+									<script>
+										function createParticles(containerId, particleSize, moveSpeed) {
+											particlesJS(containerId, {
+												"particles": {
+													"number": {
+														"value": 1,
+														"density": {
+															"enable": true,
+															"value_area": 50
+														}
+													},
+													"color": {
+														"value": ["#ff0000", "#ff7700", "#ffe600"]
+													},
+													"shape": {
+														"type": "circle"
+													},
+													"size": {
+														"value": particleSize,
+													},
+													"line_linked": {
+														"enable": false
+													},
+													"move": {
+														"enable": true,
+														"speed": moveSpeed,
+														"direction": "bottom",
+														"out_mode": "out"
+													},
+												},
+												"interactivity": {
+													"events": {
+														"onhover": {
+															"enable": false
+														}
+													}
+												}
+											});
+										}
+										createParticles("particles-js", 1, 3.2);
+										createParticles("particles-js-2", 2, 1.6);
+										createParticles("particles-js-3", 4, 0.8);
+										createParticles("particles-js-4", 6, 0.4);
+									</script>
 								</div>
 							</div>
 						</div><!-- .entry-content -->
@@ -758,79 +829,7 @@
 	</script>
 	<script src="scrollToTop.js"></script>
 	<script src="script.js"></script>
-	<div>
-		<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-		<style>
-			body {
-				background-color: black;
-			}
 
-			.particles-container {
-				width: 100%;
-				height: 100%;
-				position: fixed;
-				top: 0;
-				left: 0;
-				pointer-events: none;
-			}
-		</style>
-		<div id="particles-js"
-			class="particles-container"
-			style="filter: blur(1px);"></div>
-		<div id="particles-js-2"
-			class="particles-container"
-			style="filter: blur(2px);"></div>
-		<div id="particles-js-3"
-			class="particles-container"
-			style="filter: blur(4px);"></div>
-		<div id="particles-js-4"
-			class="particles-container"
-			style="filter: blur(8px);"></div>
-		<script>
-			function createParticles(containerId, particleSize, moveSpeed) {
-				particlesJS(containerId, {
-					"particles": {
-						"number": {
-							"value": 1,
-							"density": {
-								"enable": true,
-								"value_area": 50
-							}
-						},
-						"color": {
-							"value": ["#ff0000", "#ff7700", "#ffe600"]
-						},
-						"shape": {
-							"type": "circle"
-						},
-						"size": {
-							"value": particleSize,
-						},
-						"line_linked": {
-							"enable": false
-						},
-						"move": {
-							"enable": true,
-							"speed": moveSpeed,
-							"direction": "bottom",
-							"out_mode": "out"
-						},
-					},
-					"interactivity": {
-						"events": {
-							"onhover": {
-								"enable": false
-							}
-						}
-					}
-				});
-			}
-			createParticles("particles-js", 1, 3.2);
-			createParticles("particles-js-2", 2, 1.6);
-			createParticles("particles-js-3", 4, 0.8);
-			createParticles("particles-js-4", 6, 0.4);
-		</script>
-	</div>
 </body>
 
 </html>
