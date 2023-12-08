@@ -575,8 +575,8 @@
 		body {
 			background-color: #000000;
 			color: white;
+			height: 100% !important;
 		}
-
 
 		img {
 			border-radius: 20px;
@@ -593,13 +593,20 @@
 			left: 0;
 			top: 0;
 			width: 100%;
-			height: 100%;
+			height: 100dvh;
 			z-index: -10;
 			background: url("wp-content/uploads/bgbgbg.jpg") no-repeat center center;
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
 			-o-background-size: cover;
 			background-size: cover;
+		}
+
+		html,
+		body {
+			overscroll-behavior: none !important;
+			touch-action: pan-y !important;
+			overscroll-behavior-y: contain !important;
 		}
 	</style>
 </head>
@@ -632,7 +639,7 @@
 										src="wp-content/uploads/wblg.png"
 										alt=""
 										class="wp-image-2353"
-										style="width:400px;height:auto; filter: saturate(80%)"
+										style="width:400px;height:auto; filter: saturate(60%)"
 										srcset="wp-content/uploads/wblg.png 1024w, wp-content/uploads/wblg.png 300w, wp-content/uploads/wblg.png 150w, wp-content/uploads/wblg.png 768w, wp-content/uploads/wblg.png 500w, wp-content/uploads/wblg.png 800w, wp-content/uploads/wblg.png 1280w, wp-content/uploads/wblg.png 1386w"
 										sizes="(max-width: 1024px) 100vw, 1024px" />
 								</figure>
