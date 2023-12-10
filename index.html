@@ -847,25 +847,35 @@
 			style="filter: blur(0px);"></div>
 		<div id="particles-js-2"
 			class="particles-container"
-			style="filter: blur(4px);"></div>
+			style="filter: blur(3px);"></div>
 		<div id="particles-js-3"
 			class="particles-container"
-			style="filter: blur(12px);"></div>
+			style="filter: blur(7px);"></div>
 		<script>
-			function createParticles(containerId, particleSize, moveSpeed, directing, shaper) {
+			function createParticles(containerId, particleSize, moveSpeed, directing, shaper, flickerspeed) {
 				const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 				const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
 				particlesJS(containerId, {
 					"particles": {
 						"number": {
-							"value": 0.02,
+							"value": 0.2,
 							"density": {
 								"enable": true,
 								"value_area": 1
 							}
 						},
 						"color": {
-							"value": ["#f7da02", "#ff0000", "#ff6f00", "#ffc2c2", "#ffefad"]
+							"value": ["#f7da02", "#ff0000", "#ff6f00", "#ffc2c2", "#ffefad", "#520008", "#2b0004"]
+						},
+						"opacity": {
+							"value": 1,
+							"random": true, 
+							"anim": {
+								"enable": true,
+								"speed": flickerspeed,
+								"opacity_min": 0,
+								"sync": false
+							}
 						},
 						"shape": {
 							"type": shaper
@@ -894,9 +904,9 @@
 					}
 				});
 			}
-			createParticles("particles-js", 1, 4, "top", "circle");
-			createParticles("particles-js-2", 3, 2, "top", "circle");
-			createParticles("particles-js-3", 10, 1, "bottom", "triangle");
+			createParticles("particles-js", 1, 4, "top", "circle", 100);
+			createParticles("particles-js-2", 3, 2, "top", "circle", 20);
+			createParticles("particles-js-3", 10, 0.5, "bottom", "triangle", 1);
 		</script>
 	</div>
 </body>

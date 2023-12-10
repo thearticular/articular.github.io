@@ -648,6 +648,19 @@
 										myVideo.pause();
 									}
 								};
+								var myVideo = document.getElementById("audio-player");
+								myVideo.ontouchstart = function () {
+									if (myVideo.paused) {
+										myVideo.play();
+									} else {
+										myVideo.pause();
+									}
+								};
+								const video = document.getElementById("audio-player");
+								video.muted = true;
+								video.addEventListener('loadedmetadata', function () {
+									video.defaultPlaybackRate = video.playbackRate = 1;
+								});
 							</script>
 							<div class="wp-block-image aligncenter">
 								<figure class="size-full"><img decoding="async"
@@ -677,7 +690,10 @@
 									width="320"
 									height="240"
 									controls
-									controlsList="nodownload">
+									controlsList="nodownload"
+									muted								
+									disablePictureInPicture
+									noplaybackrate>
 									<source src="wp-content/uploads/wab.mp4"
 										type="video/mp4">
 									Your browser does not support the video tag.
@@ -796,7 +812,9 @@
 									width="320"
 									height="240"
 									controls
-									controlsList="nodownload">
+									controlsList="nodownload"
+									muted
+									disablePictureInPicture>
 									<source src="wp-content/uploads/ua.mp4"
 										type="video/mp4">
 									Your browser does not support the video tag.
@@ -844,7 +862,9 @@
 									width="320"
 									height="240"
 									controls
-									controlsList="nodownload">
+									controlsList="nodownload"
+									muted
+									disablePictureInPicture>
 									<source src="wp-content/uploads/dia.mp4"
 										type="video/mp4">
 									Your browser does not support the video tag.
@@ -904,7 +924,9 @@
 									width="320"
 									height="240"
 									controls
-									controlsList="nodownload">
+									controlsList="nodownload"
+									muted
+									disablePictureInPicture>
 									<source src="wp-content/uploads/dwa.mp4"
 										type="video/mp4">
 									Your browser does not support the video tag.
@@ -976,7 +998,9 @@
 									width="320"
 									height="240"
 									controls
-									controlsList="nodownload">
+									controlsList="nodownload"
+									muted
+									disablePictureInPicture>
 									<source src="wp-content/uploads/tr.mp4"
 										type="video/mp4">
 									Your browser does not support the video tag.
