@@ -138,8 +138,8 @@ $grid-configuration: map-extend($grid-configuration-default, $grid-configuration
   */
 :root {
 	/* Colors */
-	--wp--preset--color--primary: #1279BE;
-	--wp--preset--color--primary-hover: #303030;
+	--wp--preset--color--primary: #ffffff;
+	/* --wp--preset--color--primary-hover: #303030; */
 	--wp--preset--color--secondary: #FFB302;
 	--wp--preset--color--secondary-hover: #303030;
 	--wp--preset--color--foreground: #303030;
@@ -742,9 +742,9 @@ a {
 	color: var(--wp--preset--color--primary);
 }
 
-a:hover {
+/* a:hover {
 	color: var(--wp--preset--color--primary-hover);
-}
+} */
 
 .has-primary-background-color a:not(.has-text-color) {
 	color: var(--wp--preset--color--background);
@@ -1556,14 +1556,14 @@ button[data-load-more-btn],
 	color: var(--wp--preset--color--primary);
 }
 
-.wp-block-button.is-style-outline.wp-block-button__link:hover,
+/* .wp-block-button.is-style-outline.wp-block-button__link:hover,
 .wp-block-button.is-style-outline.wp-block-button__link:focus,
 .wp-block-button.is-style-outline.wp-block-button__link.has-focus,
 .wp-block-button.is-style-outline .wp-block-button__link:hover,
 .wp-block-button.is-style-outline .wp-block-button__link:focus,
 .wp-block-button.is-style-outline .wp-block-button__link.has-focus {
 	color: var(--wp--preset--color--primary-hover);
-}
+} */
 
 .has-primary-background-color .wp-block-button.is-style-outline.wp-block-button__link:not(.has-text-color),
 .has-primary-background-color .wp-block-button.is-style-outline .wp-block-button__link:not(.has-text-color) {
@@ -3261,9 +3261,9 @@ body:not(.fse-enabled) .main-navigation a {
 	color: currentColor;
 }
 
-.site-info a:hover {
+/* .site-info a:hover {
 	color: var(--wp--preset--color--primary-hover);
-}
+} */
 
 .footer-navigation {
 	display: inline;
@@ -3322,9 +3322,9 @@ body:not(.fse-enabled) .main-navigation a {
 	color: currentColor;
 }
 
-.footer-navigation .footer-menu a:hover {
+/* .footer-navigation .footer-menu a:hover {
 	color: var(--wp--preset--color--primary-hover);
-}
+} */
 
 body:not(.fse-enabled) .footer-menu a {
 	font-size: 0.86957rem;
