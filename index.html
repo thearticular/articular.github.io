@@ -9,7 +9,7 @@
 		href="thearticular/styles.css">
 	<meta charset="UTF-8" />
 	<meta name="viewport"
-		content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<link rel="profile"
 		href="../gmpg.org/xfn/11" />
 	<meta name='robots'
@@ -627,7 +627,6 @@
 
 <body
 	class="home page-template-default page page-id-5 wp-embed-responsive singular image-filters-enabled elementor-beta elementor-default elementor-kit-2139">
-	<!-- <div class="fixed-border"> -->
 	<div id="page"
 		class="site">
 		<a class="skip-link screen-reader-text"
@@ -646,7 +645,8 @@
 						class="post-5 page type-page status-publish hentry entry">
 						<header class="entry-header responsive-max-width"
 							id="logos"
-							style="position: fixed; transition: opacity 0.3s; width:93%; transform: translate(-50%, 0); left: 50%;"><div style="margin-bottom: -10px;"></div>
+							style="position: fixed; transition: opacity 0.3s; width:93%; transform: translate(-50%, 0); left: 50%; z-index: -5;">
+							<div style="margin-bottom: -10px;"></div>
 							<h1 class="entry-title"
 								style="margin-bottom: 45px;">Homepage</h1>
 						</header><br><br>
@@ -661,7 +661,7 @@
 										src="thearticular/wp-content/uploads/wblg.png"
 										alt=""
 										class="wp-image-2353"
-										style="width:auto; height:auto; position: fixed; transition: opacity 0.3s; transform: translate(-50%, 0); left: 50%;"
+										style="width:auto; height:auto; position: fixed; transition: opacity 0.3s; transform: translate(-50%, 0); left: 50%; z-index: -5;"
 										srcset="thearticular/wp-content/uploads/wblg.png 1024w, thearticular/wp-content/uploads/wblg.png 300w, thearticular/wp-content/uploads/wblg.png 150w, thearticular/wp-content/uploads/wblg.png 768w, thearticular/wp-content/uploads/wblg.png 500w, thearticular/wp-content/uploads/wblg.png 800w, thearticular/wp-content/uploads/wblg.png 1280w, thearticular/wp-content/uploads/wblg.png 1386w"
 										sizes="(max-width: 1920px) 100%, 800px" />
 									<script>
@@ -675,7 +675,7 @@
 										});
 										window.addEventListener('scroll', function () {
 											const header = document.getElementById('logos');
-											if (window.pageYOffset > 300) {
+											if (window.pageYOffset > 390) {
 												header.classList.add('transparenttt');
 											} else {
 												header.classList.remove('transparenttt');
@@ -685,13 +685,11 @@
 									<style>
 										.transparentt {
 											opacity: 0.5;
-											z-index: -5;
 											filter: blur(5px) brightness(150%);
 										}
 
 										.transparenttt {
 											opacity: 0.8;
-											z-index: -5;
 											filter: blur(2px) brightness(150%);
 										}
 									</style>
@@ -900,7 +898,7 @@
 				particlesJS(containerId, {
 					"particles": {
 						"number": {
-							"value": 0.2,
+							"value": 0.01,
 							"density": {
 								"enable": true,
 								"value_area": 1
