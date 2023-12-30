@@ -875,9 +875,9 @@ footer {
  * - Set vertical padding and horizontal margins
  */
 .site-main {
-	padding: 16px 16px;
-	margin-left: auto;
-	margin-right: auto;
+	padding: 10px 10px;
+	margin-left: 0px;
+	margin-right: 0px;
 }
 
 .site-footer {
@@ -891,9 +891,9 @@ footer {
 	.site-header,
 	.site-main,
 	.site-footer {
-		padding-top: 2px;
+		padding-top: 0px;
 		padding-right: 0;
-		padding-bottom: 2px;
+		padding-bottom: 0px;
 		padding-left: 0;
 	}
 }
@@ -903,8 +903,8 @@ footer {
  * - Add double vertical margins here for clearer heirarchy
  */
 .site-main>* {
-	margin-top: calc(3 * 32px);
-	margin-bottom: calc(3 * 32px);
+	margin-top: calc(0 * 32px);
+	margin-bottom: calc(0 * 32px);
 }
 
 .site-main>*:first-child {
@@ -940,9 +940,9 @@ footer {
 .entry-footer,
 .author-bio,
 .widget-area {
-	margin-top: 32px;
+	margin-top: 2px;
 	margin-right: auto;
-	margin-bottom: 32px;
+	margin-bottom: 2px;
 	margin-left: auto;
 }
 
@@ -959,8 +959,8 @@ footer {
 .wp-block-premium-content-container .wp-block-premium-content-subscriber-view>*,
 [class*="inner-container"]>*,
 .widget-area>* {
-	margin-top: 21.312px;
-	margin-bottom: 21.312px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 @media only screen and (min-width: 560px) {
@@ -974,8 +974,8 @@ footer {
 	.wp-block-premium-content-container .wp-block-premium-content-subscriber-view>*,
 	[class*="inner-container"]>*,
 	.widget-area>* {
-		margin-top: 32px;
-		margin-bottom: 32px;
+		margin-top: 10px;
+		margin-bottom: 10px;
 	}
 }
 
@@ -3464,7 +3464,7 @@ body:not(.fse-enabled) .footer-menu a {
  */
 /* Author description */
 .site-main>article>.author-bio {
-	margin-top: calc(2 * 32px);
+	margin-top: calc(0 * 32px);
 }
 
 .author-bio .author-title {
