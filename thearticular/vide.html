@@ -614,60 +614,49 @@
                                 with viewers.</p>
                             <div>
                                 <style>
-                                    .container {
+                                    .container .container2 {
                                         position: relative;
                                         width: 100%;
                                         max-width: 800px;
                                         height: 100px;
                                         overflow: hidden;
                                         border-radius: 20px;
-                                        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
                                         margin: 40px;
                                         border: 2px solid #fff;
-                                        box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
-                                        justify-content: center;
                                     }
 
-                                    #audio-player {
+                                    #audio-player,
+                                    #audio-player2 {
                                         width: 100%;
                                         height: 100%;
-                                        border: none;
                                         border-radius: 20px;
-                                        display: block;
-                                        margin: auto;
                                         border: 2px solid #fff;
-                                        box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
-                                        justify-content: center;
                                     }
 
-                                    #audio-visualizer {
+                                    #audio-visualizer,
+                                    #audio-visualizer2 {
                                         width: 100%;
                                         max-width: 800px;
-                                        height: 150px;
+                                        height: 100px;
                                         background-color: #000000;
                                         border-radius: 20px;
-                                        margin: 20px;
-                                        box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
+                                        margin: 4px;
                                         position: relative;
                                         overflow: hidden;
                                         margin-left: auto;
                                         margin-right: auto;
-                                        display: block;
                                         border: 2px solid white;
                                     }
 
-                                    #audio-visualizer:after {
+                                    #audio-visualizer:after,
+                                    #audio-visualizer2:after {
                                         content: "";
                                         position: absolute;
                                         top: 100%;
-                                        left: 0;
-                                        right: 0;
-                                        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(196, 144, 144, 0));
-                                        transform: scaleY(-1);
-                                        transform-origin: bottom;
                                     }
 
-                                    #particles-container {
+                                    #particles-container,
+                                    #particles-container2 {
                                         position: fixed;
                                         top: 0;
                                         left: 0;
@@ -678,19 +667,143 @@
                                         transform-origin: center;
                                         transition: transform 0.1s ease;
                                         overflow: hidden;
+                                        align-items: center;
+                                        align-content: center;
                                     }
 
                                     @media (max-width: 600px) {
-                                        .container {
+
+                                        /* .container,
+                                        .container2 {
                                             padding: 0px;
-                                        }
+                                        } */
 
                                         #audio-player,
-                                        #audio-visualizer {
-                                            max-width: calc(100%);
+                                        #audio-player2,
+                                        #audio-visualizer,
+                                        #audio-visualizer2 {
+                                            max-width: 100%;
                                         }
                                     }
                                 </style>
+                                <script>
+                                    function initializeAudioPlayer(playerId, containerClass, visualizerId, particlesContainerId) {
+                                        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                                        const audioElement = document.getElementById(playerId);
+                                        const audioSrc = audioContext.createMediaElementSource(audioElement);
+                                        const analyser = audioContext.createAnalyser();
+                                        const canvas = document.getElementById(visualizerId);
+                                        const ctx = canvas.getContext('2d');
+                                        audioSrc.connect(analyser);
+                                        audioSrc.connect(audioContext.destination);
+                                        const bufferLength = analyser.frequencyBinCount;
+                                        const dataArray = new Uint8Array(bufferLength);
+                                        let isPlaying = false;
+                                        audioElement.addEventListener('click', function () {
+                                            if (isPlaying) {
+                                                audioElement.pause();
+                                                isPlaying = false;
+                                            } else {
+                                                audioElement.play();
+                                                isPlaying = true;
+                                            }
+                                        });
+                                        audioElement.addEventListener('touchstart', function (e) {
+                                            e.preventDefault();
+                                            if (isPlaying) {
+                                                audioElement.pause();
+                                                isPlaying = false;
+                                            } else {
+                                                audioElement.play();
+                                                isPlaying = true;
+                                            }
+                                        });
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            const video = document.getElementById(playerId);
+                                            const container = document.querySelector(containerClass);
+                                            video.addEventListener('loadeddata', function () {
+                                                container.style.height = video.offsetHeight + 'px';
+                                            });
+                                            window.addEventListener('resize', function () {
+                                                container.style.height = video.offsetHeight + 'px';
+                                            });
+                                        });
+                                        function draw() {
+                                            const WIDTH = canvas.width;
+                                            const maxBarHeight = Math.max(...dataArray) * 1.7;
+                                            canvas.height = maxBarHeight;
+                                            const HEIGHT = canvas.height;
+                                            requestAnimationFrame(draw);
+                                            analyser.getByteFrequencyData(dataArray);
+                                            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                                            ctx.fillRect(0, 0, WIDTH, HEIGHT);
+                                            const barWidth = (WIDTH / bufferLength) * 2.5;
+                                            let x = 0;
+                                            for (let i = 0; i < bufferLength; i += 2) {
+                                                const barWidth = (WIDTH / (bufferLength / 10)) * 1;
+                                                const barHeight = dataArray[i] * 1.5;
+                                                const barHeightAdjusted = Math.max(2, barHeight);
+                                                const hue = -(i / bufferLength * 800 + 300) % 300;
+                                                const saturation = 100;
+                                                const lightness = 50;
+                                                const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                                                ctx.fillStyle = color;
+                                                ctx.fillRect(x, HEIGHT - barHeightAdjusted, barWidth, barHeightAdjusted);
+                                                x += barWidth + 1;
+                                            }
+                                            for (let i = 0; i < bufferLength; i += 100) {
+                                                const sparkX = Math.random() * WIDTH;
+                                                const sparkY = Math.random() * HEIGHT;
+                                                const sparkRadius = Math.random() * (dataArray[i] / 4);
+                                                const frequencyBasedRadius = sparkRadius * (i / bufferLength);
+                                                const sparkColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                                                ctx.beginPath();
+                                                ctx.arc(sparkX, sparkY, frequencyBasedRadius, 0, Math.PI * 4);
+                                                ctx.fillStyle = sparkColor;
+                                                ctx.fill();
+                                            }
+                                        }
+                                        draw();
+                                        const particlesContainer = document.getElementById(particlesContainerId);
+                                        const particleColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
+                                        function createParticle(container) {
+                                            const particle = document.createElement('div');
+                                            particle.classList.add('particle');
+                                            particle.style.backgroundColor = particleColors[Math.floor(Math.random() * particleColors.length)];
+                                            particle.style.width = '50px';
+                                            particle.style.height = '50px';
+                                            particle.style.borderRadius = '50%';
+                                            particle.style.position = 'absolute';
+                                            const maxTop = container.clientHeight;
+                                            const maxLeft = container.clientWidth;
+                                            particle.style.top = `${Math.random() * maxTop}px`;
+                                            particle.style.left = `${Math.random() * maxLeft}px`;
+                                            container.appendChild(particle);
+                                            setTimeout(() => {
+                                                particle.style.transform = 'scale(1)';
+                                                particle.style.opacity = '0';
+                                            }, 10000);
+                                        }
+                                        function createRandomParticles(container) {
+                                            const interval = Math.random() * 8000;
+                                            createParticle(container);
+                                            setTimeout(() => createRandomParticles(container), interval);
+                                        }
+                                        createRandomParticles(particlesContainer);
+                                        function updateParticlesPosition() {
+                                            requestAnimationFrame(updateParticlesPosition);
+                                            analyser.getByteFrequencyData(dataArray);
+                                            const average = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+                                            const scaleFactor = 1 + average / 100;
+                                            particlesContainer.style.transform = `scale(${scaleFactor})`;
+                                        }
+                                        updateParticlesPosition();
+                                    }
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        initializeAudioPlayer('audio-player', '.container', 'audio-visualizer', 'particles-container');
+                                        initializeAudioPlayer('audio-player2', '.container2', 'audio-visualizer2', 'particles-container2');
+                                    });
+                                </script>
                                 <div class="video-container">
                                     <video id="audio-player"
                                         width="320"
@@ -706,203 +819,7 @@
                                         height="400px"></canvas>
                                 </div>
                                 <div id="particles-container"></div>
-                                <p style="text-align: center;">The Wedding Invitation</p>
-                                <script>
-                                    document.addEventListener('DOMContentLoaded', function () {
-                                        const video = document.getElementById('audio-player');
-                                        let isPlaying = false;
-                                        video.addEventListener('click', function () {
-                                            if (isPlaying) {
-                                                video.pause();
-                                                isPlaying = false;
-                                            } else {
-                                                video.play();
-                                                isPlaying = true;
-                                            }
-                                        });
-                                        video.addEventListener('touchstart', function (e) {
-                                            e.preventDefault();
-                                            if (isPlaying) {
-                                                video.pause();
-                                                isPlaying = false;
-                                            } else {
-                                                video.play();
-                                                isPlaying = true;
-                                            }
-                                        });
-                                    });
-                                    document.addEventListener('DOMContentLoaded', function () {
-                                        const video = document.getElementById('audio-player');
-                                        const container = document.querySelector('.container');
-                                        video.addEventListener('loadeddata', function () {
-                                            container.style.height = video.offsetHeight + 'px';
-                                        });
-                                        window.addEventListener('resize', function () {
-                                            container.style.height = video.offsetHeight + 'px';
-                                        });
-                                    });
-                                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                                    const audioElement = document.getElementById('audio-player');
-                                    const audioSrc = audioContext.createMediaElementSource(audioElement);
-                                    const analyser = audioContext.createAnalyser();
-                                    const canvas = document.getElementById('audio-visualizer');
-                                    const ctx = canvas.getContext('2d');
-                                    audioSrc.connect(analyser);
-                                    audioSrc.connect(audioContext.destination);
-                                    const bufferLength = analyser.frequencyBinCount;
-                                    const dataArray = new Uint8Array(bufferLength);
-                                    function draw() {
-                                        const WIDTH = canvas.width;
-                                        const maxBarHeight = Math.max(...dataArray) * 1.5;
-                                        canvas.height = maxBarHeight;
-                                        const HEIGHT = canvas.height;
-                                        requestAnimationFrame(draw);
-                                        analyser.getByteFrequencyData(dataArray);
-                                        ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-                                        ctx.fillRect(0, 0, WIDTH, HEIGHT);
-                                        const barWidth = (WIDTH / bufferLength) * 2.5;
-                                        let x = 0;
-                                        for (let i = 0; i < bufferLength; i += 4) {
-                                            const barWidth = (WIDTH / (bufferLength / 4)) * 1;
-                                            const barHeight = dataArray[i] * 1.5;
-                                            const barHeightAdjusted = Math.max(2, barHeight);
-                                            const hue = -(i / bufferLength * 200 + 300) % 360;
-                                            const saturation = 100;
-                                            const lightness = 50;
-                                            const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-                                            ctx.fillStyle = color;
-                                            ctx.fillRect(x, HEIGHT - barHeightAdjusted, barWidth, barHeightAdjusted);
-                                            x += barWidth + 1;
-                                        }
-                                        for (let i = 0; i < bufferLength; i += 10) {
-                                            const sparkX = Math.random() * WIDTH;
-                                            const sparkY = Math.random() * HEIGHT;
-                                            const sparkRadius = Math.random() * (dataArray[i] / 8);
-                                            const frequencyBasedRadius = sparkRadius * (i / bufferLength);
-                                            const sparkColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                                            ctx.beginPath();
-                                            ctx.arc(sparkX, sparkY, frequencyBasedRadius, 0, Math.PI * 4);
-                                            ctx.fillStyle = sparkColor;
-                                            ctx.fill();
-                                        }
-                                    }
-                                    draw();
-                                    const particlesContainer = document.getElementById('particles-container');
-                                    const particleColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
-                                    function createParticle(container) {
-                                        const particle = document.createElement('div');
-                                        particle.classList.add('particle');
-                                        particle.style.backgroundColor = particleColors[Math.floor(Math.random() * particleColors.length)];
-                                        particle.style.width = '50px';
-                                        particle.style.height = '50px';
-                                        particle.style.borderRadius = '50%';
-                                        particle.style.position = 'absolute';
-                                        const maxTop = container.clientHeight;
-                                        const maxLeft = container.clientWidth;
-                                        particle.style.top = `${Math.random() * maxTop}px`;
-                                        particle.style.left = `${Math.random() * maxLeft}px`;
-                                        container.appendChild(particle);
-                                        setTimeout(() => {
-                                            particle.style.transform = 'scale(1)';
-                                            particle.style.opacity = '0';
-                                        }, 10000);
-                                    }
-                                    function createRandomParticles(container) {
-                                        const interval = Math.random() * 2000 + 500;
-                                        createParticle(container);
-                                        setTimeout(() => createRandomParticles(container), interval);
-                                    }
-                                    createRandomParticles(particlesContainer);
-                                    function updateParticlesPosition() {
-                                        requestAnimationFrame(updateParticlesPosition);
-                                        analyser.getByteFrequencyData(dataArray);
-                                        const average = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-                                        const scaleFactor = 1 + average / 100;
-                                        particlesContainer.style.transform = `scale(${scaleFactor})`;
-                                    }
-                                    updateParticlesPosition();
-                                </script>
-                            </div>
-
-                            <div>
-                                <style>
-                                    .container2 {
-                                        position: relative;
-                                        width: 100%;
-                                        max-width: 800px;
-                                        height: 100px;
-                                        overflow: hidden;
-                                        border-radius: 20px;
-                                        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-                                        margin: 40px;
-                                        border: 2px solid #fff;
-                                        box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
-                                        justify-content: center;
-                                    }
-
-                                    #audio-player2 {
-                                        width: 100%;
-                                        height: 100%;
-                                        border: none;
-                                        border-radius: 20px;
-                                        display: block;
-                                        margin: auto;
-                                        border: 2px solid #fff;
-                                        box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
-                                        justify-content: center;
-                                    }
-
-                                    #audio-visualizer2 {
-                                        width: 100%;
-                                        max-width: 800px;
-                                        height: 150px;
-                                        background-color: #000000;
-                                        border-radius: 20px;
-                                        margin: 20px;
-                                        box-shadow: 0 10px 16px rgba(0, 0, 0, 0.5);
-                                        position: relative;
-                                        overflow: hidden;
-                                        margin-left: auto;
-                                        margin-right: auto;
-                                        display: block;
-                                        border: 2px solid white;
-                                    }
-
-                                    #audio-visualizer2:after {
-                                        content: "";
-                                        position: absolute;
-                                        top: 100%;
-                                        left: 0;
-                                        right: 0;
-                                        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(196, 144, 144, 0));
-                                        transform: scaleY(-1);
-                                        transform-origin: bottom;
-                                    }
-
-                                    #particles-container2 {
-                                        position: fixed;
-                                        top: 0;
-                                        left: 0;
-                                        width: 100%;
-                                        height: 100%;
-                                        pointer-events: none;
-                                        filter: blur(40px);
-                                        transform-origin: center;
-                                        transition: transform 0.1s ease;
-                                        overflow: hidden;
-                                    }
-
-                                    @media (max-width: 600px) {
-                                        .container2 {
-                                            padding: 0px;
-                                        }
-
-                                        #audio-player2,
-                                        #audio-visualizer2 {
-                                            max-width: calc(100%);
-                                        }
-                                    }
-                                </style>
+                                <p style="text-align: center; padding-bottom: 4vh;">The Wedding Invitation</p>
                                 <div class="video-container2">
                                     <video id="audio-player2"
                                         width="320"
@@ -919,121 +836,6 @@
                                 </div>
                                 <div id="particles-container2"></div>
                                 <p style="text-align: center;">Restoration and Colorization Process in Photoshop</p>
-                                <script>
-                                    document.addEventListener('DOMContentLoaded', function () {
-                                        const video2 = document.getElementById('audio-player2');
-                                        let isPlaying2 = false;
-                                        video2.addEventListener('click', function () {
-                                            if (isPlaying2) {
-                                                video2.pause();
-                                                isPlaying2 = false;
-                                            } else {
-                                                video2.play();
-                                                isPlaying2 = true;
-                                            }
-                                        });
-                                        video2.addEventListener('touchstart', function (e) {
-                                            e.preventDefault();
-                                            if (isPlaying2) {
-                                                video2.pause();
-                                                isPlaying2 = false;
-                                            } else {
-                                                video2.play();
-                                                isPlaying2 = true;
-                                            }
-                                        });
-                                    });
-                                    document.addEventListener('DOMContentLoaded', function () {
-                                        const video2 = document.getElementById('audio-player2');
-                                        const container2 = document.querySelector('.container2');
-                                        video2.addEventListener('loadeddata', function () {
-                                            container2.style.height = video2.offsetHeight + 'px';
-                                        });
-                                        window.addEventListener('resize', function () {
-                                            container2.style.height = video2.offsetHeight + 'px';
-                                        });
-                                    });
-                                    const audioContext2 = new (window.AudioContext || window.webkitAudioContext)();
-                                    const audioElement2 = document.getElementById('audio-player2');
-                                    const audioSrc2 = audioContext2.createMediaElementSource(audioElement2);
-                                    const analyser2 = audioContext2.createAnalyser();
-                                    const canvas2 = document.getElementById('audio-visualizer2');
-                                    const ctx2 = canvas2.getContext('2d');
-                                    audioSrc2.connect(analyser2);
-                                    audioSrc2.connect(audioContext2.destination);
-                                    const bufferLength2 = analyser2.frequencyBinCount;
-                                    const dataArray2 = new Uint8Array(bufferLength2);
-                                    function draw2() {
-                                        const WIDTH2 = canvas2.width;
-                                        const maxBarHeight2 = Math.max(...dataArray2) * 1.5;
-                                        canvas2.height = maxBarHeight2;
-                                        const HEIGHT2 = canvas2.height;
-                                        requestAnimationFrame(draw2);
-                                        analyser2.getByteFrequencyData(dataArray2);
-                                        ctx2.fillStyle = 'rgba(0, 0, 0, 0.04)';
-                                        ctx2.fillRect(0, 0, WIDTH2, HEIGHT2);
-                                        const barWidth2 = (WIDTH2 / bufferLength2) * 2.5;
-                                        let x2 = 0;
-                                        for (let i = 0; i < bufferLength2; i += 4) {
-                                            const barWidth2 = (WIDTH2 / (bufferLength2 / 4)) * 1;
-                                            const barHeight2 = dataArray2[i] * 1.5;
-                                            const barHeightAdjusted2 = Math.max(2, barHeight2);
-                                            const hue2 = -(i / bufferLength2 * 200 + 100) % 360;
-                                            const saturation2 = 100;
-                                            const lightness2 = 50;
-                                            const color2 = `hsl(${hue2}, ${saturation2}%, ${lightness2}%)`;
-                                            ctx2.fillStyle = color2;
-                                            ctx2.fillRect(x2, HEIGHT2 - barHeightAdjusted2, barWidth2, barHeightAdjusted2);
-                                            x2 += barWidth2 + 1;
-                                        }
-                                        for (let i = 0; i < bufferLength2; i += 10) {
-                                            const sparkX2 = Math.random() * WIDTH2;
-                                            const sparkY2 = Math.random() * HEIGHT2;
-                                            const sparkRadius2 = Math.random() * (dataArray2[i] / 8);
-                                            const frequencyBasedRadius2 = sparkRadius2 * (i / bufferLength2);
-                                            const sparkColor2 = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                                            ctx2.beginPath();
-                                            ctx2.arc(sparkX2, sparkY2, frequencyBasedRadius2, 0, Math.PI * 4);
-                                            ctx2.fillStyle = sparkColor2;
-                                            ctx2.fill();
-                                        }
-                                    }
-                                    draw2();
-                                    const particlesContainer2 = document.getElementById('particles-container2');
-                                    const particleColors2 = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff'];
-                                    function createParticle2(container2) {
-                                        const particle2 = document.createElement('div');
-                                        particle2.classList.add('particle2');
-                                        particle2.style.backgroundColor = particleColors2[Math.floor(Math.random() * particleColors2.length)];
-                                        particle2.style.width = '50px';
-                                        particle2.style.height = '50px';
-                                        particle2.style.borderRadius = '50%';
-                                        particle2.style.position = 'absolute';
-                                        const maxTop2 = container2.clientHeight;
-                                        const maxLeft2 = container2.clientWidth;
-                                        particle2.style.top = `${Math.random() * maxTop2}px`;
-                                        particle2.style.left = `${Math.random() * maxLeft2}px`;
-                                        container2.appendChild(particle2);
-                                        setTimeout(() => {
-                                            particle2.style.transform = 'scale(1)';
-                                            particle2.style.opacity = '0';
-                                        }, 10000);
-                                    }
-                                    function createRandomParticles2(container2) {
-                                        const interval2 = Math.random() * 2000 + 500;
-                                        createParticle2(container2);
-                                        setTimeout(() => createRandomParticles2(container2), interval2);
-                                    }
-                                    createRandomParticles2(particlesContainer2);
-                                    function updateParticlesPosition2() {
-                                        requestAnimationFrame(updateParticlesPosition2);
-                                        analyser2.getByteFrequencyData(dataArray2);
-                                        const average2 = dataArray2.reduce((a, b) => a + b, 0) / dataArray2.length;
-                                        const scaleFactor2 = 1 + average2 / 100;
-                                        particlesContainer2.style.transform = `scale(${scaleFactor2})`;
-                                    }
-                                    updateParticlesPosition2();
-                                </script>
                             </div>
                             <br><br><br>
                             <p class="has-text-align-center"><i>Not goodbye, just see you down the way.</i></p>
