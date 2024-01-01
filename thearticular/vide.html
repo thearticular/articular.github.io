@@ -660,15 +660,19 @@
                                         position: fixed;
                                         top: 0;
                                         left: 0;
-                                        width: 100%;
-                                        height: 100%;
+                                        width: 100vw;
+                                        height: 100vh;
                                         pointer-events: none;
-                                        filter: blur(40px);
+                                        filter: blur(35px);
                                         transform-origin: center;
                                         transition: transform 0.1s ease;
                                         overflow: hidden;
                                         align-items: center;
                                         align-content: center;
+                                        align-self: center;
+                                        justify-content: center;
+                                        justify-items: center;
+                                        justify-self: center;
                                     }
 
                                     @media (max-width: 600px) {
@@ -730,7 +734,7 @@
                                         });
                                         function draw() {
                                             const WIDTH = canvas.width;
-                                            const maxBarHeight = Math.max(...dataArray) * 1.7;
+                                            const maxBarHeight = Math.max(...dataArray) * 1;
                                             canvas.height = maxBarHeight;
                                             const HEIGHT = canvas.height;
                                             requestAnimationFrame(draw);
@@ -739,11 +743,11 @@
                                             ctx.fillRect(0, 0, WIDTH, HEIGHT);
                                             const barWidth = (WIDTH / bufferLength) * 2.5;
                                             let x = 0;
-                                            for (let i = 0; i < bufferLength; i += 2) {
+                                            for (let i = 0; i < bufferLength; i += 6) {
                                                 const barWidth = (WIDTH / (bufferLength / 10)) * 1;
-                                                const barHeight = dataArray[i] * 1.5;
+                                                const barHeight = dataArray[i] * 1;
                                                 const barHeightAdjusted = Math.max(2, barHeight);
-                                                const hue = -(i / bufferLength * 800 + 300) % 300;
+                                                const hue = -(i / bufferLength * 300 + 300) % 300;
                                                 const saturation = 100;
                                                 const lightness = 50;
                                                 const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
@@ -780,12 +784,12 @@
                                             particle.style.left = `${Math.random() * maxLeft}px`;
                                             container.appendChild(particle);
                                             setTimeout(() => {
-                                                particle.style.transform = 'scale(1)';
+                                                particle.style.transform = 'scale(0.01)';
                                                 particle.style.opacity = '0';
                                             }, 10000);
                                         }
                                         function createRandomParticles(container) {
-                                            const interval = Math.random() * 8000;
+                                            const interval = Math.random() * 2000 + 500;
                                             createParticle(container);
                                             setTimeout(() => createRandomParticles(container), interval);
                                         }
@@ -794,7 +798,7 @@
                                             requestAnimationFrame(updateParticlesPosition);
                                             analyser.getByteFrequencyData(dataArray);
                                             const average = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-                                            const scaleFactor = 1 + average / 100;
+                                            const scaleFactor = 1 + average / 10;
                                             particlesContainer.style.transform = `scale(${scaleFactor})`;
                                         }
                                         updateParticlesPosition();
@@ -915,6 +919,40 @@
         for (const video of videos) {
             video.addEventListener('play', pauseOtherVideos);
         }
+        document.addEventListener('DOMContentLoaded', function () {
+            var video = document.getElementById('audio-player');
+            var particlesContainer = document.getElementById('particles-container');
+            particlesContainer.style.display = 'none'
+            video.addEventListener('play', function () {
+                particlesContainer.style.display = 'block';
+            });
+            video.addEventListener('pause', function () {
+                particlesContainer.style.display = 'none';
+            });
+            video.addEventListener('ended', function () {
+                particlesContainer.style.display = 'none';
+            });
+            video.addEventListener('waiting', function () {
+                particlesContainer.style.display = 'none';
+            });
+        })
+        document.addEventListener('DOMContentLoaded', function () {
+            var video = document.getElementById('audio-player2');
+            var particlesContainer = document.getElementById('particles-container2');
+            particlesContainer.style.display = 'none'
+            video.addEventListener('play', function () {
+                particlesContainer.style.display = 'block';
+            });
+            video.addEventListener('pause', function () {
+                particlesContainer.style.display = 'none';
+            });
+            video.addEventListener('ended', function () {
+                particlesContainer.style.display = 'none';
+            });
+            video.addEventListener('waiting', function () {
+                particlesContainer.style.display = 'none';
+            });
+        })
     </script>
 </body>
 
