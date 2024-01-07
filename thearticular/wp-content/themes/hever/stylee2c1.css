@@ -875,12 +875,12 @@ footer {
  */
 .site-main {
 	padding: 10px 10px;
-	margin-left: 0px;
+	margin-left: 1px;
 	margin-right: 0px;
 }
 
 .site-footer {
-	padding: 2px 2px;
+	padding: 0px 2px;
 	margin-left: auto;
 	margin-right: auto;
 }
