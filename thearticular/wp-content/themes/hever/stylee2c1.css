@@ -4726,14 +4726,14 @@ table th,
 
 .singular .hentry .entry-header .entry-title:after,
 .page-title:after {
-	margin-top: 8px;
+	margin-top: 0px;
 }
 
 @media only screen and (min-width: 560px) {
 
 	.singular .hentry .entry-header .entry-title:after,
 	.page-title:after {
-		margin-top: 8px;
+		margin-top: 0px;
 	}
 }
 

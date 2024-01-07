@@ -703,6 +703,8 @@
                                         trimmedValue = trimmedValue.replace(/\s\s+/g, ' ');
                                         trimmedValue = trimmedValue.replace(/\s*,\s*/g, ', ');
                                         trimmedValue = trimmedValue.replace(/ ,/g, '');
+                                        trimmedValue = trimmedValue.replace(/[^a-zA-Z0-9 ]/g, ",");
+                                        trimmedValue = trimmedValue.replace(/,\s*$/, "");
                                         input.style.color = "";
                                         var elements = {};
                                         var array = trimmedValue.split(",").map(item => item.trim());
