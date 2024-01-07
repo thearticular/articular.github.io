@@ -4708,7 +4708,7 @@ table th,
 .page-title:before,
 .page-title:after {
 	background: var(--wp--preset--color--border-low-contrast);
-	height: 1px;
+	height: 2px;
 	content: "";
 	display: block;
 	margin-bottom: 0px;
