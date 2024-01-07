@@ -605,10 +605,7 @@
                             <p class="has-text-align-center">Enter words, phrases, sentences all separated by commas and
                                 find if there are repetitions, and remove them. Many other punctuation marks will be
                                 converted to commas and treated as separators.</p><br>
-
-
                             <div>
-
                                 <style>
                                     form {
                                         display: flex;
@@ -655,47 +652,32 @@
                                         display: inline-block;
                                     }
                                 </style>
-
                                 <form>
-
                                     <button onclick="highlightDuplicates(event)">Highlight
                                         Duplicates</button>
-
                                     <div style="margin-bottom: 7px;"></div>
-
                                     <button onclick="removeDuplicate(event)">Remove
                                         Duplicates</button>
-
                                     <div style="margin-bottom: 7px;"></div>
-
                                     <button onclick="copyToClipboard(event)">Copy to Clipboard</button>
-
                                     <div style="margin-bottom: 7px;"></div>
-
                                     <button onclick="clearTextLabel(event)">Clear
                                         Text</button>
-
                                     <div style="margin-bottom: 7px;"></div>
-
                                     <label for="textInput">Enter
                                         text:</label>
-
                                     <div id="textInput"
                                         name="textInput"
                                         contenteditable="true"
                                         class="custom-input">
                                     </div>
-
                                 </form>
-
                                 <script>
-
                                     function adjustHeight() {
                                         var input = document.getElementById('textInput');
                                         input.style.height = 'auto';
                                         input.style.height = (input.scrollHeight) + "px";
                                     }
-
                                     function removeDuplicate(event) {
                                         event.preventDefault();
                                         var input = document.getElementById('textInput');
@@ -710,12 +692,10 @@
                                         trimmedValue = trimmedValue.replace(/,\s*$/, "");
                                         input.innerText = trimmedValue;
                                     }
-
                                     function clearTextLabel(event) {
                                         document.getElementById('textLabel').value = '';
                                         event.preventDefault();
                                     }
-
                                     function highlightDuplicates(event) {
                                         event.preventDefault();
                                         var input = document.getElementById('textInput');
@@ -744,7 +724,6 @@
                                             }
                                         });
                                     }
-
                                     function copyToClipboard(event) {
                                         event.preventDefault();
                                         var input = document.getElementById('textInput');
@@ -757,9 +736,7 @@
                                         document.execCommand('copy');
                                         document.body.removeChild(tempTextArea);
                                     }
-
                                 </script>
-
                             </div>
                         </div><!-- .entry-content -->
                     </article><!-- #post-1228 -->
@@ -817,7 +794,6 @@
     <script>
         /(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window.addEventListener("hashchange", function () { var t, e = location.hash.substring(1); /^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i.test(t.tagName) || (t.tabIndex = -1), t.focus()) }, !1);
     </script>
-
     <div id="buttonContainer">
         <script src="script.js"></script>
         <div id="topButton"
@@ -825,7 +801,6 @@
         <div id="bottomButton"
             onclick="scrollToBottom()"></div>
     </div>
-
     <script>
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();

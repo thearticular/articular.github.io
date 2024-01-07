@@ -4,7 +4,6 @@ function scrollToTop() {
     behavior: "instant"
   });
 }
-
 function scrollToBottom() {
   window.scrollTo({
     top: document.body.scrollHeight,

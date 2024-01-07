@@ -8,11 +8,13 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
- }
- 
+    -webkit-filter: drop-shadow(1px 0px 0 white) drop-shadow(0px 1px 0 white) drop-shadow(-1px -0px 0 white) drop-shadow(-0px -1px 0 white);
+    filter: drop-shadow(1px 0px 0 white) drop-shadow(0px 1px 0 white) drop-shadow(-1px -0px 0 white) drop-shadow(-0px -1px 0 white);
+}
+
 #bottomButton {
     position: fixed;
-    bottom: 5px;
+    bottom: 1px;
     right: 5px;
     width: 24px;
     height: 24px;
@@ -20,16 +22,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    -webkit-filter: drop-shadow(1px 0px 0 white) drop-shadow(0px 1px 0 white) drop-shadow(-1px -0px 0 white) drop-shadow(-0px -1px 0 white);
+    filter: drop-shadow(1px 0px 0 white) drop-shadow(0px 1px 0 white) drop-shadow(-1px -0px 0 white) drop-shadow(-0px -1px 0 white);
 }
-
-#buttonContainer {
-    position: fixed;
-    bottom: 2px;
-    right: 2px;
-    width: 30px;
-    height: 84px; 
-    overflow: hidden;
-    border-radius: 10px;
-    color: #fff;
-    border: 1px solid white;    
- }
