@@ -1,10 +1,10 @@
 #topButton {
     position: fixed;
-    bottom: 60px;
-    right: 5px;
-    width: 24px;
-    height: 24px;
-    background-image: url('wp-content/uploads/up.png');
+    bottom: 70px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    background-image: url('uploads/up.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -14,11 +14,11 @@
 
 #bottomButton {
     position: fixed;
-    bottom: 1px;
-    right: 5px;
-    width: 24px;
-    height: 24px;
-    background-image: url('wp-content/uploads/down.png');
+    bottom: 5px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    background-image: url('uploads/down.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
