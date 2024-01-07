@@ -4,7 +4,7 @@
     right: 15px;
     width: 30px;
     height: 30px;
-    background-image: url('uploads/up.png');
+    background-image: url('../uploads/up.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -18,7 +18,7 @@
     right: 15px;
     width: 30px;
     height: 30px;
-    background-image: url('uploads/down.png');
+    background-image: url('../uploads/down.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
