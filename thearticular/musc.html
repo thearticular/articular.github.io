@@ -790,10 +790,6 @@
                                     }
                                     updateParticlesPosition();
                                 </script>
-                                <br><br><br>
-                                <p class="has-text-align-center"><i>This pause won't last, our tale's left half
-                                        untold.</i>
-                                </p>
                         </div><!-- .entry-content -->
                     </article><!-- #post-1228 -->
                 </main><!-- #main -->
@@ -850,9 +846,15 @@
     <script>
         /(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window.addEventListener("hashchange", function () { var t, e = location.hash.substring(1); /^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i.test(t.tagName) || (t.tabIndex = -1), t.focus()) }, !1);
     </script>
-    <div id="topButton"
-        onclick="scrollToTop()">Top</div>
+
+<div id="buttonContainer">
     <script src="script.js"></script>
+    <div id="topButton"
+        onclick="scrollToTop()"></div>		
+    <div id="bottomButton"
+        onclick="scrollToBottom()"></div>
+</div>
+
     <script>
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();

@@ -629,18 +629,26 @@
 										style="border-radius:100px;background:linear-gradient(135deg,rgb(0,0,0) 0%,rgb(24, 0, 77) 54%,rgb(0,0,0) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Polynomial
 										Regression</a>
 								</div>
-							</div>
+								<div
+									class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
+									<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
+										href="dupl.html"
+										style="border-radius:100px;background:linear-gradient(135deg,rgb(0,0,0) 0%,rgb(50, 0, 77) 54%,rgb(0,0,0) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Remove
+										Duplicate Phrases</a>
+								</div>
+							</div><br>
 							<div
 								style="display: flex !important; justify-content: center !important; text-align: center !important; align-items: center !important;">
-								<p>Articles:<br>
+								<p>Download the typefaces I created:<br>
+									<a style="color:white"
+										href="wp-content/uploads/cirline.ttf">1. Cirline.ttf</a><br>
+									<a style="color:white"
+										href="wp-content/uploads/cirline rounded.ttf">2. Cirline Rounded.ttf</a><br><br>
+									Articles:<br>
 									<a style="color:white"
 										href="a_gad.html">1. Glass: The Architecture of Doom</a>
 								</p>
 							</div>
-							<br><br><br>
-							<p class="has-text-align-center"
-								style="font-size: 65%;"><i>When life knocks you down,<br> look at the ground and say
-									"Not today, gravity!" <br>Then go to bed and fly in your dreams.</i></p>
 						</div><!-- .entry-content -->
 					</article><!-- #post-5 -->
 				</main><!-- #main -->
@@ -710,6 +718,15 @@
 			e.preventDefault();
 		});
 	</script>
+
+	<div id="buttonContainer">
+		<script src="script.js"></script>
+		<div id="topButton"
+			onclick="scrollToTop()"></div>
+		<div id="bottomButton"
+			onclick="scrollToBottom()"></div>
+	</div>
+
 </body>
 
 </html>

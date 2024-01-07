@@ -1,24 +1,35 @@
 #topButton {
     position: fixed;
+    bottom: 60px;
+    right: 5px;
+    width: 24px;
+    height: 24px;
+    background-image: url('wp-content/uploads/up.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+ }
+ 
+#bottomButton {
+    position: fixed;
     bottom: 5px;
     right: 5px;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: #000;
-    color: #fff;
-    border: 2px solid white;
-    font-size: 12px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    padding: 0;
-    text-align: center;
-    line-height: 25px;
-    cursor: pointer;
-    align-content: center;
-    align-self: center;
-    padding: 2px;
+    width: 24px;
+    height: 24px;
+    background-image: url('wp-content/uploads/down.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
+
+#buttonContainer {
+    position: fixed;
+    bottom: 2px;
+    right: 2px;
+    width: 30px;
+    height: 84px; 
+    overflow: hidden;
+    border-radius: 10px;
+    color: #fff;
+    border: 1px solid white;    
+ }

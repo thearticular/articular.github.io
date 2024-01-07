@@ -12,7 +12,7 @@
         content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
     <link rel="profile"
         href="../gmpg.org/xfn/11" />
-    <title>Polynomial Regression</title>
+    <title>Remove Duplicate Phrases</title>
     <meta name='robots'
         content='max-image-preview:large' />
     <link rel='dns-prefetch'
@@ -585,7 +585,7 @@
                     <article id="post-1228"
                         class="post-1228 page type-page status-publish hentry entry">
                         <header class="entry-header responsive-max-width">
-                            <h1 class="entry-title">Polynomial Regression</h1>
+                            <h1 class="entry-title">Remove Duplicate Phrases</h1>
                         </header>
                         <div class="entry-content">
                             <div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
@@ -602,13 +602,165 @@
                                         style="border-radius:100px;background:linear-gradient(135deg,rgb(1,1,1) 0%,rgb(97,0,0) 52%,rgb(0,0,0) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous</a>
                                 </div>
                             </div>
-                            <p class="has-text-align-center">I created this web application for polynomial regression.
-                                JavaScript was used for handling user input, performing calculations, and generating the
-                                equation. Also used numeric.js and Plotly to help in matrix operations and plotting the
-                                equation. I wanted to create this to faciliate the process to interpolate and
-                                extrapolate data based on stock market, GDP, population and other data trends.</p>
-                            <iframe src="pnrc.html"
-                                style="border: none; width: 100vw; height: 100dvh; overflow: hidden; display: none;"></iframe>
+                            <p class="has-text-align-center">Enter words, phrases, sentences all separated by commas and
+                                find if there are repetitions, and remove them. Many other punctuation marks will be
+                                converted to commas and treated as separators.</p><br>
+
+
+                            <div>
+
+                                <style>
+                                    form {
+                                        display: flex;
+                                        flex-direction: column;
+                                        height: auto;
+                                        justify-content: center;
+                                        align-items: center;
+                                        background-color: #000000;
+                                        color: white;
+                                        border-radius: 20px;
+                                        border-width: 20px;
+                                        border-color: white;
+                                        text-align: center;
+                                    }
+
+                                    button {
+                                        width: 250px;
+                                        height: 40px;
+                                        line-height: 10px;
+                                        background-color: #000000;
+                                        color: white;
+                                        border-radius: 20px;
+                                        border-width: 3px;
+                                        border-color: white;
+                                        text-align: center;
+                                    }
+
+                                    button img {
+                                        object-fit: cover;
+                                        height: 150%;
+                                        width: auto;
+                                    }
+
+                                    .custom-input {
+                                        width: 250px;
+                                        height: 300px;
+                                        outline: 3px solid white;
+                                        background-color: black;
+                                        color: white;
+                                        border-radius: 30px;
+                                        overflow: auto;
+                                        resize: vertical;
+                                        padding: 10px;
+                                        display: inline-block;
+                                    }
+                                </style>
+
+                                <form>
+
+                                    <button onclick="highlightDuplicates(event)">Highlight
+                                        Duplicates</button>
+
+                                    <div style="margin-bottom: 7px;"></div>
+
+                                    <button onclick="removeDuplicate(event)">Remove
+                                        Duplicates</button>
+
+                                    <div style="margin-bottom: 7px;"></div>
+
+                                    <button onclick="copyToClipboard(event)">Copy to Clipboard</button>
+
+                                    <div style="margin-bottom: 7px;"></div>
+
+                                    <button onclick="clearTextLabel(event)">Clear
+                                        Text</button>
+
+                                    <div style="margin-bottom: 7px;"></div>
+
+                                    <label for="textInput">Enter
+                                        text:</label>
+
+                                    <div id="textInput"
+                                        name="textInput"
+                                        contenteditable="true"
+                                        class="custom-input">
+                                    </div>
+
+                                </form>
+
+                                <script>
+
+                                    function adjustHeight() {
+                                        var input = document.getElementById('textInput');
+                                        input.style.height = 'auto';
+                                        input.style.height = (input.scrollHeight) + "px";
+                                    }
+
+                                    function removeDuplicate(event) {
+                                        event.preventDefault();
+                                        var input = document.getElementById('textInput');
+                                        var trimmedValue = input.innerText.replace(/^\s+/, '');
+                                        trimmedValue = trimmedValue.replace(/[^a-zA-Z0-9 ]/g, ",");
+                                        trimmedValue = trimmedValue.replace(/\s\s+/g, ' ');
+                                        trimmedValue = trimmedValue.replace(/\s*,\s*/g, ', ');
+                                        trimmedValue = trimmedValue.replace(/ ,/g, '');
+                                        var array = trimmedValue.split(",").map(item => item.trim());
+                                        var unique = [...new Set(array)];
+                                        trimmedValue = unique.join(", ");
+                                        trimmedValue = trimmedValue.replace(/,\s*$/, "");
+                                        input.innerText = trimmedValue;
+                                    }
+
+                                    function clearTextLabel(event) {
+                                        document.getElementById('textLabel').value = '';
+                                        event.preventDefault();
+                                    }
+
+                                    function highlightDuplicates(event) {
+                                        event.preventDefault();
+                                        var input = document.getElementById('textInput');
+                                        var trimmedValue = input.innerText.replace(/^\s+/, '');
+                                        trimmedValue = trimmedValue.replace(/\s\s+/g, ' ');
+                                        trimmedValue = trimmedValue.replace(/\s*,\s*/g, ', ');
+                                        trimmedValue = trimmedValue.replace(/ ,/g, '');
+                                        input.style.color = "";
+                                        var elements = {};
+                                        var array = trimmedValue.split(",").map(item => item.trim());
+                                        array.forEach(function (item) {
+                                            if (!elements[item]) {
+                                                elements[item] = { count: 1 };
+                                            } else {
+                                                elements[item].count++;
+                                            }
+                                        });
+                                        array = array.map(function (item) {
+                                            return "<span style='color:" + (elements[item].count > 1 ? "red" : "white") + "'>" + item + "</span>";
+                                        });
+                                        input.innerHTML = array.join(", ");
+                                        input.addEventListener('input', function () {
+                                            var spans = input.getElementsByTagName('span');
+                                            for (var i = 0; i < spans.length; i++) {
+                                                spans[i].style.color = 'white';
+                                            }
+                                        });
+                                    }
+
+                                    function copyToClipboard(event) {
+                                        event.preventDefault();
+                                        var input = document.getElementById('textInput');
+                                        var text = input.innerText;
+                                        var tempTextArea = document.createElement('textarea');
+                                        tempTextArea.value = text;
+                                        document.body.appendChild(tempTextArea);
+                                        tempTextArea.select();
+                                        tempTextArea.setSelectionRange(0, 99999);
+                                        document.execCommand('copy');
+                                        document.body.removeChild(tempTextArea);
+                                    }
+
+                                </script>
+
+                            </div>
                         </div><!-- .entry-content -->
                     </article><!-- #post-1228 -->
                 </main><!-- #main -->
@@ -666,13 +818,13 @@
         /(trident|msie)/i.test(navigator.userAgent) && document.getElementById && window.addEventListener && window.addEventListener("hashchange", function () { var t, e = location.hash.substring(1); /^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i.test(t.tagName) || (t.tabIndex = -1), t.focus()) }, !1);
     </script>
 
-<div id="buttonContainer">
-    <script src="script.js"></script>
-    <div id="topButton"
-        onclick="scrollToTop()"></div>		
-    <div id="bottomButton"
-        onclick="scrollToBottom()"></div>
-</div>
+    <div id="buttonContainer">
+        <script src="script.js"></script>
+        <div id="topButton"
+            onclick="scrollToTop()"></div>
+        <div id="bottomButton"
+            onclick="scrollToBottom()"></div>
+    </div>
 
     <script>
         document.addEventListener('contextmenu', function (e) {
