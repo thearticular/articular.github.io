@@ -624,18 +624,41 @@
 			transform: translate(0%, 0%);
 		}
 
+		@property --angle {
+			syntax: '<angle>';
+			initial-value: 0deg;
+			inherits: true;
+		}
+
+		:root {
+			--d: 6s;
+			--angle: 90deg;
+			--c1: rgb(255, 255, 255);
+			--c2: rgba(255, 255, 255, 0.1);
+		}
+
 		.pageborder2 {
 			position: fixed;
 			top: 0px;
 			right: 0px;
 			bottom: 0px;
 			left: 0px;
-			border: 2px solid rgb(255, 255, 255);
 			overflow: auto;
+			border: 1px solid;
+			border-radius: 20px !important; 
 			box-sizing: border-box;
 			z-index: 15;
-			border-radius: 20px;
-			transform: translate(0%, 0%);
+			border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.5turn, var(--c2) 1turn) 1;
+			animation: borderRotate var(--d) linear infinite forwards;
+		}
+
+		@keyframes borderRotate {
+			0% {
+				--angle: 0deg;
+			}
+			100% {
+				--angle: 360deg;
+			}
 		}
 
 		body::-webkit-scrollbar {
@@ -702,7 +725,7 @@
 										<style>
 											.logo {
 												position: relative;
-												animation: pulse 10s infinite linear alternate;
+												animation: pulse 8s infinite linear alternate;
 											}
 
 											@keyframes pulse {
@@ -712,8 +735,8 @@
 													transform: translateX(0px) scale(0.98);
 												}
 
-												40%,
-												60% {
+												45%,
+												65% {
 													opacity: 1;
 													filter: brightness(100%) saturate(100%) contrast(100%) blur(0px) drop-shadow(0px 4px 10px rgb(0, 0, 0)) hue-rotate(0deg);
 													transform: translateX(0px) scale(1);
@@ -768,9 +791,12 @@
 													Hey everyone, 🙂<br><br>I&#8217;m Romit.<br>I&#8217;ve created
 													this website to
 													share some of
-													my personal projects.<br><br>You&#8217;ll find some sketches, digital art,
+													my personal projects.<br><br>You&#8217;ll find some sketches,
+													digital art,
 													colorized
-													images, paintings, and the other stuffs I do whenever I am able to squeeze time out of my daily life. Its ardous, but I love doing it.<br><br>
+													images, paintings, and the other stuffs I do whenever I am able to
+													squeeze time out of my daily life. Its ardous, but I love doing
+													it.<br><br>
 													I&#8217;m
 													occasionally working on new stuffs, so be sure to check back, as I
 													try
