@@ -632,8 +632,7 @@
 		}
 
 		:root {
-			--d: 2s;
-			--angle: 90deg;
+			--d: 20s;
 			--c1: rgb(255, 255, 255);
 			--c2: rgba(255, 255, 255, 0.1);
 		}
@@ -649,7 +648,7 @@
 			border-radius: 20px;
 			box-sizing: border-box;
 			z-index: 15;
-			border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.5turn, var(--c2) 1turn) 1;
+			border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 1turn, var(--c2) 0turn) 1;
 			animation: borderRotate var(--d) linear infinite forwards;
 		}
 
@@ -756,35 +755,42 @@
 										class="wp-block-buttons is-content-justification-center is-layout-flex wp-container-1 wp-block-buttons-is-layout-flex">
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
+											<a id="homepageButton"
+												class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
+												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0%,rgba(0, 0, 0, 0.7) 50%,rgba(0,0,0,0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);"
+												onclick="changeText()">Homepage</a>
+										</div>
+										<div
+											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
 												href="thearticular/skec.html"
-												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.5) 0%,rgba(130, 0, 0, 0.7) 50%,rgba(0,0,0,0.5) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);">Sketch</a>
+												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0%,rgba(65, 0, 0, 0.7) 50%,rgba(0,0,0,0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);">Sketch</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
 												href="thearticular/ping.html"
-												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.5) 0%,rgba(130, 91, 0, 0.7) 50%,rgba(0,0,0,0.5) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Painting</a>
+												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0%,rgba(61, 27, 0, 0.7) 50%,rgba(0,0,0,0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Painting</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
 												href="thearticular/dgat.html"
-												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.5) 0%,rgba(90, 125, 0, 0.7) 50%,rgba(0,0,0,0.5) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Digital
+												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0%,rgba(59, 33, 0, 0.7) 50%,rgba(0,0,0,0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Digital
 												Art</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
 												href="thearticular/prac.html"
-												style="border-radius:100px;background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 122, 8, 0.7) 50%, rgba(0, 0, 0, 0.5) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Photo
+												style="border-radius:100px;background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(63, 48, 0, 0.7) 50%, rgba(0, 0, 0, 0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Photo
 												Restoration and Colorization</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
 												href="thearticular/misc.html"
-												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.5) 0%,rgba(0, 122, 99, 0.7) 50%,rgba(0,0,0,0.5) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous</a>
+												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0%,rgba(59, 63, 0, 0.7) 50%,rgba(0,0,0,0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-fill has-small-font-size">
@@ -990,6 +996,15 @@
 			document.addEventListener('contextmenu', function (e) {
 				e.preventDefault();
 			});
+			function changeText() {
+				var button = document.getElementById('homepageButton');
+				var originalText = button.innerText;
+				button.innerText = 'This is the Homepage!';
+
+				setTimeout(function () {
+					button.innerText = originalText;
+				}, 3000);
+			}
 		</script>
 	</div>
 	</div>
