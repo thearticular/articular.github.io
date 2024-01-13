@@ -602,39 +602,30 @@
                                         style="border-radius:100px;background:linear-gradient(135deg,rgb(1,1,1) 0%,rgb(97,0,0) 52%,rgb(0,0,0) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous</a>
                                 </div>
                             </div>
-                            <p class="has-text-align-center">This is a font I created, by first drafting it in AutoCAD,
+                            <p class="has-text-align-center">This is a typeface I created, by first drafting it in
+                                AutoCAD,
                                 exporting it to Illustrators to correct the lines and adjust the spaces, then exported
-                                each letter into Font Lab, making the kerning right. I call it &#8220;Cirline&#8221;,
+                                each letter into Font Lab, making the kerning right. I named it &#8220;Cirline&#8221;,
                                 and yeah, it&#8217;s not for regular use, it&#8217;s too obscure. The download link is
                                 provided below just in case.</p>
                             <div><br>
                                 <style>
-                                    form {
-                                        display: flex;
-                                        flex-direction: column;
-                                        height: auto;
-                                        justify-content: center;
-                                        align-items: center;
-                                        background-color: #000000;
-                                        color: white;
-                                        border-radius: 20px;
-                                        border-width: 20px;
-                                        border-color: white;
-                                        text-align: center;
-                                    }
-
                                     @font-face {
                                         font-family: myFirstFont;
-                                        src: url("wp-content/uploads/Cirline.ttf");
+                                        src: url('wp-content/uploads/Cirline.woff2') format('woff2'),
+                                            url('wp-content/uploads/Cirline.woff') format('woff'),
+                                            url('wp-content/uploads/Cirline.ttf') format('truetype');
                                     }
 
                                     @font-face {
                                         font-family: myFirstFont2;
-                                        src: url("wp-content/uploads/Cirline Rounded.ttf");
+                                        src: url('wp-content/uploads/CirlineRounded.woff2') format('woff2'),
+                                            url('wp-content/uploads/CirlineRounded.woff') format('woff'),
+                                            url('wp-content/uploads/CirlineRounded.ttf') format('truetype');
                                     }
 
                                     #custom-input {
-                                        font-family: myFirstFont;
+                                        font-family: 'myFirstFont';
                                         font-size: 34px;
                                         width: 250px;
                                         height: 100px;
@@ -649,7 +640,7 @@
                                     }
 
                                     #custom-input2 {
-                                        font-family: myFirstFont2;
+                                        font-family: 'myFirstFont2';
                                         font-size: 34px;
                                         width: 250px;
                                         height: 100px;
@@ -662,21 +653,19 @@
                                         padding: 10px;
                                         display: inline-block;
                                     }
+
+                                    button {
+                                        width: 250px;
+                                        height: 40px;
+                                        line-height: 10px;
+                                        background-color: #000000;
+                                        color: white;
+                                        border-radius: 20px;
+                                        border-width: 3px;
+                                        border-color: white;
+                                        text-align: center;
+                                    }
                                 </style>
-                                <form>
-                                    <p>Try it out:<br>Font Cirline:<br></p><br>
-                                    <div type="text"
-                                        class="custom-input"
-                                        id="custom-input"
-                                        name="custom-input"
-                                        contenteditable="true"></div><br>
-                                    <p><br>Font Cirline Rounded:<br></p><br>
-                                    <div type="text"
-                                        class="custom-input2"
-                                        id="custom-input2"
-                                        name="custom-input2"
-                                        contenteditable="true"></div>
-                                </form><br>
                                 <script>
                                     function adjustHeight(elementId) {
                                         var input = document.getElementsById(elementId);
@@ -686,29 +675,48 @@
                                     adjustHeight('custom-input');
                                     adjustHeight('custom-input2');
                                 </script>
+                                <div style="display: flex;
+                                flex-direction: column;
+                                height: auto;
+                                justify-content: center;
+                                align-items: center;
+                                background-color: #000000;
+                                color: white;
+                                text-align: center;">
+                                    <p>Try them out:<br>Typeface Cirline:</p>
+                                    <div type="text"
+                                        class="custom-input"
+                                        id="custom-input"
+                                        name="custom-input"
+                                        contenteditable="true"></div><br>
+                                    <p>Typeface Cirline Rounded:</p>
+                                    <div type="text"
+                                        class="custom-input2"
+                                        id="custom-input2"
+                                        name="custom-input2"
+                                        contenteditable="true"></div>
+                                    <br>
+                                    <p>Downloads:</p>
+                                    <a href="wp-content/uploads/Cirline.ttf">
+                                        <button>Cirline.ttf</button></a>
+                                    <br>
+                                    <a href="wp-content/uploads/Cirline Rounded.ttf">
+                                        <button>Cirline Rounded.ttf</button></a>
+                                    <br><br>
+                                </div>
+                                <div class="wp-block-image aligncenter">
+                                    <figure class="aligncenter size-large"><img decoding="sync"
+                                            fetchpriority="high"
+                                            width="1000"
+                                            height="645"
+                                            src="wp-content/uploads/Picture19.jpg"
+                                            alt=""
+                                            class="wp-image-2898"
+                                            srcset="wp-content/uploads/Picture19.jpg 1000w, wp-content/uploads/Picture19-300x194.jpg 300w, wp-content/uploads/Picture19-150x97.jpg 150w, wp-content/uploads/Picture19-768x495.jpg 768w, wp-content/uploads/Picture19-500x323.jpg 500w, wp-content/uploads/Picture19-800x516.jpg 800w"
+                                            sizes="(max-width: 1000px) 100vw, 1000px" /></figure>
+                                </div>
+                                <p class="has-text-align-center">The characters illustration of the typeface.</p>
                             </div>
-                            <div
-                                style="display: flex !important; justify-content: center !important; text-align: center !important; align-items: center !important;">
-                                <p>Downloads:<br>
-                                    <a style="color:white"
-                                        href="wp-content/uploads/Cirline.ttf">1. Cirline.ttf</a><br>
-                                    <a style="color:white"
-                                        href="wp-content/uploads/Cirline Rounded.ttf">2. Cirline Rounded.ttf</a><br><br>
-                                </p>
-                            </div>
-
-                            <div class="wp-block-image aligncenter">
-                                <figure class="aligncenter size-large"><img decoding="sync"
-                                        fetchpriority="high"
-                                        width="1000"
-                                        height="645"
-                                        src="wp-content/uploads/Picture19.jpg"
-                                        alt=""
-                                        class="wp-image-2898"
-                                        srcset="wp-content/uploads/Picture19.jpg 1000w, wp-content/uploads/Picture19-300x194.jpg 300w, wp-content/uploads/Picture19-150x97.jpg 150w, wp-content/uploads/Picture19-768x495.jpg 768w, wp-content/uploads/Picture19-500x323.jpg 500w, wp-content/uploads/Picture19-800x516.jpg 800w"
-                                        sizes="(max-width: 1000px) 100vw, 1000px" /></figure>
-                            </div>
-                            <p class="has-text-align-center">The characters illustration of the font.</p>
                         </div><!-- .entry-content -->
                     </article><!-- #post-2289 -->
                 </main><!-- #main -->

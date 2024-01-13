@@ -632,7 +632,7 @@
 		}
 
 		:root {
-			--d: 20s;
+			--d: 4s;
 			--c1: rgb(255, 255, 255);
 			--c2: rgba(255, 255, 255, 0.1);
 		}
@@ -648,7 +648,7 @@
 			border-radius: 20px;
 			box-sizing: border-box;
 			z-index: 15;
-			border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 1turn, var(--c2) 0turn) 1;
+			border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.5turn, var(--c2) 0.9turn) 1;
 			animation: borderRotate var(--d) linear infinite forwards;
 		}
 
