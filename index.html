@@ -600,6 +600,7 @@
 			-moz-background-size: cover;
 			-o-background-size: cover;
 			background-size: cover;
+			filter: brightness(30%);
 		}
 
 		html,
@@ -611,11 +612,11 @@
 
 		.pageborder {
 			position: fixed;
-			top: -12px;
-			right: -12px;
-			bottom: -12px;
-			left: -12px;
-			border: 20px solid black;
+			top: -18px;
+			right: -18px;
+			bottom: -18px;
+			left: -18px;
+			border: 20px solid rgb(255, 255, 255);
 			box-sizing: border-box;
 			overflow: auto;
 			padding: 0;
@@ -679,13 +680,51 @@
 			-ms-overflow-style: none;
 			scrollbar-width: none;
 		}
+
+		@font-face {
+			font-family: myFirstFont2;
+			src: url('thearticular/wp-content/uploads/Cirline Rounded.woff2') format('woff2'),
+				url('thearticular/wp-content/uploads/Cirline Rounded.woff') format('woff'),
+				url('thearticular/wp-content/uploads/Cirline Rounded.ttf') format('truetype');
+		}
+
+		.custom-input2 {
+			font-family: 'myFirstFont2';
+			font-size: 20px;
+			color: white;
+			font-style: italic;
+			letter-spacing: 8px;
+			position: relative;
+			animation: pulse 8s infinite linear alternate;
+		}
+
+		@keyframes pulse {
+			0% {
+				opacity: 0.9;
+				filter: brightness(200%) saturate(150%) contrast(150%) blur(2px) hue-rotate(360deg);
+				transform: translateX(0px) scale(0.98);
+			}
+
+			45%,
+			65% {
+				opacity: 1;
+				filter: brightness(100%) saturate(100%) contrast(100%) blur(0px) hue-rotate(0deg);
+				transform: translateX(0px) scale(1);
+			}
+
+			100% {
+				opacity: 0.9;
+				filter: brightness(200%) saturate(150%) contrast(150%) blur(2px) hue-rotate(360deg);
+				transform: translateX(0px) scale(0.98);
+			}
+		}
 	</style>
 </head>
 
 <body
 	class="home page-template-default page page-id-5 wp-embed-responsive singular image-filters-enabled elementor-beta elementor-default elementor-kit-2139">
 	<div class="pageborder">
-		<div class="pageborder2">
+		<div class="pageborder3">
 			<div id="page"
 				class="site">
 				<a class="skip-link screen-reader-text"
@@ -732,20 +771,20 @@
 											@keyframes pulse {
 												0% {
 													opacity: 0.9;
-													filter: brightness(200%) saturate(150%) contrast(150%) blur(2px) drop-shadow(0px 0px 0px rgb(0, 0, 0)) hue-rotate(360deg);
+													filter: brightness(200%) saturate(150%) contrast(150%) blur(2px) hue-rotate(360deg);
 													transform: translateX(0px) scale(0.98);
 												}
 
 												45%,
 												65% {
 													opacity: 1;
-													filter: brightness(100%) saturate(100%) contrast(100%) blur(0px) drop-shadow(0px 4px 10px rgb(0, 0, 0)) hue-rotate(0deg);
+													filter: brightness(100%) saturate(100%) contrast(100%) blur(0px) hue-rotate(0deg);
 													transform: translateX(0px) scale(1);
 												}
 
 												100% {
 													opacity: 0.9;
-													filter: brightness(200%) saturate(150%) contrast(150%) blur(2px) drop-shadow(0px 0px 0px rgb(0, 0, 0)) hue-rotate(360deg);
+													filter: brightness(200%) saturate(150%) contrast(150%) blur(2px) hue-rotate(360deg);
 													transform: translateX(0px) scale(0.98);
 												}
 											}
@@ -757,49 +796,51 @@
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a id="homepageButton"
 												class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
-												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0%,rgba(0, 0, 0, 0.7) 50%,rgba(0,0,0,0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);"
+												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.2) 0%,rgba(212, 0, 0, 0.2) 50%,rgba(0,0,0,0.2) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);"
 												onclick="changeText()">Homepage</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
 												href="thearticular/skec.html"
-												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0%,rgba(65, 0, 0, 0.7) 50%,rgba(0,0,0,0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);">Sketch</a>
+												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.2) 0%,rgba(255, 0, 0, 0.2) 50%,rgba(0,0,0,0.2) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);">Sketch</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
 												href="thearticular/ping.html"
-												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0%,rgba(61, 27, 0, 0.7) 50%,rgba(0,0,0,0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Painting</a>
+												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.2) 0%,rgba(255, 115, 0, 0.2) 50%,rgba(0,0,0,0.2) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Painting</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
 												href="thearticular/dgat.html"
-												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0%,rgba(59, 33, 0, 0.7) 50%,rgba(0,0,0,0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Digital
+												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.2) 0%,rgba(255, 145, 0, 0.2) 50%,rgba(0,0,0,0.2) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Digital
 												Art</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
 												href="thearticular/prac.html"
-												style="border-radius:100px;background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(63, 48, 0, 0.7) 50%, rgba(0, 0, 0, 0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Photo
+												style="border-radius:100px;background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 196, 0, 0.2) 50%, rgba(0, 0, 0, 0.2) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Photo
 												Restoration and Colorization</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-outline has-small-font-size">
 											<a class="wp-block-button__link has-background-color has-text-color has-background has-link-color wp-element-button"
 												href="thearticular/misc.html"
-												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0%,rgba(59, 63, 0, 0.7) 50%,rgba(0,0,0,0.7) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous</a>
+												style="border-radius:100px;background:linear-gradient(135deg,rgba(0,0,0,0.2) 0%,rgba(238, 255, 0, 0.2) 50%,rgba(0,0,0,0.2) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous</a>
 										</div>
 										<div
 											class="wp-block-button has-custom-width wp-block-button__width-100 has-custom-font-size is-style-fill has-small-font-size">
 											<div id="custom-button">
 												<span>
-													Hey everyone, 🙂<br><br>I&#8217;m Romit.<br>I&#8217;ve created
+													Hey everyone, 🙂<br><br>I&#8217;ve created
 													this website to
 													share some of
-													my personal projects.<br><br>You&#8217;ll find some sketches,
+													my personal projects.<br><br>Every single thing here is manually
+													made by me over the past years.<br><br>You&#8217;ll find some
+													sketches,
 													digital art,
 													colorized
 													images, paintings, and the other stuffs I do whenever I am able to
@@ -823,13 +864,14 @@
 													miss anything.<br><br>And for my system, its a pretty
 													old i5 7th Gen
 													desktop, I plan to upgrade it one day.<br><br>
+													<div class="custom-input2">Romit Singh</div>
 												</span>
 											</div>
 											<div>
 												<style>
 													#custom-button {
 														color: rgba(255, 255, 255, 1.0);
-														background-color: rgba(0, 0, 0, 0.7);
+														background-color: rgba(0, 0, 0, 0);
 														border: 2px solid white;
 														border-radius: 20px;
 														padding: 20px 20px;
