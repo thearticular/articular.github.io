@@ -613,7 +613,7 @@
 		.pageborder {
 			position: fixed;
 			top: -18px;
-			right: -18px;
+			right: -17px;
 			bottom: -18px;
 			left: -18px;
 			border: 20px solid rgb(255, 255, 255);
@@ -623,6 +623,7 @@
 			border-radius: 40px;
 			z-index: 100;
 			transform: translate(0%, 0%);
+			background: transparent;
 		}
 
 
@@ -698,24 +699,18 @@
 			animation: pulse 8s infinite linear alternate;
 		}
 
-		@keyframes pulse {
+		@keyframes pulses {
 			0% {
-				opacity: 0.9;
-				filter: brightness(200%) saturate(150%) contrast(150%) blur(2px) hue-rotate(360deg);
-				transform: translateX(0px) scale(0.98);
+				filter: brightness(200%) saturate(150%) contrast(150%) hue-rotate(360deg);
 			}
 
 			45%,
 			65% {
-				opacity: 1;
-				filter: brightness(100%) saturate(100%) contrast(100%) blur(0px) hue-rotate(0deg);
-				transform: translateX(0px) scale(1);
+				filter: brightness(100%) saturate(100%) contrast(100%) hue-rotate(0deg);
 			}
 
 			100% {
-				opacity: 0.9;
-				filter: brightness(200%) saturate(150%) contrast(150%) blur(2px) hue-rotate(360deg);
-				transform: translateX(0px) scale(0.98);
+				filter: brightness(200%) saturate(150%) contrast(150%) hue-rotate(360deg);
 			}
 		}
 	</style>
@@ -756,9 +751,7 @@
 												src="thearticular/wp-content/uploads/wblg.png"
 												alt=""
 												class="wp-image-2353"
-												style="width:auto; height:auto;"
-												srcset="thearticular/wp-content/uploads/wblg.png 1024w, thearticular/wp-content/uploads/wblg.png 300w, thearticular/wp-content/uploads/wblg.png 150w, thearticular/wp-content/uploads/wblg.png 768w, thearticular/wp-content/uploads/wblg.png 500w, thearticular/wp-content/uploads/wblg.png 800w, thearticular/wp-content/uploads/wblg.png 1280w, thearticular/wp-content/uploads/wblg.png 1386w"
-												sizes="(max-width: 1920px) 100%, 800px" />
+												style="width:400px; height:auto;" />
 										</figure>
 									</div>
 									<div>
