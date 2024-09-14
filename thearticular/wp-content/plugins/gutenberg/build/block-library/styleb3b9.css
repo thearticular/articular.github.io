@@ -4664,7 +4664,7 @@ html :where(.is-position-sticky) {
 }
 
 .wp-block-button__link {
-    background-image: url('../../../uploads/home.png'); 
+    background-image: url('./../../../uploads/home.png'); 
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
