@@ -13,8 +13,6 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
 # Visibility
 --------------------------------------------------------------*/
 @media print {
-
-	/* Margins */
 	@page {
 		margin: 2cm;
 	}
@@ -28,7 +26,6 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
 		margin: 0;
 	}
 
-	/* Fonts */
 	body {
 		font: 13pt Georgia, "Times New Roman", Times, serif;
 		font: 13pt var(--font-base, Georgia, "Times New Roman", Times, serif);
@@ -54,7 +51,6 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
 		margin-top: 25px;
 	}
 
-	/* Page breaks */
 	a {
 		page-break-inside: avoid;
 	}
@@ -89,7 +85,6 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
 		page-break-before: avoid;
 	}
 
-	/* Links */
 	a:link,
 	a:visited,
 	a {
@@ -119,7 +114,6 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
 		content: " < " attr(href) "> ";
 	}
 
-	/* Visibility */
 	.main-navigation,
 	.site-title+.main-navigation,
 	.social-navigation,
@@ -141,7 +135,6 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
 		background: none;
 	}
 
-	/* Site Header (With Featured Image) */
 	.site-header.featured-image {
 		min-height: 0;
 	}
@@ -181,7 +174,6 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
 		margin-top: 1rem;
 	}
 
-	/* Remove image filters from featured image */
 	.image-filters-enabled *:after {
 		display: none !important;
 	}

@@ -12,7 +12,7 @@
         content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
     <link rel="profile"
         href="../gmpg.org/xfn/11" />
-    <title>Remove Duplicate Phrases</title>
+    <title>Kaprekar Constant</title>
     <meta name='robots'
         content='max-image-preview:large' />
     <link rel='dns-prefetch'
@@ -607,7 +607,7 @@
                     <article id="post-1228"
                         class="post-1228 page type-page status-publish hentry entry">
                         <header class="entry-header responsive-max-width">
-                            <h1 class="entry-title">Remove Duplicate Phrases</h1>
+                            <h1 class="entry-title">Kaprekar Constant</h1>
                         </header>
                         <div class="entry-content">
                             <div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
@@ -624,9 +624,11 @@
                                         style="border-radius:100px;background:linear-gradient(135deg,rgb(1,1,1) 0%,rgb(97,0,0) 52%,rgb(0,0,0) 100%);padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)">Miscellaneous</a>
                                 </div>
                             </div>
-                            <p class="has-text-align-center">Enter words, phrases, sentences all separated by commas and
-                                find if there are repetitions, and remove them. Many other punctuation marks will be
-                                converted to commas and treated as separators.</p><br>
+                            <p class="has-text-align-center">This is the Kaprekar's routine, enter any four digit
+                                number, with at least one digit unique. Then arrange their digits in ascending and
+                                descending orders. Take their differences. Do the same with the result. After some
+                                iterations, you will always get the end up with 6174, no matter what. Try it out here.
+                            </p>
                             <div>
                                 <style>
                                     form {
@@ -643,10 +645,24 @@
                                         text-align: center;
                                     }
 
+                                    input {
+                                        margin-top: 5px !important;
+                                        font-size: 0.6em !important;
+                                        padding: 2px !important;
+                                        width: 250px !important;
+                                        height: 40px !important;
+                                        border-radius: 20px !important;
+                                        border-width: 3px !important;
+                                        border-color: rgb(255, 255, 255) !important;
+                                        text-align: center !important;
+                                        background-color: #000000 !important;
+                                        color: white !important;
+                                    }
+
                                     button {
                                         width: 250px;
                                         height: 40px;
-                                        line-height: 10px;
+                                        line-height: 2px;
                                         background-color: #000000;
                                         color: white;
                                         border-radius: 20px;
@@ -655,114 +671,80 @@
                                         text-align: center;
                                     }
 
-                                    button img {
-                                        object-fit: cover;
-                                        height: 150%;
-                                        width: auto;
-                                    }
-
-                                    .custom-input {
-                                        width: 250px;
-                                        height: 300px;
-                                        outline: 3px solid white;
-                                        background-color: black;
-                                        color: white;
-                                        border-radius: 30px;
-                                        overflow: auto;
-                                        resize: vertical;
+                                    #result {
+                                        box-sizing: border-box;
+                                        margin-top: 20px;
+                                        margin-bottom: 10px;
                                         padding: 10px;
-                                        display: inline-block;
-                                        font-size: 0.6em;
+                                        background-color: #000000;
+                                        width: 250px;
+                                        line-height: 1em;
+                                        font-size: 0.9em;
+                                        padding: 2px;
+                                        margin-top: 5px;
+                                        text-align: center;
+                                        align-items: center;
+                                        justify-content: center;
                                     }
                                 </style>
                                 <form>
-                                    <button onclick="highlightDuplicates(event)">Highlight
-                                        Duplicates</button>
+                                    <br />
+                                    <p>Enter the number:</p>
+                                    <input type="text"
+                                        id="numberInput"
+                                        placeholder="">
                                     <div style="margin-bottom: 7px;"></div>
-                                    <button onclick="removeDuplicate(event)">Remove
-                                        Duplicates</button>
-                                    <div style="margin-bottom: 7px;"></div>
-                                    <button onclick="copyToClipboard(event)">Copy to Clipboard</button>
-                                    <div style="margin-bottom: 7px;"></div>
-                                    <button onclick="clearTextLabel(event)">Clear
-                                        Text</button>
-                                    <div style="margin-bottom: 7px;"></div>
-                                    <label for="textInput"
-                                        style="font-size: 0.6em;">Enter
-                                        text:</label>
-                                    <div id="textInput"
-                                        name="textInput"
-                                        contenteditable="true"
-                                        class="custom-input">
-                                    </div>
+                                    <button type="button"
+                                        onclick="calculateKaprekar()">Iterate</button>
+                                    <div id="result"></div>
                                 </form>
                                 <script>
-                                    function adjustHeight() {
-                                        var input = document.getElementById('textInput');
-                                        input.style.height = 'auto';
-                                        input.style.height = (input.scrollHeight) + "px";
-                                    }
-                                    function removeDuplicate(event) {
-                                        event.preventDefault();
-                                        var input = document.getElementById('textInput');
-                                        var trimmedValue = input.innerText.replace(/^\s+/, '');
-                                        trimmedValue = trimmedValue.replace(/[^a-zA-Z0-9 ]/g, ",");
-                                        trimmedValue = trimmedValue.replace(/\s\s+/g, ' ');
-                                        trimmedValue = trimmedValue.replace(/\s*,\s*/g, ', ');
-                                        trimmedValue = trimmedValue.replace(/ ,/g, '');
-                                        var array = trimmedValue.split(",").map(item => item.trim());
-                                        array = array.map(element => element.toLowerCase());
-                                        var unique = [...new Set(array)];
-                                        trimmedValue = unique.join(", ");
-                                        trimmedValue = trimmedValue.replace(/,\s*$/, "");
-                                        input.innerText = trimmedValue;
-                                    }
-                                    function clearTextLabel(event) {
-                                        document.getElementById('textLabel').value = '';
-                                        event.preventDefault();
-                                    }
-                                    function highlightDuplicates(event) {
-                                        event.preventDefault();
-                                        var input = document.getElementById('textInput');
-                                        var trimmedValue = input.innerText.replace(/^\s+/, '');
-                                        trimmedValue = trimmedValue.replace(/\s\s+/g, ' ');
-                                        trimmedValue = trimmedValue.replace(/\s*,\s*/g, ', ');
-                                        trimmedValue = trimmedValue.replace(/ ,/g, '');
-                                        trimmedValue = trimmedValue.replace(/[^a-zA-Z0-9 ]/g, ",");
-                                        trimmedValue = trimmedValue.replace(/,\s*$/, "");
-                                        trimmedValue = trimmedValue.toLowerCase();
-                                        input.style.color = "";
-                                        var elements = {};
-                                        var array = trimmedValue.split(",").map(item => item.trim());
-                                        array.forEach(function (item) {
-                                            if (!elements[item]) {
-                                                elements[item] = { count: 1 };
-                                            } else {
-                                                elements[item].count++;
-                                            }
+                                    function calculateKaprekar() {
+                                        let num = document.getElementById('numberInput').value;
+                                        let resultDiv = document.getElementById('result');
+                                        resultDiv.innerHTML = '';
+                                        if (num.length !== 4 || isNaN(num)) {
+                                            resultDiv.innerHTML = 'Please enter a valid 4-digit number.';
+                                            resultDiv.style.fontSize = '12px';
+                                            return;
+                                        }
+                                        if (num.split('').every(digit => digit === num[0])) {
+                                            resultDiv.innerHTML = 'All digits are same.';
+                                            resultDiv.style.fontSize = '12px';
+                                            return;
+                                        }
+                                        let steps = [];
+                                        let message = `Desc  -  Asce  =  Diff`;
+                                        let p = document.createElement('p');
+                                        p.textContent = message;
+                                        resultDiv.appendChild(p);
+                                        let blankLine = document.createElement('p');
+                                        blankLine.style.height = '1px';
+                                        resultDiv.appendChild(blankLine);
+                                        let stepNumber = 1;
+                                        while (num !== '6174') {
+                                            let numArray = num.split('').map(Number);
+                                            let asc = numArray.slice().sort((a, b) => a - b).join('');
+                                            let desc = numArray.slice().sort((a, b) => b - a).join('');
+                                            num = (desc - asc).toString().padStart(4, '0');
+                                            steps.push(`Step ${stepNumber}: ${desc} - ${asc} = ${num}`);
+                                            stepNumber++;
+                                            if (num === '0000') break;
+                                        }
+                                        steps.forEach(step => {
+                                            let p = document.createElement('p');
+                                            p.textContent = step;
+                                            resultDiv.appendChild(p);
                                         });
-                                        array = array.map(function (item) {
-                                            return "<span style='color:" + (elements[item].count > 1 ? "red" : "white") + "'>" + item + "</span>";
-                                        });
-                                        input.innerHTML = array.join(", ");
-                                        input.addEventListener('input', function () {
-                                            var spans = input.getElementsByTagName('span');
-                                            for (var i = 0; i < spans.length; i++) {
-                                                spans[i].style.color = 'white';
-                                            }
-                                        });
-                                    }
-                                    function copyToClipboard(event) {
-                                        event.preventDefault();
-                                        var input = document.getElementById('textInput');
-                                        var text = input.innerText;
-                                        var tempTextArea = document.createElement('textarea');
-                                        tempTextArea.value = text;
-                                        document.body.appendChild(tempTextArea);
-                                        tempTextArea.select();
-                                        tempTextArea.setSelectionRange(0, 99999);
-                                        document.execCommand('copy');
-                                        document.body.removeChild(tempTextArea);
+                                        if (num === '6174') {
+                                            let blankLine = document.createElement('p');
+                                            blankLine.style.height = '1px';
+                                            resultDiv.appendChild(blankLine);
+                                            let message = `Reached 6174 in ${stepNumber - 1} steps`;
+                                            let p = document.createElement('p');
+                                            p.textContent = message;
+                                            resultDiv.appendChild(p);
+                                        }
                                     }
                                 </script>
                             </div>

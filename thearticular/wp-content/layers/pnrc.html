@@ -11,10 +11,6 @@
 <body>
     <div>
         <style>
-            * {
-                font-size: 16px;
-            }
-
             body {
                 display: flex;
                 justify-content: center;
@@ -26,20 +22,20 @@
             label {
                 display: block;
                 margin-top: 5px;
-                font-size: 0.9em;
                 text-align: center;
             }
 
             input {
                 margin-top: 5px;
-                font-size: 0.9em;
                 padding: 2px;
-                width: 150px;
-                height: 35px;
+                width: 240px;
+                height: 30px;
                 border-radius: 20px;
                 border-width: 3px;
-                border-color: white;
+                border-color: rgb(255, 255, 255);
                 text-align: center;
+                color: rgb(255, 255, 255);
+                background-color: black;
             }
 
             input::placeholder {
@@ -50,31 +46,29 @@
                 width: 250px;
                 height: 40px;
                 margin-top: 5px;
-                font-size: 0.9em;
                 padding: 2px;
                 background-color: #000000;
                 border-radius: 20px;
                 border-width: 3px;
                 border-color: white;
                 color: white;
+                font-weight: bold;
+                font-size: 1.2em;
             }
 
             #dataPointInputs {
                 margin-bottom: 5px;
-                font-size: 0.9em;
                 padding: 2px;
             }
 
             #equation,
             #result {
                 margin-top: 5px;
-                font-size: 0.9em;
                 padding: 2px;
             }
 
             #plot {
                 margin-top: 5px;
-                font-size: 0.9em;
                 padding: 2px;
             }
 
@@ -84,7 +78,6 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                font-size: 0.9em;
                 padding: 2px;
                 color: white;
             }
@@ -97,21 +90,22 @@
             <label for="order">Enter the order:</label>
             <input type="number"
                 id="order"
-                placeholder="Order?">
+                placeholder=""
+                min="1">
             <button onclick="calculateEquation()">Generate the Equation</button>
             <p id="equation"></p><br><br>
             <label for="inputX"
-                style="text-align:center;">To Extrapolate or Interpolate<br>Enter the value of
+                style="text-align:center;">To Extrapolate or Interpolate,<br>enter the value of
                 a new
-                'X':</label>
+                X:</label>
             <input type="number"
                 id="inputX"
-                placeholder="New X?">
+                placeholder="">
             <button id="calculateYButton"
                 onclick="calculateY()"
                 disabled>Calculate the new 'Y'</button>
             <p id="result"></p><br><br>
-            <p style="font-size: 12px;">Plot of the equation: </p>
+            <p>Plot of the equation will be generated below: </p>
             <div id="plot"></div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
@@ -125,11 +119,11 @@
                 dataPointInputs.appendChild(dataPointLabel);
                 var xInput = document.createElement('input');
                 xInput.type = 'number';
-                xInput.placeholder = 'X?';
+                xInput.placeholder = 'X';
                 dataPointInputs.appendChild(xInput);
                 var yInput = document.createElement('input');
                 yInput.type = 'number';
-                yInput.placeholder = 'Y?';
+                yInput.placeholder = 'Y';
                 dataPointInputs.appendChild(yInput);
                 dataPointInputs.appendChild(document.createElement('br'));
             }

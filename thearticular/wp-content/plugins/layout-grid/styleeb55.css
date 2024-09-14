@@ -5,7 +5,6 @@
 /**
  * Padding Options
  */
-/* autoprefixer grid: no-autoplace */
 .wp-block-jetpack-layout-grid-editor,
 .wp-block-jetpack-layout-grid {
   padding-left: 24px;
@@ -195,7 +194,6 @@
 /**
  * Responsive Grid Options. Exclude these from the editor.
  */
-/* autoprefixer grid: no-autoplace */
 .wp-block-jetpack-layout-grid {
   display: grid;
   grid-gap: 24px;
