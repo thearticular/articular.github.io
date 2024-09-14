@@ -4662,3 +4662,22 @@ html :where(.is-position-sticky) {
         --wp-admin--admin-bar--position-offset: 0px
     }
 }
+
+.wp-block-button__link {
+    background-image: url('D:/home.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    border-radius: 100px; 
+    padding-top: var(--wp--preset--spacing--30); 
+    padding-bottom: var(--wp--preset--spacing--30); 
+    text-align: center; 
+    display: inline-block; 
+    color: rgb(0, 0, 0); 
+    font-size: var(--wp--preset--font-size--small); 
+    text-decoration: none; 
+    position: relative; 
+    z-index: 1;
+    background-color: black !important;
+}
+
