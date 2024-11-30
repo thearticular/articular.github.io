@@ -593,6 +593,22 @@
         p {
             font-size: 12px !important;
         }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 10vw;
+            padding-right: 10vw;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -633,11 +649,30 @@
                                 the visuals were edited in Photoshop. The motion graphics were created in After Effects,
                                 and the final video was edited in Premiere Pro. Finally, the video was downscaled using
                                 Handbrake.</p>
-                            <div
-                                style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5vw;">
+                            <div class="video-container">
                                 <video class="video-player"
-                                    width="100%"
-                                    height="100%"
+                                    controls
+                                    controlsList="nodownload"
+                                    disablePictureInPicture
+                                    noplaybackrate>
+                                    <source src="wp-content/uploads/sands.mp4"
+                                        type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="video-container">
+                                <video class="video-player"
+                                    controls
+                                    controlsList="nodownload"
+                                    disablePictureInPicture
+                                    noplaybackrate>
+                                    <source src="wp-content/uploads/drift.mp4"
+                                        type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="video-container">
+                                <video class="video-player"
                                     controls
                                     controlsList="nodownload"
                                     disablePictureInPicture
@@ -647,11 +682,8 @@
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
-                            <div
-                                style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5vw;">
+                            <div class="video-container">
                                 <video class="video-player"
-                                    width="100%"
-                                    height="100%"
                                     controls
                                     controlsList="nodownload"
                                     disablePictureInPicture
@@ -661,11 +693,8 @@
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
-                            <div
-                                style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5vw;">
+                            <div class="video-container">
                                 <video class="video-player"
-                                    width="100%"
-                                    height="100%"
                                     controls
                                     controlsList="nodownload"
                                     disablePictureInPicture
@@ -675,11 +704,8 @@
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
-                            <div
-                                style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5vw;">
+                            <div class="video-container">
                                 <video class="video-player"
-                                    width="100%"
-                                    height="100%"
                                     controls
                                     controlsList="nodownload"
                                     disablePictureInPicture
@@ -689,11 +715,8 @@
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
-                            <div
-                                style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5vw;">
+                            <div class="video-container">
                                 <video class="video-player"
-                                    width="100%"
-                                    height="100%"
                                     controls
                                     controlsList="nodownload"
                                     disablePictureInPicture
@@ -703,11 +726,8 @@
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
-                            <div
-                                style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5vw;">
+                            <div class="video-container">
                                 <video class="video-player"
-                                    width="100%"
-                                    height="100%"
                                     controls
                                     controlsList="nodownload"
                                     disablePictureInPicture
@@ -717,8 +737,7 @@
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
-                            <div
-                                style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 5vw;">
+                            <div class="video-container">
                                 <video class="video-player"
                                     width="100%"
                                     height="100%"
