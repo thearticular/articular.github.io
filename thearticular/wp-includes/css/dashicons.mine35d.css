@@ -1371,11 +1371,11 @@
     content: "\f19a"
 }
 
-.dashicons-wordpress-alt:before {
+.dashicons--alt:before {
     content: "\f324"
 }
 
-.dashicons-wordpress:before {
+.dashicons-:before {
     content: "\f120"
 }
 

@@ -6,7 +6,7 @@ Theme URI: https://github.com/Automattic/themes/hever
 Author: Automattic
 Author URI: https://automattic.com/
 Description: A fully responsive theme, ideal for creating a strong — yet beautiful — online presence for your business.
-Requires at least: WordPress 4.9.6
+Requires at least:
 Version: 1.5.15
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -14,7 +14,7 @@ Template: varia
 Text Domain: hever
 Tags: one-column, flexible-header, accessibility-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, rtl-language-support, sticky-post, threaded-comments, translation-ready, auto-loading-homepage, wpcom-fse, jetpack-global-styles
 AMP: true
-This theme, like WordPress, is licensed under the GPL.
+This theme, like, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 Hever is a child theme of Varia which is based on Underscores https://underscores.me/, (C) 2012-2019 Automattic, Inc.
 Underscores is distributed under the terms of the GNU GPL v2 or later.

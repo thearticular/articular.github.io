@@ -3956,7 +3956,7 @@ ul.wp-block-rss.is-grid li {
     color: #fff
 }
 
-.wp-block-social-links:not(.is-style-logos-only) .wp-social-link-wordpress {
+.wp-block-social-links:not(.is-style-logos-only) .wp-social-link- {
     background-color: #3499cd;
     color: #fff
 }
@@ -4144,7 +4144,7 @@ ul.wp-block-rss.is-grid li {
     color: #25d366
 }
 
-.wp-block-social-links.is-style-logos-only .wp-social-link-wordpress {
+.wp-block-social-links.is-style-logos-only .wp-social-link- {
     color: #3499cd
 }
 
