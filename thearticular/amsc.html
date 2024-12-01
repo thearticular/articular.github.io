@@ -594,6 +594,30 @@
             font-size: 12px !important;
         }
 
+        .button-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button-container button {
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+            border-radius: 25px;
+            padding: 12px 20px;
+            margin: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 150px;
+            text-align: center;
+        }
+
+        .button-container button:hover {
+            background-color: #000000;
+        }
+
         .video-container {
             position: relative;
             width: 100%;
@@ -601,8 +625,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-left: 10vw;
-            padding-right: 10vw;
+            padding-left: 5vw;
+            padding-right: 5vw;
         }
 
         .video-player {
@@ -649,6 +673,11 @@
                                 the visuals were edited in Photoshop. The motion graphics were created in After Effects,
                                 and the final video was edited in Premiere Pro. Finally, the video was downscaled using
                                 Handbrake.</p>
+                            <div class="button-container">
+                                <button id="play-all">Play all</button>
+                                <button id="stop">Stop</button>
+                            </div>
+
                             <div class="video-container">
                                 <video class="video-player"
                                     controls
@@ -769,22 +798,58 @@
         </footer>
     </div>
     <script>
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        });
-    </script>
-    <script>
+
         const videos = document.querySelectorAll('video');
-        function pauseOtherVideos({ target }) {
-            for (const video of videos) {
-                if (video !== target) {
-                    video.pause();
-                }
+
+        const playAllButton = document.getElementById('play-all');
+        const shuffleButton = document.getElementById('shuffle');
+        const stopButton = document.getElementById('stop');
+
+        let isPlayingAll = false;
+        let currentVideoIndex = 0;
+
+        function playAllVideos() {
+            isPlayingAll = true;
+            playNextVideo();
+        }
+
+        function playNextVideo() {
+            if (currentVideoIndex < videos.length) {
+                const video = videos[currentVideoIndex];
+                video.play();
+                video.onended = function () {
+                    currentVideoIndex++;
+                    playNextVideo();
+                };
+            } else {
+                currentVideoIndex = 0;
             }
         }
-        for (const video of videos) {
-            video.addEventListener('play', pauseOtherVideos);
+
+        function stopAllVideos() {
+            videos.forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+            });
+            isPlayingAll = false;
+            currentVideoIndex = 0;
         }
+        playAllButton.addEventListener('click', () => {
+            stopAllVideos();
+            playAllVideos();
+        });
+
+        stopButton.addEventListener('click', stopAllVideos);
+
+        videos.forEach(video => {
+            video.addEventListener('play', () => {
+                videos.forEach(otherVideo => {
+                    if (otherVideo !== video) {
+                        otherVideo.pause();
+                    }
+                });
+            });
+        });
     </script>
     <script type='text/javascript'
         src='wp-content/plugins/advanced-backgrounds/assets/vendor/jarallax/dist/jarallax.min4c71.js?ver=2.1.3'
