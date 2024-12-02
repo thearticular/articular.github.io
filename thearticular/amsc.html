@@ -598,23 +598,25 @@
         .button-container {
             position: relative;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
         }
-
         .button-container button {
             background-color: black;
             color: white;
             border: 2px solid white;
-            border-radius: 25px;
-            padding: 12px 20px;
-            margin: 4px;
-            font-size: 16px;
+            border-radius: 50%;
+            padding: 12px;
+            font-size: 24px;
             cursor: pointer;
-            width: 150px;
-            text-align: center;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
         .button-container button:hover {
             background-color: #000000;
         }
@@ -675,13 +677,12 @@
                                 and the final video was edited in Premiere Pro. Finally, the video was downscaled using
                                 Handbrake.</p>
                             <div class="button-container">
-                                <button id="shuffle">Shuffle</button>
-                                <button id="play-all">Play all</button>
-                                <button id="pause">Pause</button>
-                                <button id="resume">Resume</button>
-                                <button id="stop">Stop</button>
+                                <button id="shuffle"><i class="fas fa-random"></i></button>
+                                <button id="play-all"><i class="fas fa-play"></i></button>
+                                <button id="pause"><i class="fas fa-pause"></i></button>
+                                <button id="resume"><i class="fas fa-play-circle"></i></button>
+                                <button id="stop"><i class="fas fa-stop"></i></button>
                             </div>
-
                             <div class="video-container">
                                 <video class="video-player"
                                     controls
@@ -700,6 +701,17 @@
                                     disablePictureInPicture
                                     noplaybackrate>
                                     <source src="wp-content/uploads/drift.mp4"
+                                        type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="video-container">
+                                <video class="video-player"
+                                    controls
+                                    controlsList="nodownload"
+                                    disablePictureInPicture
+                                    noplaybackrate>
+                                    <source src="wp-content/uploads/vile.mp4"
                                         type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
