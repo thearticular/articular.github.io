@@ -571,7 +571,8 @@
             text-decoration: line-through;
         }
     </style>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        rel="stylesheet">
     <style type="text/css"
         id="wp-custom-css">
         .home #page {
@@ -603,6 +604,7 @@
             gap: 10px;
             margin-bottom: 20px;
         }
+
         .button-container button {
             background-color: black;
             color: white;
@@ -617,6 +619,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .button-container button:hover {
             background-color: #000000;
         }
@@ -682,6 +685,10 @@
                                 <button id="pause"><i class="fas fa-pause"></i></button>
                                 <button id="resume"><i class="fas fa-play-circle"></i></button>
                                 <button id="stop"><i class="fas fa-stop"></i></button>
+                                <button id="next"
+                                    style="display: none;"><i class="fas fa-backward"></i></button>
+                                <button id="previous"><i class="fas fa-forward"></i></button>
+                                <button id="boost-volume"><i class="fas fa-volume-up"></i></button>
                             </div>
                             <div class="video-container">
                                 <video class="video-player"
@@ -816,10 +823,13 @@
         const pauseButton = document.getElementById('pause');
         const resumeButton = document.getElementById('resume');
         const stopButton = document.getElementById('stop');
+        const nextButton = document.getElementById('next');
+        const previousButton = document.getElementById('previous');
         let isPlayingAll = false;
         let currentVideoIndex = 0;
         let currentPausedVideo = null;
         let shuffledVideos = [...videos];
+        let originalParent = [];
         function shuffleVideos() {
             shuffledVideos = [...videos];
             for (let i = shuffledVideos.length - 1; i > 0; i--) {
@@ -842,12 +852,31 @@
                 };
             } else {
                 currentVideoIndex = 0;
+                playNextVideo();
             }
+        }
+        function playPreviousVideo() {
+            if (currentVideoIndex > 0) {
+                currentVideoIndex--;
+            } else {
+                currentVideoIndex = shuffledVideos.length - 1;
+            }
+            const video = shuffledVideos[currentVideoIndex];
+            video.play();
+            resetOtherVideos(video);
+        }
+        function resetOtherVideos(currentVideo) {
+            videos.forEach(otherVideo => {
+                if (otherVideo !== currentVideo) {
+                    otherVideo.pause();
+                }
+            });
         }
         function stopAllVideos() {
             videos.forEach(video => {
                 video.pause();
                 video.currentTime = 0;
+                resetVideoPosition(video);
             });
             isPlayingAll = false;
             currentVideoIndex = 0;
@@ -866,6 +895,21 @@
                 currentPausedVideo.play();
             }
         }
+        function moveVideoToTop(video) {
+            const videoContainer = video.parentElement;
+            const buttonContainer = document.querySelector('.button-container');
+            originalParent.push(videoContainer);
+            buttonContainer.parentElement.insertBefore(videoContainer, buttonContainer.nextSibling);
+        }
+        function resetVideoPosition(video) {
+            const videoContainer = video.parentElement;
+            const originalIndex = Array.from(originalParent).indexOf(videoContainer);
+            if (originalIndex !== -1) {
+                const originalParentContainer = originalParent[originalIndex];
+                originalParentContainer.parentElement.appendChild(originalParentContainer);
+                originalParent.splice(originalIndex, 1);
+            }
+        }
         shuffleButton.addEventListener('click', () => {
             shuffleVideos();
         });
@@ -876,13 +920,20 @@
         stopButton.addEventListener('click', stopAllVideos);
         pauseButton.addEventListener('click', pauseAllVideos);
         resumeButton.addEventListener('click', resumeCurrentVideo);
+        nextButton.addEventListener('click', playNextVideo);
+        previousButton.addEventListener('click', playPreviousVideo);
         videos.forEach(video => {
+            originalParent.push(video.parentElement);
             video.addEventListener('play', () => {
                 videos.forEach(otherVideo => {
                     if (otherVideo !== video) {
                         otherVideo.pause();
                     }
                 });
+                moveVideoToTop(video);
+            });
+            video.addEventListener('ended', () => {
+                resetVideoPosition(video);
             });
         });
     </script>
