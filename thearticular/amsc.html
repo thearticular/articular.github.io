@@ -571,6 +571,7 @@
             text-decoration: line-through;
         }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style type="text/css"
         id="wp-custom-css">
         .home #page {
@@ -674,7 +675,10 @@
                                 and the final video was edited in Premiere Pro. Finally, the video was downscaled using
                                 Handbrake.</p>
                             <div class="button-container">
+                                <button id="shuffle">Shuffle</button>
                                 <button id="play-all">Play all</button>
+                                <button id="pause">Pause</button>
+                                <button id="resume">Resume</button>
                                 <button id="stop">Stop</button>
                             </div>
 
@@ -779,10 +783,6 @@
                                         type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
-                                <p
-                                    style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); color: #fff; background: rgba(0, 0, 0, 0); padding: 5px; border-radius: 5px; margin: 0; text-align: center;">
-                                    Kurukshetra War
-                                </p>
                             </div>
                         </div>
                     </article>
@@ -798,24 +798,31 @@
         </footer>
     </div>
     <script>
-
         const videos = document.querySelectorAll('video');
-
-        const playAllButton = document.getElementById('play-all');
         const shuffleButton = document.getElementById('shuffle');
+        const playAllButton = document.getElementById('play-all');
+        const pauseButton = document.getElementById('pause');
+        const resumeButton = document.getElementById('resume');
         const stopButton = document.getElementById('stop');
-
         let isPlayingAll = false;
         let currentVideoIndex = 0;
-
+        let currentPausedVideo = null;
+        let shuffledVideos = [...videos];
+        function shuffleVideos() {
+            shuffledVideos = [...videos];
+            for (let i = shuffledVideos.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledVideos[i], shuffledVideos[j]] = [shuffledVideos[j], shuffledVideos[i]];
+            }
+        }
         function playAllVideos() {
             isPlayingAll = true;
+            currentVideoIndex = 0;
             playNextVideo();
         }
-
         function playNextVideo() {
-            if (currentVideoIndex < videos.length) {
-                const video = videos[currentVideoIndex];
+            if (currentVideoIndex < shuffledVideos.length) {
+                const video = shuffledVideos[currentVideoIndex];
                 video.play();
                 video.onended = function () {
                     currentVideoIndex++;
@@ -825,7 +832,6 @@
                 currentVideoIndex = 0;
             }
         }
-
         function stopAllVideos() {
             videos.forEach(video => {
                 video.pause();
@@ -833,14 +839,31 @@
             });
             isPlayingAll = false;
             currentVideoIndex = 0;
+            currentPausedVideo = null;
         }
+        function pauseAllVideos() {
+            videos.forEach(video => {
+                if (!video.paused) {
+                    video.pause();
+                    currentPausedVideo = video;
+                }
+            });
+        }
+        function resumeCurrentVideo() {
+            if (currentPausedVideo) {
+                currentPausedVideo.play();
+            }
+        }
+        shuffleButton.addEventListener('click', () => {
+            shuffleVideos();
+        });
         playAllButton.addEventListener('click', () => {
             stopAllVideos();
             playAllVideos();
         });
-
         stopButton.addEventListener('click', stopAllVideos);
-
+        pauseButton.addEventListener('click', pauseAllVideos);
+        resumeButton.addEventListener('click', resumeCurrentVideo);
         videos.forEach(video => {
             video.addEventListener('play', () => {
                 videos.forEach(otherVideo => {
