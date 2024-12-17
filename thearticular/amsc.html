@@ -664,21 +664,6 @@
         #video-counter.red {
             background-color: rgba(255, 0, 0, 0.298);
         }
-
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            animation: ripple-animation 1s infinite;
-            opacity: 0.05;
-            pointer-events: none;
-            z-index: -10;
-        }
-
-        @keyframes ripple-animation {
-            100% {
-                transform: scale(5);
-            }
-        }
     </style>
 </head>
 
@@ -731,7 +716,6 @@
                                     id="video">
                                     <source src="wp-content/uploads/sands.mp4"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div class="video-container">
@@ -739,7 +723,6 @@
                                     id="video">
                                     <source src="wp-content/uploads/drift.mp4"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div class="video-container">
@@ -747,7 +730,6 @@
                                     id="video">
                                     <source src="wp-content/uploads/vile.mp4"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div class="video-container">
@@ -755,7 +737,6 @@
                                     id="video">
                                     <source src="wp-content/uploads/river.mp4"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div class="video-container">
@@ -763,7 +744,6 @@
                                     id="video">
                                     <source src="wp-content/uploads/falling.mp4"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div class="video-container">
@@ -771,7 +751,6 @@
                                     id="video">
                                     <source src="wp-content/uploads/opposing.mp4"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div class="video-container">
@@ -779,7 +758,6 @@
                                     id="video">
                                     <source src="wp-content/uploads/krishna.mp4"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div class="video-container">
@@ -787,7 +765,6 @@
                                     id="video">
                                     <source src="wp-content/uploads/rain.mp4"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div class="video-container">
@@ -795,7 +772,6 @@
                                     id="video">
                                     <source src="wp-content/uploads/ruins.mp4"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                             <div class="video-container">
@@ -806,7 +782,6 @@
                                     style="border-width: 3px;">
                                     <source src="wp-content/uploads/krwa.mp4"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
                                 </video>
                             </div>
                         </div>
@@ -900,102 +875,6 @@
         nextButton.addEventListener('click', nextVideo);
         previousButton.addEventListener('click', previousVideo);
         updateCurrentVideo();
-
-
-
-
-
-
-        const videoCounterr = document.getElementById('video-counter');
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const analyser = audioCtx.createAnalyser();
-        analyser.fftSize = 32;
-        const dataArray = new Uint8Array(analyser.frequencyBinCount);
-        let ripplePool = [];
-        let currentSource = null;
-        let animationFrameId = null;
-        const connectedElements = new Set();
-        function getRandomColor() {
-            const r = Math.floor(Math.random() * 256);
-            const g = Math.floor(Math.random() * 256);
-            const b = Math.floor(Math.random() * 256);
-            return `radial-gradient(circle, rgba(${r},${g},${b},1), rgba(${b},${r},${g},1))`;
-        }
-        function createRippleEffect(amplitude) {
-            const ripple = ripplePool.pop() || document.createElement('div');
-            ripple.className = 'ripple';
-            const size = amplitude * 1;
-            ripple.style.width = `${size}px`;
-            ripple.style.height = `${size}px`;
-            ripple.style.background = getRandomColor();
-            videoCounterr.appendChild(ripple);
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    if (ripple.parentNode) videoCounterr.removeChild(ripple);
-                    ripplePool.push(ripple);
-                }, 500);
-            });
-        }
-        function connectToAudioSource(element) {
-            if (currentSource) {
-                currentSource.disconnect();
-                currentSource = null;
-            }
-            currentSource = audioCtx.createMediaElementSource(element);
-            currentSource.connect(analyser);
-            analyser.connect(audioCtx.destination);
-        }
-        function startVisualizer() {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-            }
-            function visualize() {
-                analyser.getByteFrequencyData(dataArray);
-                const amplitude = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-                createRippleEffect(amplitude);
-                animationFrameId = requestAnimationFrame(visualize);
-            }
-            visualize();
-        }
-        document.querySelectorAll('audio, video').forEach(mediaElement => {
-            mediaElement.addEventListener('play', () => {
-                if (!connectedElements.has(mediaElement)) {
-                    connectedElements.add(mediaElement);
-                    if (audioCtx.state === 'suspended') {
-                        audioCtx.resume();
-                    }
-                    if (currentSource) {
-                        currentSource.disconnect();
-                    }
-                    connectToAudioSource(mediaElement);
-                    startVisualizer();
-                }
-            });
-            mediaElement.addEventListener('pause', () => {
-                if (animationFrameId) {
-                    cancelAnimationFrame(animationFrameId);
-                    animationFrameId = null;
-                }
-            });
-            mediaElement.addEventListener('ended', () => {
-                if (animationFrameId) {
-                    cancelAnimationFrame(animationFrameId);
-                    animationFrameId = null;
-                }
-            });
-        });
-
-
-
-
-
-
-
-
-
-
-
-
     </script>
     <script type='text/javascript'
         src='wp-content/plugins/advanced-backgrounds/assets/vendor/jarallax/dist/jarallax.min4c71.js?ver=2.1.3'
