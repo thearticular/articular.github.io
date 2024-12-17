@@ -668,22 +668,15 @@
         .ripple {
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
-            animation: ripple-animation 10s infinite;
-            opacity: 1;
+            animation: ripple-animation 1s infinite;
+            opacity: 0.05;
             pointer-events: none;
-            z-index: -1;
+            z-index: -10;
         }
 
         @keyframes ripple-animation {
-            0% {
-                transform: scale(0);
-                opacity: 0.05;
-            }
-
             100% {
-                transform: scale(100);
-                opacity: 0;
+                transform: scale(5);
             }
         }
     </style>
@@ -918,7 +911,6 @@
         const analyser = audioCtx.createAnalyser();
         analyser.fftSize = 32;
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
-        const MAX_RIPPLES = 1;
         let ripplePool = [];
         let currentSource = null;
         let animationFrameId = null;
@@ -932,24 +924,16 @@
         function createRippleEffect(amplitude) {
             const ripple = ripplePool.pop() || document.createElement('div');
             ripple.className = 'ripple';
-            const size = amplitude * 0.5;
+            const size = amplitude * 1;
             ripple.style.width = `${size}px`;
             ripple.style.height = `${size}px`;
-            ripple.style.left = `calc(50% - ${size / 2}px)`;
-            ripple.style.top = `calc(50% - ${size / 2}px)`;
             ripple.style.background = getRandomColor();
-            ripple.style.position = 'absolute';
-            ripple.style.borderRadius = '50%';
-            ripple.style.opacity = '1';
-            ripple.style.pointerEvents = 'none';
-            ripple.style.transition = 'opacity 1s ease-out';
             videoCounterr.appendChild(ripple);
             requestAnimationFrame(() => {
-                ripple.style.opacity = '1';
                 setTimeout(() => {
                     if (ripple.parentNode) videoCounterr.removeChild(ripple);
                     ripplePool.push(ripple);
-                }, 1000);
+                }, 500);
             });
         }
         function connectToAudioSource(element) {
