@@ -669,7 +669,7 @@
             position: absolute;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
-            animation: ripple-animation 2s infinite;
+            animation: ripple-animation 10s infinite;
             opacity: 1;
             pointer-events: none;
             z-index: -1;
@@ -678,7 +678,7 @@
         @keyframes ripple-animation {
             0% {
                 transform: scale(0);
-                opacity: 0.01;
+                opacity: 0.05;
             }
 
             100% {
@@ -691,7 +691,6 @@
 
 <body
     class="page-template-default page page-id-1228 wp-embed-responsive singular image-filters-enabled elementor-beta elementor-default elementor-kit-2139">
-    <div id="particles-container"></div>
     <div id="page"
         class="site">
         <a class="skip-link screen-reader-text"
@@ -910,10 +909,20 @@
         updateCurrentVideo();
 
 
+
+
+
+
+        const videoCounterr = document.getElementById('video-counter');
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const analyser = audioCtx.createAnalyser();
         analyser.fftSize = 32;
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
+        const MAX_RIPPLES = 1;
+        let ripplePool = [];
+        let currentSource = null;
+        let animationFrameId = null;
+        const connectedElements = new Set();
         function getRandomColor() {
             const r = Math.floor(Math.random() * 256);
             const g = Math.floor(Math.random() * 256);
@@ -921,43 +930,88 @@
             return `radial-gradient(circle, rgba(${r},${g},${b},1), rgba(${b},${r},${g},1))`;
         }
         function createRippleEffect(amplitude) {
-            const ripple = document.createElement('div');
+            const ripple = ripplePool.pop() || document.createElement('div');
             ripple.className = 'ripple';
-            const size = amplitude * 0.1;
+            const size = amplitude * 0.5;
             ripple.style.width = `${size}px`;
             ripple.style.height = `${size}px`;
-            ripple.style.left = `calc(50% - ${size / 0}px)`;
-            ripple.style.top = `calc(50% - ${size / 0}px)`;
+            ripple.style.left = `calc(50% - ${size / 2}px)`;
+            ripple.style.top = `calc(50% - ${size / 2}px)`;
             ripple.style.background = getRandomColor();
-            videoCounter.appendChild(ripple);
-            setTimeout(() => {
-                videoCounter.removeChild(ripple);
-            }, 1000);
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.opacity = '1';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.transition = 'opacity 1s ease-out';
+            videoCounterr.appendChild(ripple);
+            requestAnimationFrame(() => {
+                ripple.style.opacity = '1';
+                setTimeout(() => {
+                    if (ripple.parentNode) videoCounterr.removeChild(ripple);
+                    ripplePool.push(ripple);
+                }, 1000);
+            });
         }
         function connectToAudioSource(element) {
-            const source = audioCtx.createMediaElementSource(element);
-            source.connect(analyser);
+            if (currentSource) {
+                currentSource.disconnect();
+                currentSource = null;
+            }
+            currentSource = audioCtx.createMediaElementSource(element);
+            currentSource.connect(analyser);
             analyser.connect(audioCtx.destination);
         }
         function startVisualizer() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
             function visualize() {
                 analyser.getByteFrequencyData(dataArray);
                 const amplitude = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
                 createRippleEffect(amplitude);
-                requestAnimationFrame(visualize);
+                animationFrameId = requestAnimationFrame(visualize);
             }
             visualize();
         }
         document.querySelectorAll('audio, video').forEach(mediaElement => {
             mediaElement.addEventListener('play', () => {
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
+                if (!connectedElements.has(mediaElement)) {
+                    connectedElements.add(mediaElement);
+                    if (audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+                    if (currentSource) {
+                        currentSource.disconnect();
+                    }
+                    connectToAudioSource(mediaElement);
+                    startVisualizer();
                 }
-                document.querySelectorAll('.ripple').forEach(ripple => ripple.remove());
-                connectToAudioSource(mediaElement);
-                startVisualizer();
+            });
+            mediaElement.addEventListener('pause', () => {
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null;
+                }
+            });
+            mediaElement.addEventListener('ended', () => {
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null;
+                }
             });
         });
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
     <script type='text/javascript'
         src='wp-content/plugins/advanced-backgrounds/assets/vendor/jarallax/dist/jarallax.min4c71.js?ver=2.1.3'
