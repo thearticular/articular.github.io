@@ -953,6 +953,7 @@
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
+                document.querySelectorAll('.ripple').forEach(ripple => ripple.remove());
                 connectToAudioSource(mediaElement);
                 startVisualizer();
             });
