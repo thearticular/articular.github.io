@@ -5,31 +5,10 @@
 <head>
     <meta name="viewport"
         content="width=device-width, initial-scale=1" />
-    <title>(P)art(y)icular</title>
-    <link rel="icon"
-        href="wp-content/uploads/favicon.ico"
-        type="image/x-icon">
-    <meta property="og:title"
-        content="(P)art(y)icular">
-    <meta property="og:description"
-        content="https://thearticular.github.io">
-    <meta property="og:image"
-        content="https://thearticular.github.io/thearticular/wp-content/uploads/wblg.png">
-    <meta property="og:url"
-        content="https://thearticular.github.io">
-    <meta property="og:site_name"
-        content="https://thearticular.github.io">
-    <meta property="og:article:author"
-        content="https://thearticular.github.io">
-    <meta property="og:article:section"
-        content="https://thearticular.github.io">
-    <meta property="og:article:tag"
-        content="https://thearticular.github.io">
     <link rel='stylesheet'
         href='wp-content/plugins/gutenberg/build/block-library/styleb3b9.css?ver=16.9.0' />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         rel="stylesheet">
-
     <link rel='stylesheet'
         href='wp-content/themes/hever/stylee2c1.css?ver=1.5.15' />
     <style>
@@ -115,157 +94,145 @@
                 <div class="video-container">
                     <video class="video-player"
                         id="video">
-                        <source src="wp-content/uploads/sands.mp4"
-                            type="video/mp4">
+                        <source src="wp-content/uploads/sands.mp4">
                     </video>
                 </div>
                 <div class="video-container">
                     <video class="video-player"
                         id="video">
-                        <source src="wp-content/uploads/drift.mp4"
-                            type="video/mp4">
+                        <source src="wp-content/uploads/drift.mp4">
                     </video>
                 </div>
                 <div class="video-container">
                     <video class="video-player"
                         id="video">
-                        <source src="wp-content/uploads/vile.mp4"
-                            type="video/mp4">
+                        <source src="wp-content/uploads/vile.mp4">
                     </video>
                 </div>
                 <div class="video-container">
                     <video class="video-player"
                         id="video">
-                        <source src="wp-content/uploads/river.mp4"
-                            type="video/mp4">
+                        <source src="wp-content/uploads/river.mp4">
                     </video>
                 </div>
                 <div class="video-container">
                     <video class="video-player"
                         id="video">
-                        <source src="wp-content/uploads/falling.mp4"
-                            type="video/mp4">
+                        <source src="wp-content/uploads/falling.mp4">
                     </video>
                 </div>
                 <div class="video-container">
                     <video class="video-player"
                         id="video">
-                        <source src="wp-content/uploads/opposing.mp4"
-                            type="video/mp4">
+                        <source src="wp-content/uploads/opposing.mp4">
                     </video>
                 </div>
                 <div class="video-container">
                     <video class="video-player"
                         id="video">
-                        <source src="wp-content/uploads/krishna.mp4"
-                            type="video/mp4">
+                        <source src="wp-content/uploads/krishna.mp4">
                     </video>
                 </div>
                 <div class="video-container">
                     <video class="video-player"
                         id="video">
-                        <source src="wp-content/uploads/rain.mp4"
-                            type="video/mp4">
+                        <source src="wp-content/uploads/rain.mp4">
                     </video>
                 </div>
                 <div class="video-container">
                     <video class="video-player"
                         id="video">
-                        <source src="wp-content/uploads/ruins.mp4"
-                            type="video/mp4">
+                        <source src="wp-content/uploads/ruins.mp4">
                     </video>
                 </div>
                 <div class="video-container">
                     <video class="video-player"
-                        id="video"
-                        >
-                        <source src="wp-content/uploads/krwa.mp4"
-                            type="video/mp4">
+                        id="video">
+                        <source src="wp-content/uploads/krwa.mp4">
                     </video>
                 </div>
             </div>
         </article>
     </main>
-
-    <script>
-        const originalVideosOrder = Array.from(document.querySelectorAll('.video-container'));
-        const videoContainers = document.querySelectorAll('.video-container');
-        const videoCounter = document.getElementById('video-counter');
-        const videos = document.querySelectorAll('video');
-        const playButton = document.getElementById('play');
-        const pauseButton = document.getElementById('pause');
-        const stopButton = document.getElementById('stop');
-        const nextButton = document.getElementById('next');
-        const previousButton = document.getElementById('previous');
-        let currentVideoIndex = 0;
-        let currentVideo = videos[currentVideoIndex];
-        function updateCurrentVideo() {
-            videos.forEach((video, index) => {
-                video.style.display = (index === currentVideoIndex) ? 'block' : 'none';
-            });
-            currentVideo = videos[currentVideoIndex];
-            videoCounter.textContent = `Song ${currentVideoIndex + 1} of ${videoContainers.length}`;
-            videoCounter.classList.add('red');
-            setTimeout(() => {
-                videoCounter.classList.remove('red');
-            }, 500);
-        }
-        function playVideo() {
-            currentVideo.play();
-        }
-        function pauseVideo() {
-            currentVideo.pause();
-        }
-        function stopVideos() {
-            const videoContainerParent = document.querySelector('.video-container').parentElement;
-            originalVideosOrder.forEach((videoContainer) => {
-                videoContainerParent.appendChild(videoContainer);
-            });
-            currentVideoIndex = 0;
-            updateCurrentVideo();
-            videos.forEach((video) => {
-                video.pause();
-                video.currentTime = 0;
-            });
-        }
-        function nextVideo() {
-            videos.forEach((video) => {
-                video.pause();
-                video.currentTime = 0;
-            });
-            updateCurrentVideo();
-            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-            updateCurrentVideo();
-            videos.forEach((video) => {
-                video.pause();
-                video.currentTime = 0;
-            });
-            updateCurrentVideo();
-            videos[currentVideoIndex].play();
-        }
-        function previousVideo() {
-            videos.forEach((video) => {
-                video.pause();
-                video.currentTime = 0;
-            });
-            updateCurrentVideo();
-            currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
-            updateCurrentVideo();
-            videos.forEach((video) => {
-                video.pause();
-                video.currentTime = 0;
-            });
-            updateCurrentVideo();
-            videos[currentVideoIndex].play();
-        }
-        playButton.addEventListener('click', playVideo);
-        pauseButton.addEventListener('click', pauseVideo);
-        stopButton.addEventListener('click', stopVideos);
-        nextButton.addEventListener('click', nextVideo);
-        previousButton.addEventListener('click', previousVideo);
-        updateCurrentVideo();
-    </script>
-
 </body>
+
+<script>
+    const originalVideosOrder = Array.from(document.querySelectorAll('.video-container'));
+    const videoContainers = document.querySelectorAll('.video-container');
+    const videoCounter = document.getElementById('video-counter');
+    const videos = document.querySelectorAll('video');
+    const playButton = document.getElementById('play');
+    const pauseButton = document.getElementById('pause');
+    const stopButton = document.getElementById('stop');
+    const nextButton = document.getElementById('next');
+    const previousButton = document.getElementById('previous');
+    let currentVideoIndex = 0;
+    let currentVideo = videos[currentVideoIndex];
+    function updateCurrentVideo() {
+        videos.forEach((video, index) => {
+            video.style.display = (index === currentVideoIndex) ? 'block' : 'none';
+        });
+        currentVideo = videos[currentVideoIndex];
+        videoCounter.textContent = `Song ${currentVideoIndex + 1} of ${videoContainers.length}`;
+        videoCounter.classList.add('red');
+        setTimeout(() => {
+            videoCounter.classList.remove('red');
+        }, 500);
+    }
+    function playVideo() {
+        currentVideo.play();
+    }
+    function pauseVideo() {
+        currentVideo.pause();
+    }
+    function stopVideos() {
+        const videoContainerParent = document.querySelector('.video-container').parentElement;
+        originalVideosOrder.forEach((videoContainer) => {
+            videoContainerParent.appendChild(videoContainer);
+        });
+        currentVideoIndex = 0;
+        updateCurrentVideo();
+        videos.forEach((video) => {
+            video.pause();
+            video.currentTime = 0;
+        });
+    }
+    function nextVideo() {
+        videos.forEach((video) => {
+            video.pause();
+            video.currentTime = 0;
+        });
+        updateCurrentVideo();
+        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+        updateCurrentVideo();
+        videos.forEach((video) => {
+            video.pause();
+            video.currentTime = 0;
+        });
+        updateCurrentVideo();
+        videos[currentVideoIndex].play();
+    }
+    function previousVideo() {
+        videos.forEach((video) => {
+            video.pause();
+            video.currentTime = 0;
+        });
+        updateCurrentVideo();
+        currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+        updateCurrentVideo();
+        videos.forEach((video) => {
+            video.pause();
+            video.currentTime = 0;
+        });
+        updateCurrentVideo();
+        videos[currentVideoIndex].play();
+    }
+    playButton.addEventListener('click', playVideo);
+    pauseButton.addEventListener('click', pauseVideo);
+    stopButton.addEventListener('click', stopVideos);
+    nextButton.addEventListener('click', nextVideo);
+    previousButton.addEventListener('click', previousVideo);
+    updateCurrentVideo();
+</script>
 
 </html>
