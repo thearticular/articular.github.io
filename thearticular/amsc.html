@@ -7,8 +7,6 @@
         content="width=device-width, initial-scale=1">
     <link rel='stylesheet'
         href='wp-content/plugins/gutenberg/build/block-library/styleb3b9.css?ver=16.9.0'>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        rel="stylesheet">
     <link rel='stylesheet'
         href='wp-content/themes/hever/stylee2c1.css?ver=1.5.15'>
     <style>
@@ -50,7 +48,7 @@
             border-radius: 20px;
             padding: 10px;
             margin: 1px;
-            width: 400px;
+            width: 100%;
             font-weight: normal;
             font-size: 12px;
         }
@@ -64,9 +62,8 @@
         }
 
         #custom-seekbar {
-            height: 14px;
+            height: 20px;
             border: 2px solid #fff;
-            border-radius: 20px;
             position: relative;
             max-width: 500px;
         }
@@ -74,7 +71,7 @@
         #custom-seekbar span {
             background-color: rgb(255, 255, 255);
             position: absolute;
-            height: 10px;
+            height: 16px;
         }
 
         #audio-visualizer {
@@ -125,7 +122,6 @@
                 </div>
                 <div class="controls">
                     <button id="pauseBtn">Pause</button>
-                    <button id="playAllBtn">Play All</button>
                     <button id="stopBtn">Stop</button>
                 </div>
                 <div id="custom-seekbar">
@@ -210,7 +206,6 @@
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const playBtn = document.getElementById('playBtn');
-        const playAllBtn = document.getElementById('playAllBtn');
         const pauseBtn = document.getElementById('pauseBtn');
         const stopBtn = document.getElementById('stopBtn');
         const seekbar = document.getElementById('custom-seekbar');
@@ -239,7 +234,6 @@
             "Kurukshetra",
         ];
         let currentIndex = 0;
-        let playAll = false;
         function resetAllVideos() {
             videos.forEach((video) => {
                 video.pause();
@@ -268,7 +262,6 @@
         }
         playBtn.addEventListener('click', () => {
             videos[currentIndex].play();
-            playAll = false;
         });
         pauseBtn.addEventListener('click', () => {
             videos[currentIndex].pause();
@@ -276,7 +269,6 @@
         stopBtn.addEventListener('click', () => {
             videos[currentIndex].pause();
             videos[currentIndex].currentTime = 0;
-            playAll = false;
         });
         videoSelector.addEventListener('change', () => {
             const index = parseInt(videoSelector.value, 10);
@@ -285,31 +277,12 @@
         prevBtn.addEventListener('click', () => {
             if (currentIndex > 0) {
                 playVideo(currentIndex - 1);
-                playAll = false;
             }
         });
         nextBtn.addEventListener('click', () => {
             if (currentIndex < videos.length - 1) {
                 playVideo(currentIndex + 1);
-                playAll = false;
             }
-        });
-        playAllBtn.addEventListener('click', () => {
-            playAll = true;
-            playVideo(currentIndex);
-        });
-        function onVideoEnd() {
-            if (playAll) {
-                currentIndex++;
-                if (currentIndex < videos.length) {
-                    playVideo(currentIndex);
-                } else {
-                    playAll = false;
-                }
-            }
-        }
-        videos.forEach((video) => {
-            video.addEventListener('ended', onVideoEnd);
         });
         updateVideoSelector();
         playVideo(currentIndex);
@@ -346,19 +319,35 @@
             for (let i = 0; i < bufferLength; i++) {
                 sum += dataArray[i];
             }
-            const averageAmplitude = sum / bufferLength / 10;
+            const averageAmplitude = sum / bufferLength / 2;
             drawCircles(averageAmplitude);
         }
         function drawCircles(amplitude) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const numCircles = 30;
-            const maxRadius = Math.min(canvas.width, canvas.height) / 2;
+            const numCircles = 5;
+            const maxRadius = Math.min(canvas.width, canvas.height);
             const baseRadius = maxRadius * 0.1;
             for (let i = 0; i < numCircles; i++) {
                 const radius = baseRadius * (i + 1) + amplitude / 1;
                 ctx.beginPath();
                 ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - i / numCircles) * 0.1})`;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - i / numCircles) * 0.4})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                const triangleRadius = baseRadius * (i + 1) + amplitude / 2;
+                ctx.beginPath();
+                for (let j = 0; j < 3; j++) {
+                    const angle = (j * 2 * Math.PI) / 3 - Math.PI / 2;
+                    const x = canvas.width / 2 + triangleRadius * Math.cos(angle);
+                    const y = canvas.height / 2 + triangleRadius * Math.sin(angle);
+                    if (j === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.closePath();
+                ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - i / numCircles) * 0.4})`;
                 ctx.lineWidth = 2;
                 ctx.stroke();
             }
@@ -375,6 +364,12 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            videos.forEach((video) => {
+                video.pause();
+            });
+            animate();
         });
     </script>
 </body>
