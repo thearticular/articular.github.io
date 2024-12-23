@@ -16,6 +16,10 @@
             --wp--preset--spacing--30: 0.67rem;
             background-color: #000000;
             color: rgb(255, 255, 255);
+            overscroll-behavior: none;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
         }
 
         .wp-block-button__link {
@@ -28,24 +32,45 @@
             font-size: 12px;
         }
 
-        .button-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        .button-container button {
-            background-color: rgba(0, 0, 0, 0);
-        }
-
         .video-player {
-            width: 100%;
+            display: none;
         }
 
-        #video-counter {
-            font-size: 12px;
+        .controls {
             display: flex;
             justify-content: center;
-            font-weight: bold;
+            align-items: center;
+        }
+
+        select,
+        button {
+            background-color: #000000;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            padding: 10px;
+            margin: 1px;
+            width: 400px;
+            font-weight: normal;
+            font-size: 12px;
+        }
+
+        #videoSelector {
+            text-align: center;
+        }
+
+        #custom-seekbar {
+            height: 14px;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            position: relative;
+            width: 500px;
+        }
+
+        #custom-seekbar span {
+            background-color: rgb(255, 255, 255);
+            position: absolute;
+            height: 10px;
         }
 
         #audio-visualizer {
@@ -77,267 +102,214 @@
                     visuals in Photoshop, animations with motion graphics in After Effects and JavaScript,
                     video editing in Premiere Pro. Finally downscaled with
                     Handbrake.</p>
-                <div class="button-container">
-                    <button id="play"><i class="fas fa-play"></i></button>
-                    <button id="pause"><i class="fas fa-pause"></i></button>
-                    <button id="stop"><i class="fas fa-stop"></i></button>
-                    <button id="previous"><i class="fas fa-backward"></i></button>
-                    <button id="next"><i class="fas fa-forward"></i></button>
+                <div class="controls">
+                    <select id="videoSelector"></select>
                 </div>
-                <div id="video-counter"></div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/yudh.mp4">
-                    </video>
+                <div class="controls">
+                    <button id="prevBtn">Previous</button>
+                    <button id="playBtn">Play</button>
+                    <button id="nextBtn">Next</button>
                 </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/brou.mp4">
-                    </video>
+                <div class="controls">
+                    <button id="pauseBtn">Pause</button>
+                    <button id="playAllBtn">Play All</button>
+                    <button id="stopBtn">Stop</button>
                 </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/rifl.mp4">
-                    </video>
+                <div id="custom-seekbar">
+                    <span></span>
                 </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/carv.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/apart.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/poten.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/crack.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/sands.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/drift.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/vile.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/river.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/falling.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/opposing.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/krishna.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/rain.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/ruins.mp4">
-                    </video>
-                </div>
-                <div class="video-container">
-                    <video class="video-player"
-                        id="video">
-                        <source src="wp-content/uploads/krwa.mp4">
-                    </video>
-                </div>
+                <video class="video-player"
+                    id="video17">
+                    <source src="wp-content/uploads/yudh.mp4">
+                </video>
+                <video class="video-player"
+                    id="video16">
+                    <source src="wp-content/uploads/brou.mp4">
+                </video>
+                <video class="video-player"
+                    id="video15">
+                    <source src="wp-content/uploads/rifl.mp4">
+                </video>
+                <video class="video-player"
+                    id="video14">
+                    <source src="wp-content/uploads/carv.mp4">
+                </video>
+                <video class="video-player"
+                    id="video13">
+                    <source src="wp-content/uploads/apart.mp4">
+                </video>
+                <video class="video-player"
+                    id="video12">
+                    <source src="wp-content/uploads/poten.mp4">
+                </video>
+                <video class="video-player"
+                    id="video11">
+                    <source src="wp-content/uploads/crack.mp4">
+                </video>
+                <video class="video-player"
+                    id="video10">
+                    <source src="wp-content/uploads/sands.mp4">
+                </video>
+                <video class="video-player"
+                    id="video9">
+                    <source src="wp-content/uploads/drift.mp4">
+                </video>
+                <video class="video-player"
+                    id="video8">
+                    <source src="wp-content/uploads/vile.mp4">
+                </video>
+                <video class="video-player"
+                    id="video7">
+                    <source src="wp-content/uploads/river.mp4">
+                </video>
+                <video class="video-player"
+                    id="video6">
+                    <source src="wp-content/uploads/falling.mp4">
+                </video>
+                <video class="video-player"
+                    id="video5">
+                    <source src="wp-content/uploads/opposing.mp4">
+                </video>
+                <video class="video-player"
+                    id="video4">
+                    <source src="wp-content/uploads/krishna.mp4">
+                </video>
+                <video class="video-player"
+                    id="video3">
+                    <source src="wp-content/uploads/rain.mp4">
+                </video>
+                <video class="video-player"
+                    id="video2">
+                    <source src="wp-content/uploads/ruins.mp4">
+                </video>
+                <video class="video-player"
+                    id="video1">
+                    <source src="wp-content/uploads/krwa.mp4">
+                </video>
             </div>
         </article>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script>
-        const originalVideosOrder = Array.from(document.querySelectorAll('.video-container'));
-        const videoContainers = document.querySelectorAll('.video-container');
-        const videoCounter = document.getElementById('video-counter');
-        const videos = document.querySelectorAll('video');
-        const playButton = document.getElementById('play');
-        const pauseButton = document.getElementById('pause');
-        const stopButton = document.getElementById('stop');
-        const nextButton = document.getElementById('next');
-        const previousButton = document.getElementById('previous');
-        let currentVideoIndex = 0;
-        let currentVideo = videos[currentVideoIndex];
-        const audioVisualizer = document.getElementById('audio-visualizer');
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const analyser = audioContext.createAnalyser();
-        analyser.fftSize = 32;
-        const bufferLength = analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        audioVisualizer.appendChild(canvas);
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        function updateVisualizer() {
-            const alphaValue = 0.05;
-            ctx.globalAlpha = alphaValue;
-            analyser.getByteFrequencyData(dataArray);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const lowFrequencyData = dataArray.slice(0, bufferLength / 2);
-            const highFrequencyData = dataArray.slice(bufferLength / 2);
-            const lowAvg = lowFrequencyData.reduce((sum, value) => sum + value, 0) / lowFrequencyData.length;
-            const highAvg = highFrequencyData.reduce((sum, value) => sum + value, 0) / highFrequencyData.length;
-            const outerRadius = Math.max(1, lowAvg);
-            const innerRadius = Math.max(1, highAvg);
-            const gradient = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, innerRadius, canvas.width / 2, canvas.height / 2, outerRadius);
-            gradient.addColorStop(0, 'rgba(5, 5, 5, 1)');
-            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(canvas.width / 2, canvas.height / 2, outerRadius, 0, Math.PI * 2);
-            ctx.fill();
-            const numSpirals = lowAvg / 100;
-            const maxRadius = canvas.height;
-            const spiralStep = 1 * Math.PI / numSpirals;
-            const pointsPerSpiral = 10;
-            for (let i = 0; i < numSpirals; i++) {
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = `rgba(255, 255, 255, ${1 - i / numSpirals})`;
-                ctx.beginPath();
-                ctx.stroke();
-            }
-            const circleCount = Math.max(1, Math.floor(lowAvg / 1));
-            for (let i = 0; i < circleCount; i++) {
-                const radius = (i + 1) * outerRadius * 0.1;
-                const alpha = Math.max(0.1, 1 - i / circleCount);
-                ctx.beginPath();
-                ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-            }
-            const fractalLayers = Math.max(1, Math.floor(highAvg / 10));
-            const fractalAngleShift = Math.PI / 1;
-            const fractalMaxRadius = Math.max(canvas.width, canvas.height) * 0.25;
-            for (let layer = 0; layer < fractalLayers; layer++) {
-                ctx.beginPath();
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = `rgba(255, 255, 255, ${0.5 - layer / fractalLayers})`;
-                for (let i = 0; i < 1000; i++) {
-                    const angle = i * 0.1 + (layer * fractalAngleShift);
-                    const radius = (i / 1000) * fractalMaxRadius * Math.sin(i * 0.05);
-                    const x = canvas.width / 2 + Math.cos(angle) * radius;
-                    const y = canvas.height / 2 + Math.sin(angle) * radius;
-                    ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-            }
-            const arcCount = Math.max(2, Math.floor(lowAvg / 10));
-            for (let i = 0; i < arcCount; i++) {
-                const angleStart = Math.PI * (i * 0.5);
-                const angleEnd = angleStart + Math.PI * 0.5;
-                const radius = outerRadius * (0.5 + i / arcCount);
-                ctx.beginPath();
-                ctx.arc(canvas.width / 2, canvas.height / 2, radius, angleStart, angleEnd);
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = `rgba(255, 255, 255, ${1 - i / arcCount})`;
-                ctx.stroke();
-            }
-            setTimeout(() => requestAnimationFrame(updateVisualizer), 1000 / 24);
-        }
-        function setUpAudioSource() {
-            const source = audioContext.createMediaElementSource(currentVideo);
-            source.connect(analyser);
-            analyser.connect(audioContext.destination);
-            updateVisualizer();
-        }
-        function playVideo() {
-            currentVideo.play();
-            setUpAudioSource();
-        }
-        function pauseVideo() {
-            currentVideo.pause();
-        }
-        function stopVideos() {
-            currentVideoIndex = 0;
-            updateCurrentVideo();
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        const videos = document.querySelectorAll('.video-player');
+        const videoSelector = document.getElementById('videoSelector');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const playBtn = document.getElementById('playBtn');
+        const playAllBtn = document.getElementById('playAllBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const seekbar = document.getElementById('custom-seekbar');
+        const seekbarSpan = seekbar.querySelector('span');
+        const videoNames = [
+            "Yudhishthir",
+            "Brought To You By",
+            "Rifle",
+            "Carved",
+            "Apart",
+            "Potential Difference",
+            "Cracks",
+            "Sands",
+            "Drift",
+            "Vile",
+            "Rivers Of Least Resistance",
+            "Falling",
+            "Opposite Poles",
+            "Krishna",
+            "Rain Down",
+            "Ruins",
+            "Kurukshetra",
+        ];
+        let currentIndex = 0;
+        let playAll = false;
+        function resetAllVideos() {
             videos.forEach((video) => {
                 video.pause();
                 video.currentTime = 0;
+                video.style.display = 'none';
             });
         }
-        function nextVideo() {
-            videos.forEach((video) => {
-                video.pause();
-                video.currentTime = 0;
-            });
-            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-            updateCurrentVideo();
-            setUpAudioSource();
-            currentVideo.play();
+        function playVideo(index) {
+            if (index < 0 || index >= videos.length) return;
+            resetAllVideos();
+            videos[index].style.display = 'block';
+            videos[index].play();
+            currentIndex = index;
+            videoSelector.value = currentIndex;
+            updateSeekbar();
         }
-        function previousVideo() {
-            videos.forEach((video) => {
-                video.pause();
-                video.currentTime = 0;
-            });
-            currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
-            updateCurrentVideo();
-            setUpAudioSource();
-            currentVideo.play();
-        }
-        function updateCurrentVideo() {
+        function updateVideoSelector() {
+            videoSelector.innerHTML = '';
             videos.forEach((video, index) => {
-                video.style.display = (index === currentVideoIndex) ? 'block' : 'none';
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = videoNames[index];
+                videoSelector.appendChild(option);
             });
-            currentVideo = videos[currentVideoIndex];
-            videoCounter.textContent = `Song ${currentVideoIndex + 1} of ${videoContainers.length}`;
         }
-        playButton.addEventListener('click', playVideo);
-        pauseButton.addEventListener('click', pauseVideo);
-        stopButton.addEventListener('click', stopVideos);
-        nextButton.addEventListener('click', nextVideo);
-        previousButton.addEventListener('click', previousVideo);
-        updateCurrentVideo();    
+        playBtn.addEventListener('click', () => {
+            videos[currentIndex].play();
+            playAll = false;
+        });
+        pauseBtn.addEventListener('click', () => {
+            videos[currentIndex].pause();
+        });
+        stopBtn.addEventListener('click', () => {
+            videos[currentIndex].pause();
+            videos[currentIndex].currentTime = 0;
+            playAll = false;
+        });
+        videoSelector.addEventListener('change', () => {
+            const index = parseInt(videoSelector.value, 10);
+            playVideo(index);
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                playVideo(currentIndex - 1);
+                playAll = false;
+            }
+        });
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < videos.length - 1) {
+                playVideo(currentIndex + 1);
+                playAll = false;
+            }
+        });
+        playAllBtn.addEventListener('click', () => {
+            playAll = true;
+            playVideo(currentIndex);
+        });
+        function onVideoEnd() {
+            if (playAll) {
+                currentIndex++;
+                if (currentIndex < videos.length) {
+                    playVideo(currentIndex);
+                } else {
+                    playAll = false;
+                }
+            }
+        }
+        videos.forEach((video) => {
+            video.addEventListener('ended', onVideoEnd);
+        });
+        updateVideoSelector();
+        playVideo(currentIndex);
+        function updateSeekbar() {
+            const vid = videos[currentIndex];
+            vid.ontimeupdate = function () {
+                var percentage = (vid.currentTime / vid.duration) * 100;
+                $(seekbarSpan).css("width", percentage + "%");
+            };
+            $(seekbar).on("click", function (e) {
+                var offset = $(this).offset();
+                var left = (e.pageX - offset.left);
+                var totalWidth = $(this).width();
+                var percentage = (left / totalWidth);
+                var vidTime = vid.duration * percentage;
+                vid.currentTime = vidTime;
+            });
+        }
     </script>
 </body>
 
