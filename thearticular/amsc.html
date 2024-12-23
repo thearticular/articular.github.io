@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="en-US">
-<meta charset="UTF-8" />
 
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport"
-        content="width=device-width, initial-scale=1" />
+        content="width=device-width, initial-scale=1">
     <link rel='stylesheet'
-        href='wp-content/plugins/gutenberg/build/block-library/styleb3b9.css?ver=16.9.0' />
+        href='wp-content/plugins/gutenberg/build/block-library/styleb3b9.css?ver=16.9.0'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         rel="stylesheet">
     <link rel='stylesheet'
-        href='wp-content/themes/hever/stylee2c1.css?ver=1.5.15' />
+        href='wp-content/themes/hever/stylee2c1.css?ver=1.5.15'>
     <style>
         body {
             --wp--preset--spacing--30: 0.67rem;
@@ -44,7 +44,7 @@
 
         select,
         button {
-            background-color: #000000;
+            background-color: #00000000;
             color: #fff;
             border: 2px solid #fff;
             border-radius: 20px;
@@ -53,6 +53,10 @@
             width: 400px;
             font-weight: normal;
             font-size: 12px;
+        }
+
+        select option {
+            background-color: rgb(0, 0, 0);
         }
 
         #videoSelector {
@@ -64,7 +68,7 @@
             border: 2px solid #fff;
             border-radius: 20px;
             position: relative;
-            width: 500px;
+            max-width: 500px;
         }
 
         #custom-seekbar span {
@@ -79,11 +83,20 @@
             left: 0;
             z-index: -10;
         }
+
+        #backgroundCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+        }
     </style>
 </head>
 
 <body class="singular">
-    <div id="audio-visualizer"></div>
+    <canvas id="backgroundCanvas"></canvas>
     <main class="site-main">
         <article class="hentry entry">
             <header class="entry-header responsive-max-width">
@@ -202,6 +215,10 @@
         const stopBtn = document.getElementById('stopBtn');
         const seekbar = document.getElementById('custom-seekbar');
         const seekbarSpan = seekbar.querySelector('span');
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioContext.createAnalyser();
+        const canvas = document.getElementById("backgroundCanvas");
+        const ctx = canvas.getContext("2d");
         const videoNames = [
             "Yudhishthir",
             "Brought To You By",
@@ -231,13 +248,14 @@
             });
         }
         function playVideo(index) {
-            if (index < 0 || index >= videos.length) return;
             resetAllVideos();
-            videos[index].style.display = 'block';
-            videos[index].play();
+            const video = videos[index];
+            video.style.display = 'block';
+            video.play();
             currentIndex = index;
             videoSelector.value = currentIndex;
             updateSeekbar();
+            setupAudioSource(video);
         }
         function updateVideoSelector() {
             videoSelector.innerHTML = '';
@@ -310,6 +328,54 @@
                 vid.currentTime = vidTime;
             });
         }
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const audioElements = document.querySelectorAll('video');
+        let currentAudioSource;
+        function setupAudioSource(video) {
+            const source = audioContext.createMediaElementSource(video);
+            source.connect(analyser);
+            analyser.connect(audioContext.destination);
+            analyser.fftSize = 32;
+        }
+        function updateAmplitude() {
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for (let i = 0; i < bufferLength; i++) {
+                sum += dataArray[i];
+            }
+            const averageAmplitude = sum / bufferLength / 10;
+            drawCircles(averageAmplitude);
+        }
+        function drawCircles(amplitude) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const numCircles = 30;
+            const maxRadius = Math.min(canvas.width, canvas.height) / 2;
+            const baseRadius = maxRadius * 0.1;
+            for (let i = 0; i < numCircles; i++) {
+                const radius = baseRadius * (i + 1) + amplitude / 1;
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - i / numCircles) * 0.1})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        }
+        function animate() {
+            updateAmplitude();
+            requestAnimationFrame(animate);
+        }
+        videos.forEach((video) => {
+            video.addEventListener('play', () => {
+                animate();
+            });
+        });
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 
