@@ -197,25 +197,7 @@
         const analyser = audioContext.createAnalyser();
         const canvas = document.getElementById("backgroundCanvas");
         const ctx = canvas.getContext("2d");
-        const videoNames = [
-            "Yudhishthir",
-            "Brought To You By",
-            "Rifle",
-            "Carved",
-            "Apart",
-            "Potential Difference",
-            "Cracks",
-            "Sands",
-            "Drift",
-            "Vile",
-            "Rivers Of Least Resistance",
-            "Falling",
-            "Opposite Poles",
-            "Krishna",
-            "Rain Down",
-            "Ruins",
-            "Kurukshetra",
-        ];
+        const videoNames = ["Yudhishthir", "Brought To You By", "Rifle", "Carved", "Apart", "Potential Difference", "Cracks", "Sands", "Drift", "Vile", "Rivers Of Least Resistance", "Falling", "Opposite Poles", "Krishna", "Rain Down", "Ruins", "Kurukshetra", "", "",];
         let currentIndex = 0;
         function resetAllVideos() {
             videos.forEach((video) => {
