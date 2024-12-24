@@ -349,12 +349,6 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
-        document.addEventListener('DOMContentLoaded', () => {
-            videos.forEach((video) => {
-                video.pause();
-            });
-            playVideo(currentIndex);
-        });
         document.addEventListener('click', () => {
             if (audioContext.state === 'suspended') {
                 audioContext.resume();
