@@ -74,6 +74,23 @@
             height: 16px;
         }
 
+        #loadingText {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            color: white;
+            z-index: 10;
+            animation: expand 2s infinite ease-in-out;
+        }
+
+        @keyframes expand {
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
         #audio-visualizer {
             position: absolute;
             top: 0;
@@ -126,6 +143,7 @@
                 </div>
                 <div id="custom-seekbar">
                     <span></span>
+                    <div id="loadingText">Loading Page...</div>
                 </div>
                 <video class="video">
                     <source src="wp-content/uploads/yudh.mp4">
@@ -210,6 +228,7 @@
             resetAllVideos();
             const video = videos[index];
             video.style.display = 'block';
+            video.load();
             video.play();
             currentIndex = index;
             videoSelector.value = currentIndex;
@@ -334,6 +353,15 @@
             videos.forEach((video) => {
                 video.pause();
             });
+            playVideo(currentIndex);
+        });
+        document.addEventListener('click', () => {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        });
+        window.addEventListener('load', () => {
+            document.getElementById('loadingText').style.display = 'none';
             animate();
         });
     </script>
