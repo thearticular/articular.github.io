@@ -6,9 +6,9 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1">
     <link rel='stylesheet'
-        href='wp-content/plugins/gutenberg/build/block-library/styleb3b9.css?ver=16.9.0'>
+        href='wp-content/plugins/gutenberg/build/block-library/styleb3b9.css'>
     <link rel='stylesheet'
-        href='wp-content/themes/hever/stylee2c1.css?ver=1.5.15'>
+        href='wp-content/themes/hever/stylee2c1.css'>
     <style>
         body {
             --wp--preset--spacing--30: 0.67rem;
@@ -146,6 +146,9 @@
                     <div id="loadingText">Loading Page...</div>
                 </div>
                 <video class="video">
+                    <source src="wp-content/uploads/nasd.mp4">
+                </video>
+                <video class="video">
                     <source src="wp-content/uploads/yudh.mp4">
                 </video>
                 <video class="video">
@@ -215,7 +218,7 @@
         const analyser = audioContext.createAnalyser();
         const canvas = document.getElementById("backgroundCanvas");
         const ctx = canvas.getContext("2d");
-        const videoNames = ["Yudhishthir", "Brought To You By", "Rifle", "Carved", "Apart", "Potential Difference", "Cracks", "Sands", "Drift", "Vile", "Rivers Of Least Resistance", "Falling", "Opposite Poles", "Krishna", "Rain Down", "Ruins", "Kurukshetra", "", "",];
+        const videoNames = ["Nasadiya Sukta","Yudhishthir", "Brought To You By", "Rifle", "Carved", "Apart", "Potential Difference", "Cracks", "Sands", "Drift", "Vile", "Rivers Of Least Resistance", "Falling", "Opposite Poles", "Krishna", "Rain Down", "Ruins", "Kurukshetra", "", "",];
         let currentIndex = 0;
         function resetAllVideos() {
             videos.forEach((video) => {
