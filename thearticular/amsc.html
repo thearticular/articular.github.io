@@ -240,6 +240,7 @@
         const analyser = audioContext.createAnalyser();
         const canvas = document.getElementById("backgroundCanvas");
         const ctx = canvas.getContext("2d");
+        let playAllActive = false;
         const rawVideoNames = [
             "Nasadiya Sukta",
             "Yudhishthir",
@@ -260,16 +261,19 @@
             "Ruins",
             "Kurukshetra"
         ];
-        const videoNames = rawVideoNames.map((name, index) => `${index + 1}/${rawVideoNames.length} : ${name}`);
+        const videoNames = rawVideoNames.map((name, index) => `${ index + 1 }/${ rawVideoNames.length } : ${ name }`);
         let currentIndex = 0;
-        function resetAllVideos() {
-            videos.forEach((video) => {
+        function resetAllVideos()
+        {
+            videos.forEach((video) =>
+            {
                 video.pause();
                 video.currentTime = 0;
                 video.style.display = 'none';
             });
         }
-        function playVideo(index) {
+        function playVideo(index)
+        {
             resetAllVideos();
             const video = videos[index];
             video.style.display = 'block';
@@ -280,72 +284,106 @@
             updateSeekbar();
             setupAudioSource(video);
         }
-        function updateVideoSelector() {
+        function updateVideoSelector()
+        {
             videoSelector.innerHTML = '';
-            videos.forEach((video, index) => {
+            videos.forEach((video, index) =>
+            {
                 const option = document.createElement('option');
                 option.value = index;
                 option.textContent = videoNames[index];
                 videoSelector.appendChild(option);
             });
         }
-        playBtn.addEventListener('click', () => {
+        playBtn.addEventListener('click', () =>
+        {
             videos[currentIndex].play();
         });
-        pauseBtn.addEventListener('click', () => {
+        pauseBtn.addEventListener('click', () =>
+        {
             videos[currentIndex].pause();
         });
-        stopBtn.addEventListener('click', () => {
+        stopBtn.addEventListener('click', () =>
+        {
             videos[currentIndex].pause();
             videos[currentIndex].currentTime = 0;
             resetAllVideos();
+            playAllActive = false;
             const video = videos[0];
             video.style.display = 'block';
             video.load();
             currentIndex = 0;
             videoSelector.value = currentIndex;
         });
-        videoSelector.addEventListener('change', () => {
+        videoSelector.addEventListener('change', () =>
+        {
             const index = parseInt(videoSelector.value, 10);
             playVideo(index);
         });
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
+        prevBtn.addEventListener('click', () =>
+        {
+            if (currentIndex > 0)
+            {
                 playVideo(currentIndex - 1);
             }
         });
-        nextBtn.addEventListener('click', () => {
-            if (currentIndex < videos.length - 1) {
+        nextBtn.addEventListener('click', () =>
+        {
+            if (currentIndex < videos.length - 1)
+            {
                 playVideo(currentIndex + 1);
             }
         });
-        playAll.addEventListener('click', () => {
-            for (let i = currentIndex; i < videos.length; i++) {
-                playVideo(i);
-            }
+        playAll.addEventListener('click', () =>
+        {
+            playAllActive = true;
+            playVideo(currentIndex);
+        });
+        videos.forEach((video, index) =>
+        {
+            video.addEventListener('ended', () =>
+            {
+                if (playAllActive)
+                {
+                    if (currentIndex < videos.length - 1)
+                    {
+                        playVideo(currentIndex + 1);
+                    }
+                    else
+                    {
+                        playVideo(0);
+                    }
+                }
+            });
         });
         updateVideoSelector();
         playVideo(currentIndex);
-        function updateSeekbar() {
+        function updateSeekbar()
+        {
             const vid = videos[currentIndex];
             const totalTimeElement = document.getElementById("totalTime");
             const currentTimeElement = document.getElementById("currentTime");
-            function formatTime(seconds) {
+            function formatTime(seconds)
+            {
                 const minutes = Math.floor(seconds / 60);
                 const secs = Math.floor(seconds % 60);
-                return `${minutes < 10 ? '0' + minutes : minutes}:${secs < 10 ? '0' + secs : secs}`;
+                return `${ minutes < 10 ? '0' + minutes : minutes }:${ secs < 10 ? '0' + secs : secs }`;
             }
-            vid.addEventListener('loadedmetadata', function () {
+            vid.addEventListener('loadedmetadata', function ()
+            {
                 totalTimeElement.textContent = formatTime(vid.duration);
             });
-            vid.ontimeupdate = function () {
+            vid.ontimeupdate = function ()
+            {
                 const percentage = (vid.currentTime / vid.duration) * 100;
-                requestAnimationFrame(() => {
+                requestAnimationFrame(() =>
+                {
                     $(seekbarSpan).css("width", percentage + "%");
                 });
                 currentTimeElement.textContent = formatTime(vid.currentTime);
             };
-            $(seekbar).on("click", function (e) {
+            $(seekbar).on("click", function (e)
+            {
                 var offset = $(this).offset();
                 var left = (e.pageX - offset.left);
                 var totalWidth = $(this).width();
@@ -359,72 +397,88 @@
         canvas.height = window.innerHeight;
         const audioElements = document.querySelectorAll('video');
         let currentAudioSource;
-        function setupAudioSource(video) {
+        function setupAudioSource(video)
+        {
             const source = audioContext.createMediaElementSource(video);
             source.connect(analyser);
             analyser.connect(audioContext.destination);
             analyser.fftSize = 32;
         }
-        function updateAmplitude() {
+        function updateAmplitude()
+        {
             const bufferLength = analyser.frequencyBinCount;
             const dataArray = new Uint8Array(bufferLength);
             analyser.getByteFrequencyData(dataArray);
             let sum = 0;
-            for (let i = 0; i < bufferLength; i++) {
+            for (let i = 0; i < bufferLength; i++)
+            {
                 sum += dataArray[i];
             }
             const averageAmplitude = sum / bufferLength / 2;
             drawCircles(averageAmplitude);
         }
-        function drawCircles(amplitude) {
+        function drawCircles(amplitude)
+        {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             const numCircles = 5;
             const maxRadius = Math.min(canvas.width, canvas.height);
             const baseRadius = maxRadius * 0.1;
-            for (let i = 0; i < numCircles; i++) {
+            for (let i = 0; i < numCircles; i++)
+            {
                 const radius = baseRadius * (i + 1) + amplitude / 1;
                 ctx.beginPath();
                 ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - i / numCircles) * 0.4})`;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${ (1 - i / numCircles) * 0.4 })`;
                 ctx.lineWidth = 2;
                 ctx.stroke();
                 const triangleRadius = baseRadius * (i + 1) + amplitude / 2;
                 ctx.beginPath();
-                for (let j = 0; j < 3; j++) {
+                for (let j = 0; j < 3; j++)
+                {
                     const angle = (j * 2 * Math.PI) / 3 - Math.PI / 2;
                     const x = canvas.width / 2 + triangleRadius * Math.cos(angle);
                     const y = canvas.height / 2 + triangleRadius * Math.sin(angle);
-                    if (j === 0) {
+                    if (j === 0)
+                    {
                         ctx.moveTo(x, y);
-                    } else {
+                    }
+                    else
+                    {
                         ctx.lineTo(x, y);
                     }
                 }
                 ctx.closePath();
-                ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - i / numCircles) * 0.4})`;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${ (1 - i / numCircles) * 0.4 })`;
                 ctx.lineWidth = 2;
                 ctx.stroke();
             }
         }
-        function animate() {
+        function animate()
+        {
             updateAmplitude();
             requestAnimationFrame(animate);
         }
-        videos.forEach((video) => {
-            video.addEventListener('play', () => {
+        videos.forEach((video) =>
+        {
+            video.addEventListener('play', () =>
+            {
                 animate();
             });
         });
-        window.addEventListener('resize', () => {
+        window.addEventListener('resize', () =>
+        {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
-        document.addEventListener('click', () => {
-            if (audioContext.state === 'suspended') {
+        document.addEventListener('click', () =>
+        {
+            if (audioContext.state === 'suspended')
+            {
                 audioContext.resume();
             }
         });
-        window.onload = function () {
+        window.onload = function ()
+        {
             animate();
             document.getElementById('loadingText').style.display = 'none';
             document.getElementById('timeDisplay').style.display = 'block';
