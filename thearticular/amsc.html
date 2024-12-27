@@ -233,6 +233,7 @@
         const playBtn = document.getElementById('playBtn');
         const pauseBtn = document.getElementById('pauseBtn');
         const stopBtn = document.getElementById('stopBtn');
+        const playAll = document.getElementById('playAll');
         const seekbar = document.getElementById('custom-seekbar');
         const seekbarSpan = seekbar.querySelector('span');
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -297,6 +298,12 @@
         stopBtn.addEventListener('click', () => {
             videos[currentIndex].pause();
             videos[currentIndex].currentTime = 0;
+            resetAllVideos();
+            const video = videos[0];
+            video.style.display = 'block';
+            video.load();
+            currentIndex = 0;
+            videoSelector.value = currentIndex;
         });
         videoSelector.addEventListener('change', () => {
             const index = parseInt(videoSelector.value, 10);
@@ -310,6 +317,11 @@
         nextBtn.addEventListener('click', () => {
             if (currentIndex < videos.length - 1) {
                 playVideo(currentIndex + 1);
+            }
+        });
+        playAll.addEventListener('click', () => {
+            for (let i = currentIndex; i < videos.length; i++) {
+                playVideo(i);
             }
         });
         updateVideoSelector();
@@ -413,6 +425,7 @@
             }
         });
         window.onload = function () {
+            animate();
             document.getElementById('loadingText').style.display = 'none';
             document.getElementById('timeDisplay').style.display = 'block';
         };
