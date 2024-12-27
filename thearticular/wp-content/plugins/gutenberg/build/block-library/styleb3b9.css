@@ -4679,4 +4679,5 @@ html :where(.is-position-sticky) {
     position: relative;
     z-index: 1;
     background-color: black !important;
+    filter: brightness(3);
 }
