@@ -38,19 +38,13 @@
 		href='thearticular/wp-content/plugins/gutenberg/build/block-library/styleb3b9.css'>
 	<link rel='stylesheet'
 		href='thearticular/wp-content/themes/hever/stylee2c1.css'>
-	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 	<style>
 		body {
 			--wp--preset--spacing--30: 0.67rem;
 			color: white;
-		}
-
-		body:before {
-			content: "";
-			position: fixed;
-			width: 100vw;
-			height: 100vh;
-			background: url("thearticular/wp-content/uploads/bgbgbg.jpg") repeat center top;
+			position: absolute;
+			width: 100%;
+			height: 100%;
 		}
 
 		.entry-title {
@@ -124,28 +118,6 @@
 			}
 		}
 
-		.particles-container {
-			width: 100%;
-			height: 100%;
-			position: fixed;
-			top: 0;
-			left: 0;
-			pointer-events: none;
-			overflow: hidden;
-		}
-
-		#particles-js {
-			filter: blur(0px);
-		}
-
-		#particles-js-2 {
-			filter: blur(3px);
-		}
-
-		#particles-js-3 {
-			filter: blur(7px);
-		}
-
 		@font-face {
 			font-family: 'Cirline Rounded';
 			src: url('thearticular/wp-content/uploads/Cirline Rounded.ttf') format('truetype');
@@ -163,10 +135,59 @@
 				-4px -4px 6px rgb(0, 0, 0);
 
 		}
+
+		:root {
+			--bg-image: url('thearticular/wp-content/uploads/bgbgbg.jpg');
+		}
+
+		#bgcontainer {
+			width: 100vw;
+			height: 100vh;
+			overflow: hidden;
+			background-color: black;
+		}
+
+		canvas {
+			width: 100cqw;
+			height: 100cqh;
+			background: var(--bg-image);
+			background-size: 100cqw;
+			filter: url('#swirl');
+			animation: bannermove 60s linear infinite;
+			background-repeat: repeat;
+		}
+
+		@keyframes bannermove {
+			0% {
+				background-position: 0 0;
+			}
+
+			100% {
+				background-position: 100cqw 100cqw;
+			}
+		}
 	</style>
 </head>
 
 <body class="singular">
+	<div id="bgcontainer">
+		<canvas></canvas>
+	</div>
+	<svg>
+		<filter id="swirl">
+			<feTurbulence baseFrequency="0.01"
+				numOctaves="5"
+				result="wrap"
+				type="fractalNoise"></feTurbulence>
+			<feDisplacementMap id="liquid"
+				class="liquid"
+				in="SourceGraphic"
+				in2="wrap"
+				scale="300"
+				xChannelSelector="R"
+				yChannelSelector="B"></feDisplacementMap>
+		</filter>
+	</svg>
 	<div class="pageborder">
 		<div class="pageborder2">
 			<main class="site-main">
@@ -179,9 +200,7 @@
 						</div>
 						<div class="wp-block-buttons is-layout-flex">
 							<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline">
-								<a id="homepageButton"
-									class="wp-block-button__link has-background"
-									onclick="changeText()">Homepage</a>
+								<a class="wp-block-button__link has-background">This is the homepage</a>
 							</div>
 							<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline">
 								<a class="otherButton wp-block-button__link has-background"
@@ -252,102 +271,13 @@
 				</article>
 			</main>
 		</div>
-		<div id="particles-js"
-			class="particles-container"></div>
-		<div id="particles-js-2"
-			class="particles-container"></div>
-		<div id="particles-js-3"
-			class="particles-container"></div>
 	</div>
-	<script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "thearticular",
-            "url": "https://thearticular.github.io",
-            "description": "thearticular",
-            "publisher": {
-                "@type": "thearticular",
-                "name": "thearticular",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://thearticular.github.io/thearticular/wp-content/uploads/logo.png"
-                }
-            }
-        }
-    </script>
-	<script>
-		document.addEventListener('contextmenu', function (e)
-		{
-			e.preventDefault();
-		});
-		function changeText()
-		{
-			var button = document.getElementById('homepageButton');
-			var originalText = button.innerText;
-			button.innerText = 'This is the Homepage!';
-			setTimeout(function ()
-			{
-				button.innerText = originalText;
-			}, 1000);
-		}
-		function createParticles(containerId, particleSize, moveSpeed, directing, shaper, flickerspeed)
-		{
-			const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-			const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-			particlesJS(containerId, {
-				"particles": {
-					"number": {
-						"value": 0.02,
-						"density": {
-							"enable": true,
-							"value_area": 1
-						}
-					},
-					"color": {
-						"value": ["#f7da02", "#ff0000", "#ff6f00", "#ffc2c2", "#ffefad", "#520008", "#2b0004"]
-					},
-					"opacity": {
-						"value": 1,
-						"random": true,
-						"anim": {
-							"enable": true,
-							"speed": flickerspeed,
-							"opacity_min": 0,
-							"sync": false
-						}
-					},
-					"shape": {
-						"type": shaper
-					},
-					"size": {
-						"value": particleSize,
-					},
-					"line_linked": {
-						"enable": false
-					},
-					"move": {
-						"enable": true,
-						"speed": moveSpeed,
-						"direction": directing,
-						"out_mode": "out",
-						"straight": false,
-						"random": true
-					}
-				},
-				"interactivity": {
-					"events": {
-						"onhover": {
-							"enable": false
-						}
-					}
-				}
-			});
-		}
-		createParticles("particles-js", 1, 4, "top", "circle", 100);
-		createParticles("particles-js-2", 3, 2, "top", "circle", 20);
-		createParticles("particles-js-3", 10, 0.5, "bottom", "triangle", 1);
-	</script>
 </body>
+<script>
+	document.addEventListener('contextmenu', function (e)
+	{
+		e.preventDefault();
+	});
+</script>
 
 </html>
