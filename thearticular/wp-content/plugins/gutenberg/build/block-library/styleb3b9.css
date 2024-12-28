@@ -52,7 +52,7 @@
 }
 
 :where(.wp-block-button__link) {
-    border-radius: 9999px;
+    border-radius: 100px;
     box-shadow: none;
     padding: calc(.667em + 2px) calc(1.333em + 2px);
     text-decoration: none
@@ -105,7 +105,7 @@
 
 .wp-block-button.is-style-squared,
 .wp-block-button__link.wp-block-button.is-style-squared {
-    border-radius: 0
+    border-radius: 100px
 }
 
 .wp-block-button.no-border-radius,
@@ -4680,4 +4680,11 @@ html :where(.is-position-sticky) {
     z-index: 1;
     background-color: black !important;
     filter: brightness(3);
+    border-radius: 100px !important;
+}
+
+.otherButton
+{
+    background-image: none;
+    background-color: #00000000 !important;
 }
