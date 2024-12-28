@@ -129,7 +129,7 @@
 			background-size: cover;
 			background: var(--bg-image);
 			filter: url('#swirl');
-			animation: bannermove 60s linear infinite;
+			animation: bannermove 200s linear infinite;
 		}
 
 		@keyframes bannermove {
@@ -150,15 +150,15 @@
 	</div>
 	<svg>
 		<filter id="swirl">
-			<feTurbulence baseFrequency="0.005"
-				numOctaves="5"
+			<feTurbulence baseFrequency="0.04"
+				numOctaves="1"
 				result="wrap"
 				type="fractalNoise"></feTurbulence>
 			<feDisplacementMap id="liquid"
 				class="liquid"
 				in="SourceGraphic"
 				in2="wrap"
-				scale="200"
+				scale="100"
 				xChannelSelector="R"
 				yChannelSelector="B"></feDisplacementMap>
 		</filter>
