@@ -41,10 +41,13 @@
 	<style>
 		body {
 			--wp--preset--spacing--30: 0.67rem;
-			color: white;
-			position: absolute;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
 			width: 100%;
 			height: 100%;
+			position: fixed;
+			background-color: black;
 		}
 
 		.entry-title {
@@ -90,32 +93,11 @@
 			width: 400px;
 			height: auto;
 			margin-bottom: -30px;
+			margin-top: 20px;
 		}
 
 		.logo {
 			position: relative;
-			animation: pulse 8s infinite linear alternate;
-		}
-
-		@keyframes pulse {
-			0% {
-				opacity: 0.9;
-				filter: brightness(200%) saturate(150%) contrast(150%) blur(2px) hue-rotate(360deg);
-				transform: translateX(0px) scale(0.98);
-			}
-
-			45%,
-			65% {
-				opacity: 1;
-				filter: brightness(100%) saturate(100%) contrast(100%) blur(0px) hue-rotate(0deg);
-				transform: translateX(0px) scale(1);
-			}
-
-			100% {
-				opacity: 0.9;
-				filter: brightness(200%) saturate(150%) contrast(150%) blur(2px) hue-rotate(360deg);
-				transform: translateX(0px) scale(0.98);
-			}
 		}
 
 		@font-face {
@@ -140,21 +122,14 @@
 			--bg-image: url('thearticular/wp-content/uploads/bgbgbg.jpg');
 		}
 
-		#bgcontainer {
+		canvas {
 			width: 100vw;
 			height: 100vh;
-			overflow: hidden;
-			background-color: black;
-		}
-
-		canvas {
-			width: 100cqw;
-			height: 100cqh;
+			background-repeat: repeat;
+			background-size: cover;
 			background: var(--bg-image);
-			background-size: 100cqw;
 			filter: url('#swirl');
 			animation: bannermove 60s linear infinite;
-			background-repeat: repeat;
 		}
 
 		@keyframes bannermove {
@@ -163,7 +138,7 @@
 			}
 
 			100% {
-				background-position: 100cqw 100cqw;
+				background-position: 0 -100vh;
 			}
 		}
 	</style>
@@ -175,7 +150,7 @@
 	</div>
 	<svg>
 		<filter id="swirl">
-			<feTurbulence baseFrequency="0.01"
+			<feTurbulence baseFrequency="0.005"
 				numOctaves="5"
 				result="wrap"
 				type="fractalNoise"></feTurbulence>
@@ -183,7 +158,7 @@
 				class="liquid"
 				in="SourceGraphic"
 				in2="wrap"
-				scale="300"
+				scale="200"
 				xChannelSelector="R"
 				yChannelSelector="B"></feDisplacementMap>
 		</filter>
