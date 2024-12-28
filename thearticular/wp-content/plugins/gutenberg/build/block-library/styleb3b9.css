@@ -4686,5 +4686,5 @@ html :where(.is-position-sticky) {
 .otherButton
 {
     background-image: none;
-    background-color: #00000000 !important;
+    background-color: #00000079 !important;
 }
