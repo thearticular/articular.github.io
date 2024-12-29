@@ -69,10 +69,10 @@
 
 		.pageborder {
 			position: fixed;
-			top: -25px;
-			right: -25px;
-			bottom: -25px;
-			left: -25px;
+			top: -30px;
+			right: -30px;
+			bottom: -30px;
+			left: -30px;
 			border: 40px solid rgb(0, 0, 0);
 			border-radius: 50px;
 			transform: translate(0%, 0%);
@@ -92,7 +92,7 @@
 		img {
 			width: 400px;
 			height: auto;
-			margin-bottom: -30px;
+			margin-bottom: -10px;
 			margin-top: 20px;
 		}
 
@@ -107,19 +107,21 @@
 
 		.homepage-heading {
 			font-family: 'Cirline Rounded', sans-serif;
-			font-size: 80px;
+			font-size: 30px;
 			text-align: center;
 			color: #ffffffd1;
-			letter-spacing: 5px;
+			letter-spacing: 10px;
 			line-height: 0.9;
 			text-shadow:
-				4px 4px 6px rgb(0, 0, 0),
-				-4px -4px 6px rgb(0, 0, 0);
+				-1px -1px 0 #000,
+				1px -1px 0 #000,
+				-1px 1px 0 #000,
+				1px 1px 0 #000;
 
 		}
 
 		:root {
-			--bg-image: url('thearticular/wp-content/uploads/bgbgbg.jpg');
+			--bg-image: url('thearticular/wp-content/uploads/bgbgbg.png');
 		}
 
 		canvas {
@@ -128,7 +130,7 @@
 			background-repeat: repeat;
 			background-size: cover;
 			background: var(--bg-image);
-			filter: url('#swirl');
+			filter: url('#swirl') brightness(1);
 			animation: bannermove 200s linear infinite;
 		}
 
@@ -141,16 +143,26 @@
 				background-position: 0 -100vh;
 			}
 		}
+
+		.intro {
+			font-size: 12px;
+			text-align: center;
+			color: white;
+			font-weight: bolder;
+			text-shadow:
+				-1px -1px 0 #000,
+				1px -1px 0 #000,
+				-1px 1px 0 #000,
+				1px 1px 0 #000;
+		}
 	</style>
 </head>
 
 <body class="singular">
-	<div id="bgcontainer">
-		<canvas></canvas>
-	</div>
+	<canvas></canvas>
 	<svg>
 		<filter id="swirl">
-			<feTurbulence baseFrequency="0.04"
+			<feTurbulence baseFrequency="0.07"
 				numOctaves="1"
 				result="wrap"
 				type="fractalNoise"></feTurbulence>
@@ -158,7 +170,7 @@
 				class="liquid"
 				in="SourceGraphic"
 				in2="wrap"
-				scale="100"
+				scale="30"
 				xChannelSelector="R"
 				yChannelSelector="B"></feDisplacementMap>
 		</filter>
@@ -172,6 +184,9 @@
 							<img src="thearticular/wp-content/uploads/wblg.png" />
 						</figure>
 						<div class="homepage-heading">The Articular
+						</div>
+						<div class="intro">Hi there!<br>I am Romit Singh, the owner, creator, developer,
+							artist, and author of this site.<br>Thank you for visiting!
 						</div>
 						<div class="wp-block-buttons is-layout-flex">
 							<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline">

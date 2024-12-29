@@ -4678,7 +4678,7 @@ html :where(.is-position-sticky) {
     text-decoration: none;
     position: relative;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.763) !important;
+    background-color: rgba(0, 0, 0, 0.449) !important;
     filter: brightness(3);
     border-radius: 100px !important;
 }
@@ -4686,5 +4686,5 @@ html :where(.is-position-sticky) {
 .otherButton
 {
     background-image: none;
-    background-color: #000000bb !important;
+    background-color: #00000077 !important;
 }
