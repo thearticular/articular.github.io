@@ -165,6 +165,12 @@
                     <button id="playAll">Play All</button>
                     <button id="stopBtn">Stop</button>
                 </div>
+                <div class="controls">
+                    <button id="loopBtn">Loop</button>
+                    <button id="flatBtn">Flat</button>
+                    <button id="bassBtn">Bass</button>
+                    <button id="trebleBtn">Treble</button>
+                </div>
                 <div id="custom-seekbar">
                     <span></span>
                     <div id="timeDisplay">
@@ -262,6 +268,10 @@
         const pauseBtn = document.getElementById('pauseBtn');
         const stopBtn = document.getElementById('stopBtn');
         const playAll = document.getElementById('playAll');
+        const loopBtn = document.getElementById('loopBtn');
+        const flatBtn = document.getElementById('flatBtn');
+        const bassBtn = document.getElementById('bassBtn');
+        const trebleBtn = document.getElementById('trebleBtn');
         const seekbar = document.getElementById('custom-seekbar');
         const seekbarSpan = seekbar.querySelector('span');
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -269,6 +279,7 @@
         const canvas = document.getElementById("backgroundCanvas");
         const ctx = canvas.getContext("2d");
         let playAllActive = false;
+        let loopActive = false;
         const rawVideoNames = [
             "Sankhya",
             "Nasadiya Sukta",
@@ -338,6 +349,7 @@
             videos[currentIndex].currentTime = 0;
             resetAllVideos();
             playAllActive = false;
+            loopActive = false;
             const video = videos[0];
             video.style.display = 'block';
             video.load();
@@ -382,6 +394,22 @@
                     {
                         playVideo(0);
                     }
+                }
+            });
+        });
+        loopBtn.addEventListener('click', () =>
+        {
+            loopActive = true
+            playAllActive = false;
+            playVideo(currentIndex);
+        });
+        videos.forEach((video, index) =>
+        {
+            video.addEventListener('ended', () =>
+            {
+                if (loopActive)
+                {
+                    playVideo(currentIndex);
                 }
             });
         });
