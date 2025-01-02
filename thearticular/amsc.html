@@ -161,15 +161,16 @@
                     <button id="nextBtn">Next</button>
                 </div>
                 <div class="controls">
+                    <button id="loopBtn">Loop</button>
                     <button id="pauseBtn">Pause</button>
                     <button id="playAll">Play All</button>
                     <button id="stopBtn">Stop</button>
                 </div>
                 <div class="controls">
-                    <button id="loopBtn">Loop</button>
                     <button id="flatBtn">Flat</button>
                     <button id="bassBtn">Bass</button>
                     <button id="trebleBtn">Treble</button>
+                    <button id="panningBtn">Binuaral</button>
                 </div>
                 <div id="custom-seekbar">
                     <span></span>
@@ -272,6 +273,7 @@
         const flatBtn = document.getElementById('flatBtn');
         const bassBtn = document.getElementById('bassBtn');
         const trebleBtn = document.getElementById('trebleBtn');
+        const panningBtn = document.getElementById('panningBtn');
         const seekbar = document.getElementById('custom-seekbar');
         const seekbarSpan = seekbar.querySelector('span');
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -286,26 +288,15 @@
         let trebleActive = false;
         let bassGain = 0;
         let trebleGain = 0;
+        let panningActive = false;
+        let panValue = 0;
+        let panDirection = 1;
+        let lastTimestamp = 0;
+        let panDurationInFrames = 100;
         const rawVideoNames = [
             "Sankhya",
             "Nasadiya Sukta",
-            "Yudhishthir",
-            "Brought To You By",
-            "Rifle",
-            "Carved",
-            "Apart",
-            "Potential Difference",
-            "Cracks",
-            "Sands",
-            "Drift",
-            "Vile",
-            "Rivers Of Least Resistance",
-            "Falling",
-            "Opposite Poles",
-            "Krishna",
-            "Rain Down",
-            "Ruins",
-            "Kurukshetra"
+            "Yudhishthir"
         ];
         const videoNames = rawVideoNames.map((name, index) => `${ index + 1 }/${ rawVideoNames.length } : ${ name }`);
         let currentIndex = 0;
@@ -464,6 +455,13 @@
         {
             var mediaElement = video;
             const source = audioContext.createMediaElementSource(video);
+            const panner = audioContext.createPanner();
+            panner.panningModel = 'HRTF';
+            panner.distanceModel = 'linear';
+            panner.refDistance = 1;
+            source.connect(panner);
+            panner.connect(analyser);
+            analyser.connect(audioContext.destination);
             var gainDb = -40.0;
             var bandSplit = [360, 3600];
             var hBand = audioContext.createBiquadFilter();
@@ -502,9 +500,7 @@
                 mGain: mGain,
                 hGain: hGain
             };
-            source.connect(analyser);
-            analyser.connect(audioContext.destination);
-            analyser.fftSize = 32;
+            mediaElement.audioNodes.panner = panner;
         }
         function updateAmplitude()
         {
@@ -590,6 +586,8 @@
             flatActive = true;
             bassActive = false;
             trebleActive = false;
+            panningActive = false;
+            stopPanning();
             equalize();
         });
         bassBtn.addEventListener('click', () =>
@@ -619,7 +617,6 @@
             }
             if (bassActive)
             {
-                trebleGain = 0;
                 bassGain = bassGain + 1.5;
                 mediaElement.audioNodes.lGain.gain.value = bassGain;
                 mediaElement.audioNodes.mGain.gain.value = 1.0;
@@ -627,11 +624,64 @@
             }
             if (trebleActive)
             {
-                bassGain = 0;
                 trebleGain = trebleGain + 1.5;
                 mediaElement.audioNodes.lGain.gain.value = 1.0;
                 mediaElement.audioNodes.mGain.gain.value = 1.0;
                 mediaElement.audioNodes.hGain.gain.value = trebleGain;
+            }
+        }
+        panningBtn.addEventListener('click', () =>
+        {
+            panningActive = true;
+            if (panningActive)
+            {
+                panDurationInFrames = panDurationInFrames - 10;
+                if (panDurationInFrames < 10)
+                {
+                    panDurationInFrames = 10
+                }
+                panAudio();
+            }
+        });
+        function panAudio()
+        {
+            const video = videos[currentIndex];
+            const panner = video.audioNodes.panner;
+            if (!panner) return;
+            let startTime = audioContext.currentTime;
+            let endPanValue = panDirection === 1 ? 1 : -1;
+            let panStep = (endPanValue - panValue) / panDurationInFrames;
+            function smoothPan(timestamp)
+            {
+                if (panningActive)
+                {
+                    let elapsedTime = timestamp - lastTimestamp;
+                    panValue += panStep;
+                    panner.positionX.setValueAtTime(panValue, audioContext.currentTime);
+                    if ((panDirection === 1 && panValue < 1) || (panDirection === -1 && panValue > -1))
+                    {
+                        lastTimestamp = timestamp;
+                        requestAnimationFrame(smoothPan);
+                    }
+                    else
+                    {
+                        panDirection = panDirection === 1 ? -1 : 1;
+                        panValue = panDirection === 1 ? -1 : 1;
+                        lastTimestamp = timestamp;
+                        panAudio();
+                    }
+                }
+            }
+            lastTimestamp = performance.now();
+            requestAnimationFrame(smoothPan);
+        }
+        function stopPanning()
+        {
+            const video = videos[currentIndex];
+            const panner = video.audioNodes.panner;
+            if (panner)
+            {
+                panner.positionX.setValueAtTime(0, audioContext.currentTime);
             }
         }
     </script>
