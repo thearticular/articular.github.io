@@ -180,6 +180,21 @@
                     <div id="loadingText">Loading Page...</div>
                 </div>
                 <video class="video">
+                    <source src="wp-content/uploads/aaroha.mp4">
+                </video>
+                <video class="video">
+                    <source src="wp-content/uploads/yuyut.mp4">
+                </video>
+                <video class="video">
+                    <source src="wp-content/uploads/abhim.mp4">
+                </video>
+                <video class="video">
+                    <source src="wp-content/uploads/ayas.mp4">
+                </video>
+                <video class="video">
+                    <source src="wp-content/uploads/avsh.mp4">
+                </video>
+                <video class="video">
                     <source src="wp-content/uploads/sankh.mp4">
                 </video>
                 <video class="video">
@@ -275,6 +290,11 @@
         let lastTimestamp = 0;
         let panDurationInFrames = 100;
         const rawVideoNames = [
+            "Aarohanam",
+            "Yuyutsō",
+            "Abhimanyu",
+            "Ayaskantiya",
+            "Avshishyate",
             "Sankhya",
             "Nasadiya Sukta",
             "Yudhishthir",
@@ -572,6 +592,33 @@
                 audioContext.resume();
             }
         });
+        const loadingMessages = [
+            "Loading Page...",
+            "Please Wait...",
+            "Still Loading...",
+            "Internet Little Slow...",
+            "Lots Of Songs Are Loading...",
+            "Its Time Now...",
+            "Oh My God...",
+            "Hmmm...",
+            "Wow...",
+            "It Will Load...",
+            "It Should Load",
+            "It Would Load",
+            "It Could",
+            "Might"
+        ];
+        let currentMessageIndex = 0;
+        function updateLoadingText()
+        {
+            document.getElementById('loadingText').textContent = loadingMessages[currentMessageIndex];
+            currentMessageIndex++;
+            if (currentMessageIndex >= loadingMessages.length)
+            {
+                currentMessageIndex = 0;
+            }
+        }
+        setInterval(updateLoadingText, 2000);
         window.onload = function ()
         {
             animate();
