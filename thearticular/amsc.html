@@ -179,76 +179,100 @@
                     </div>
                     <div id="loadingText">Loading Page...</div>
                 </div>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/aaroha.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/yuyut.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/abhim.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/ayas.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/avsh.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/sankh.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/nasd.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/yudh.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/brou.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/rifl.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/carv.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/apart.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/poten.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/crack.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/sands.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/drift.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/vile.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/river.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/falling.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/opposing.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/krishna.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/rain.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/ruins.mp4">
                 </video>
-                <video class="video">
+                <video class="video"
+                    preload="none">
                     <source src="wp-content/uploads/krwa.mp4">
                 </video>
             </div>
@@ -330,8 +354,23 @@
         {
             resetAllVideos();
             const video = videos[index];
-            video.style.display = 'block';
+            document.getElementById('timeDisplay').style.display = 'none';
+            document.getElementById('loadingText').style.display = 'block';
+            videos.forEach((v, i) => (v.style.display = i === index ? 'block' : 'none'));
             video.load();
+            const checkVideoReady = setInterval(() =>
+            {
+                if (
+                    video.readyState >= 4 &&
+                    video.buffered.length > 0 &&
+                    video.offsetParent !== null
+                )
+                {
+                    clearInterval(checkVideoReady);
+                    document.getElementById('loadingText').style.display = 'none';
+                    document.getElementById('timeDisplay').style.display = 'block';
+                }
+            }, 1000);
             video.play();
             currentIndex = index;
             videoSelector.value = currentIndex;
@@ -410,6 +449,10 @@
                         playVideo(0);
                     }
                 }
+                if (loopActive)
+                {
+                    playVideo(currentIndex);
+                }
             });
         });
         loopBtn.addEventListener('click', () =>
@@ -417,16 +460,6 @@
             loopActive = true
             playAllActive = false;
             playVideo(currentIndex);
-        });
-        videos.forEach((video, index) =>
-        {
-            video.addEventListener('ended', () =>
-            {
-                if (loopActive)
-                {
-                    playVideo(currentIndex);
-                }
-            });
         });
         updateVideoSelector();
         playVideo(currentIndex);
@@ -543,8 +576,8 @@
                 const radius = baseRadius * (i + 1) + amplitude / 1;
                 ctx.beginPath();
                 ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(255, 255, 255, ${ (1 - i / numCircles) * 0.4 })`;
-                ctx.lineWidth = 2;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${ (1 - i / numCircles) * 0.2 })`;
+                ctx.lineWidth = 1;
                 ctx.stroke();
                 const triangleRadius = baseRadius * (i + 1) + amplitude / 2;
                 ctx.beginPath();
@@ -563,7 +596,7 @@
                     }
                 }
                 ctx.closePath();
-                ctx.strokeStyle = `rgba(255, 255, 255, ${ (1 - i / numCircles) * 0.4 })`;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${ (1 - i / numCircles) * 0.2 })`;
                 ctx.lineWidth = 2;
                 ctx.stroke();
             }
@@ -592,38 +625,9 @@
                 audioContext.resume();
             }
         });
-        const loadingMessages = [
-            "Loading Page...",
-            "Please Wait...",
-            "Still Loading...",
-            "Internet Little Slow...",
-            "Lots Of Songs Are Loading...",
-            "Its Time Now...",
-            "Oh My God...",
-            "Hmmm...",
-            "Wow...",
-            "It Will Load...",
-            "It Should Load",
-            "It Would Load",
-            "It Could",
-            "Might"
-        ];
-        let currentMessageIndex = 0;
-        function updateLoadingText()
-        {
-            document.getElementById('loadingText').textContent = loadingMessages[currentMessageIndex];
-            currentMessageIndex++;
-            if (currentMessageIndex >= loadingMessages.length)
-            {
-                currentMessageIndex = 0;
-            }
-        }
-        setInterval(updateLoadingText, 2000);
         window.onload = function ()
         {
             animate();
-            document.getElementById('loadingText').style.display = 'none';
-            document.getElementById('timeDisplay').style.display = 'block';
         };
         flatBtn.addEventListener('click', () =>
         {
