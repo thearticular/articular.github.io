@@ -538,7 +538,7 @@
             for (let i = 0; i < numCircles; i++)
             {
                 const radius = baseRadius * (i + 1) + amplitude / 1;
-                const opacity = (1 - i / numCircles) * 0.1;
+                const opacity = (1 - i / numCircles) * 0.2;
                 ctx.beginPath();
                 ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
                 ctx.strokeStyle = `rgba(255, 255, 255, ${ opacity })`;
