@@ -316,7 +316,7 @@
         const analyser = audioContext.createAnalyser();
         const canvas = document.getElementById("backgroundCanvas");
         const ctx = canvas.getContext("2d");
-        let currentAudioSource;
+        let source;
         let playAllActive = false;
         let loopActive = false;
         let flatActive = false;
@@ -372,8 +372,19 @@
             const video = videos[index];
             document.getElementById('timeDisplay').style.display = 'none';
             document.getElementById('loadingText').style.display = 'block';
-            videos.forEach((v, i) => (v.style.display = i === index ? 'block' : 'none'));
-            video.load();
+            videos.forEach((video, i) =>
+            {
+                if (i === index)
+                {
+                    video.style.display = 'block';
+                    video.load();
+                } else
+                {
+                    video.style.display = 'none';
+                    video.removeAttribute('src');
+                    video.load();
+                }
+            });
             const checkVideoReady = setInterval(() =>
             {
                 if (
@@ -519,8 +530,10 @@
         const audioElements = document.querySelectorAll('video');
         function setupAudioSource(video)
         {
+            source.disconnect();
+            source = null;
             var mediaElement = video;
-            const source = audioContext.createMediaElementSource(video);
+            source = audioContext.createMediaElementSource(video);
             const panner = audioContext.createPanner();
             panner.panningModel = 'HRTF';
             panner.distanceModel = 'linear';
