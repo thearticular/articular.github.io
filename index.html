@@ -5,9 +5,9 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="copyright"
-		content="thearticular.github.io © 2025 is licensed under CC BY-NC-ND 4.0. All rights reserved.">
+		content="thearticular.github.io © 2025 and all its content are licensed under CC BY-NC-ND 4.0. All rights reserved.">
 	<meta name="license"
-		content="thearticular.github.io © 2025 is licensed under CC BY-NC-ND 4.0. All rights reserved.">
+		content="thearticular.github.io © 2025 and all its content are licensed under CC BY-NC-ND 4.0. All rights reserved.">
 	<link rel="icon"
 		href="thearticular/wp-content/uploads/favicon.ico"
 		type="image/x-icon">
@@ -109,21 +109,6 @@
 			src: url('thearticular/wp-content/uploads/Cirline Rounded.ttf') format('truetype');
 		}
 
-		.homepage-heading {
-			font-family: 'Cirline Rounded', sans-serif;
-			font-size: 30px;
-			text-align: center;
-			color: #ffffffd1;
-			letter-spacing: 10px;
-			line-height: 0.9;
-			text-shadow:
-				-1px -1px 0 #000,
-				1px -1px 0 #000,
-				-1px 1px 0 #000,
-				1px 1px 0 #000;
-
-		}
-
 		:root {
 			--bg-image: url('thearticular/wp-content/uploads/bgbgbg.png');
 		}
@@ -149,15 +134,60 @@
 		}
 
 		.intro {
-			font-size: 12px;
+			font-size: 10px;
 			text-align: center;
 			color: white;
-			font-weight: bolder;
 			text-shadow:
 				-1px -1px 0 #000,
 				1px -1px 0 #000,
 				-1px 1px 0 #000,
 				1px 1px 0 #000;
+		}
+
+		footer {
+			color: white;
+			font-size: 10px;
+			text-align: center;
+			width: 100%;
+			margin: 0 auto;
+			text-shadow:
+				-1px -1px 0 #000,
+				1px -1px 0 #000,
+				-1px 1px 0 #000,
+				1px 1px 0 #000;
+		}
+
+		.title-with-lines {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: relative;
+			text-align: center;
+		}
+
+		.title-with-lines h1 {
+			font-family: 'Cirline Rounded', sans-serif;
+			letter-spacing: 8px;
+			font-size: 2.5rem;
+			color: #ffffff;
+			text-shadow:
+				-1px -1px 0 #000,
+				1px -1px 0 #000,
+				-1px 1px 0 #000,
+				1px 1px 0 #000;
+		}
+
+		.title-with-lines::before,
+		.title-with-lines::after {
+			content: "";
+			display: block;
+			width: 100%;
+			height: 2px;
+			background-color: rgb(255, 255, 255);
+		}
+
+		.title-with-lines::before {
+			order: -1;
 		}
 	</style>
 </head>
@@ -184,11 +214,15 @@
 			<main class="site-main">
 				<article class="hentry">
 					<div class="entry-content">
+						<div class="title-with-lines">
+							<h1>THE ARTICULAR</h1>
+							<footer>
+								thearticular.github.io © 2025 and all its content are licensed under CC BY-NC-ND 4.0.
+							</footer>
+						</div>
 						<figure class="aligncenter logo">
 							<img src="thearticular/wp-content/uploads/wblg.png" />
 						</figure>
-						<div class="homepage-heading">The Articular
-						</div>
 						<div class="intro">Hi there!<br>I am Romit Singh, the sole owner, creator, developer,
 							artist, and author of this site.<br>Thank you for visiting 😊!
 						</div>
@@ -239,7 +273,7 @@
 							</div>
 							<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline">
 								<a class="otherButton wp-block-button__link has-background"
-									href="thearticular/musc.html">Music</a>
+									href="thearticular/musc.html">FL Studio</a>
 							</div>
 							<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-outline">
 								<a class="otherButton wp-block-button__link has-background"
@@ -261,14 +295,6 @@
 									href="thearticular/amsc.html">Synthetic
 									Music</a>
 							</div>
-							<footer style="color: white; font-size: 12px; text-align: center; width: 100%; margin: 0 auto; font-weight: bolder;
-							text-shadow:
-								-1px -1px 0 #000,
-								1px -1px 0 #000,
-								-1px 1px 0 #000,
-								1px 1px 0 #000;">
-								thearticular.github.io © 2025 is licensed under CC BY-NC-ND 4.0. All rights reserved.
-							</footer>							
 						</div>
 				</article>
 			</main>

@@ -136,6 +136,19 @@
             height: 100%;
             z-index: -10;
         }
+
+		footer {
+			color: white;
+			font-size: 10px;
+			text-align: center;
+			width: 100%;
+			margin: 0 auto;
+			text-shadow:
+				-1px -1px 0 #000,
+				1px -1px 0 #000,
+				-1px 1px 0 #000,
+				1px 1px 0 #000;
+		}
     </style>
 </head>
 
@@ -144,7 +157,11 @@
     <main class="site-main">
         <article class="hentry entry">
             <header class="entry-header responsive-max-width">
-                <h1 class="entry-title">Synthetic Music</h1>
+                <h1 class="entry-title">Synthetic Music
+                    <footer>
+                        thearticular.github.io © 2025 and all its content are licensed under CC BY-NC-ND 4.0.
+                    </footer>
+                </h1>
             </header>
             <div class="entry-content">
                 <div class="wp-block-buttons">
@@ -185,7 +202,7 @@
                     <div id="timeDisplay">
                         <div id="currentTime">00:00</div>/<div id="totalTime">00:00</div>
                     </div>
-                    <div id="loadingText">Loading Page...</div>
+                    <div id="loadingText">Loading Please Wait...</div>
                 </div>
                 <video class="video"
                     preload="none">
@@ -285,14 +302,6 @@
                 </video>
             </div>
         </article>
-        <footer style="color: white; font-size: 12px; text-align: center; width: 100%; margin: 0 auto;
-        text-shadow:
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px 1px 0 #000,
-            1px 1px 0 #000;">
-            thearticular.github.io © 2025 is licensed under CC BY-NC-ND 4.0. All rights reserved.
-        </footer>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script>
