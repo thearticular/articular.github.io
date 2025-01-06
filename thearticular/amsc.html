@@ -538,7 +538,7 @@
             for (let i = 0; i < numCircles; i++)
             {
                 const radius = baseRadius * (i + 1) + amplitude / 1;
-                const opacity = (1 - i / numCircles) * 0.2;
+                const opacity = (1 - i / numCircles) * 0.3;
                 ctx.beginPath();
                 ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
                 ctx.strokeStyle = `rgba(255, 255, 255, ${ opacity })`;
@@ -747,6 +747,13 @@
                 panner.positionX.setValueAtTime(0, audioContext.currentTime);
             }
         }
+        document.addEventListener('click', () =>
+        {
+            if (audioContext.state === 'suspended')
+            {
+                audioContext.resume();
+            }
+        });
         videos.forEach((video, index) =>
         {
             video.addEventListener('ended', () =>
@@ -770,12 +777,27 @@
         });
         stopBtn.addEventListener('click', () =>
         {
+            document.getElementById('timeDisplay').style.display = 'none';
+            document.getElementById('loadingText').style.display = 'block';
             videos[currentIndex].pause();
             videos[currentIndex].currentTime = 0;
             resetAllVideos();
             playAllActive = false;
             loopActive = false;
             const video = videos[0];
+            const checkVideoReady = setInterval(() =>
+            {
+                if (
+                    video.readyState >= 4 &&
+                    video.buffered.length > 0 &&
+                    video.offsetParent !== null
+                )
+                {
+                    clearInterval(checkVideoReady);
+                    document.getElementById('loadingText').style.display = 'none';
+                    document.getElementById('timeDisplay').style.display = 'block';
+                }
+            }, 1000);
             video.style.display = 'block';
             video.load();
             currentIndex = 0;
