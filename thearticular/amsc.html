@@ -539,7 +539,6 @@
         const audioElements = document.querySelectorAll('video');
         function setupAudioSource(video)
         {
-            source.disconnect();
             source = null;
             var mediaElement = video;
             source = audioContext.createMediaElementSource(video);
