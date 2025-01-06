@@ -137,18 +137,18 @@
             z-index: -10;
         }
 
-		footer {
-			color: white;
-			font-size: 10px;
-			text-align: center;
-			width: 100%;
-			margin: 0 auto;
-			text-shadow:
-				-1px -1px 0 #000,
-				1px -1px 0 #000,
-				-1px 1px 0 #000,
-				1px 1px 0 #000;
-		}
+        footer {
+            color: white;
+            font-size: 10px;
+            text-align: center;
+            width: 100%;
+            margin: 0 auto;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
     </style>
 </head>
 
@@ -324,7 +324,11 @@
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const analyser = audioContext.createAnalyser();
         const canvas = document.getElementById("backgroundCanvas");
+        const audioElements = document.querySelectorAll('video');
         const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let currentIndex = 0;
         let source;
         let playAllActive = false;
         let loopActive = false;
@@ -365,7 +369,6 @@
             "Kurukshetra"
         ];
         const videoNames = rawVideoNames.map((name, index) => `${ index + 1 }/${ rawVideoNames.length } : ${ name }`);
-        let currentIndex = 0;
         function resetAllVideos()
         {
             videos.forEach((video) =>
@@ -425,80 +428,6 @@
                 videoSelector.appendChild(option);
             });
         }
-        playBtn.addEventListener('click', () =>
-        {
-            videos[currentIndex].play();
-        });
-        pauseBtn.addEventListener('click', () =>
-        {
-            videos[currentIndex].pause();
-        });
-        stopBtn.addEventListener('click', () =>
-        {
-            videos[currentIndex].pause();
-            videos[currentIndex].currentTime = 0;
-            resetAllVideos();
-            playAllActive = false;
-            loopActive = false;
-            const video = videos[0];
-            video.style.display = 'block';
-            video.load();
-            currentIndex = 0;
-            videoSelector.value = currentIndex;
-        });
-        videoSelector.addEventListener('change', () =>
-        {
-            const index = parseInt(videoSelector.value, 10);
-            playVideo(index);
-        });
-        prevBtn.addEventListener('click', () =>
-        {
-            if (currentIndex > 0)
-            {
-                playVideo(currentIndex - 1);
-            }
-        });
-        nextBtn.addEventListener('click', () =>
-        {
-            if (currentIndex < videos.length - 1)
-            {
-                playVideo(currentIndex + 1);
-            }
-        });
-        playAll.addEventListener('click', () =>
-        {
-            playAllActive = true;
-            playVideo(currentIndex);
-        });
-        videos.forEach((video, index) =>
-        {
-            video.addEventListener('ended', () =>
-            {
-                if (playAllActive)
-                {
-                    if (currentIndex < videos.length - 1)
-                    {
-                        playVideo(currentIndex + 1);
-                    }
-                    else
-                    {
-                        playVideo(0);
-                    }
-                }
-                if (loopActive)
-                {
-                    playVideo(currentIndex);
-                }
-            });
-        });
-        loopBtn.addEventListener('click', () =>
-        {
-            loopActive = true
-            playAllActive = false;
-            playVideo(currentIndex);
-        });
-        updateVideoSelector();
-        playVideo(currentIndex);
         function updateSeekbar()
         {
             const vid = videos[currentIndex];
@@ -534,9 +463,6 @@
                 $(seekbarSpan).css("width", percentage * 100 + "%");
             });
         }
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const audioElements = document.querySelectorAll('video');
         function setupAudioSource(video)
         {
             source = null;
@@ -643,52 +569,6 @@
             updateAmplitude();
             requestAnimationFrame(animate);
         }
-        videos.forEach((video) =>
-        {
-            video.addEventListener('play', () =>
-            {
-                animate();
-            });
-        });
-        window.addEventListener('resize', () =>
-        {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-        document.addEventListener('click', () =>
-        {
-            if (audioContext.state === 'suspended')
-            {
-                audioContext.resume();
-            }
-        });
-        window.onload = function ()
-        {
-            animate();
-        };
-        flatBtn.addEventListener('click', () =>
-        {
-            flatActive = true;
-            bassActive = false;
-            trebleActive = false;
-            panningActive = false;
-            stopPanning();
-            equalize();
-        });
-        bassBtn.addEventListener('click', () =>
-        {
-            flatActive = false;
-            bassActive = true;
-            trebleActive = false;
-            equalize();
-        });
-        trebleBtn.addEventListener('click', () =>
-        {
-            flatActive = false;
-            bassActive = false;
-            trebleActive = true;
-            equalize();
-        });
         function equalize()
         {
             const mediaElement = videos[currentIndex];
@@ -715,19 +595,6 @@
                 mediaElement.audioNodes.hGain.gain.value = trebleGain;
             }
         }
-        panningBtn.addEventListener('click', () =>
-        {
-            panningActive = true;
-            if (panningActive)
-            {
-                panDurationInFrames = panDurationInFrames - 10;
-                if (panDurationInFrames < 10)
-                {
-                    panDurationInFrames = 10
-                }
-                panAudio();
-            }
-        });
         function panAudio()
         {
             const video = videos[currentIndex];
@@ -769,6 +636,117 @@
                 panner.positionX.setValueAtTime(0, audioContext.currentTime);
             }
         }
+        videos.forEach((video, index) =>
+        {
+            video.addEventListener('ended', () =>
+            {
+                if (playAllActive)
+                {
+                    if (currentIndex < videos.length - 1)
+                    {
+                        playVideo(currentIndex + 1);
+                    }
+                    else
+                    {
+                        playVideo(0);
+                    }
+                }
+                if (loopActive)
+                {
+                    playVideo(currentIndex);
+                }
+            });
+        });
+        stopBtn.addEventListener('click', () =>
+        {
+            videos[currentIndex].pause();
+            videos[currentIndex].currentTime = 0;
+            resetAllVideos();
+            playAllActive = false;
+            loopActive = false;
+            const video = videos[0];
+            video.style.display = 'block';
+            video.load();
+            currentIndex = 0;
+            videoSelector.value = currentIndex;
+        });
+        panningBtn.addEventListener('click', () =>
+        {
+            panningActive = true;
+            if (panningActive)
+            {
+                panDurationInFrames = panDurationInFrames - 10;
+                if (panDurationInFrames < 10)
+                {
+                    panDurationInFrames = 10
+                }
+                panAudio();
+            }
+        });
+        flatBtn.addEventListener('click', () =>
+        {
+            flatActive = true;
+            bassActive = false;
+            trebleActive = false;
+            panningActive = false;
+            stopPanning();
+            equalize();
+        });
+        bassBtn.addEventListener('click', () =>
+        {
+            flatActive = false;
+            bassActive = true;
+            trebleActive = false;
+            equalize();
+        });
+        trebleBtn.addEventListener('click', () =>
+        {
+            flatActive = false;
+            bassActive = false;
+            trebleActive = true;
+            equalize();
+        });
+        loopBtn.addEventListener('click', () =>
+        {
+            loopActive = true
+            playAllActive = false;
+            playVideo(currentIndex);
+        });
+        prevBtn.addEventListener('click', () =>
+        {
+            if (currentIndex > 0)
+            {
+                playVideo(currentIndex - 1);
+            }
+        });
+        nextBtn.addEventListener('click', () =>
+        {
+            if (currentIndex < videos.length - 1)
+            {
+                playVideo(currentIndex + 1);
+            }
+        });
+        videoSelector.addEventListener('change', () =>
+        {
+            const index = parseInt(videoSelector.value, 10);
+            playVideo(index);
+        });
+        playAll.addEventListener('click', () =>
+        {
+            playAllActive = true;
+            playVideo(currentIndex);
+        });
+        playBtn.addEventListener('click', () =>
+        {
+            videos[currentIndex].play();
+        });
+        pauseBtn.addEventListener('click', () =>
+        {
+            videos[currentIndex].pause();
+        });
+        updateVideoSelector();
+        playVideo(currentIndex);
+        animate();
     </script>
 </body>
 
