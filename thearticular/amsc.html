@@ -27,7 +27,6 @@
         }
 
         .wp-block-button__link {
-            border-radius: 100px;
             padding-top: var(--wp--preset--spacing--30);
             padding-bottom: var(--wp--preset--spacing--30);
         }
@@ -51,26 +50,27 @@
             background-color: #00000000;
             color: #fff;
             border: 1px solid #fff;
-            border-radius: 20px;
-            padding: 0 10px;
+            padding: 0 0px;
             height: 25px;
             margin: 1px;
             width: 100%;
             font-weight: normal;
             font-size: 12px;
+            border-radius: 0;
         }
 
         select option {
             background-color: rgb(0, 0, 0);
+            border-radius: 0;
         }
 
         #videoSelector {
             text-align: center;
             height: 25px;
-            padding: 0 10px;
+            padding: 0 0px;
             font-size: 12px;
             border: 1px solid #fff;
-            border-radius: 20px;
+            border-radius: 0;
         }
 
         #custom-seekbar {
@@ -557,7 +557,7 @@
             for (let i = 0; i < numCircles; i++)
             {
                 const radius = baseRadius * (i + 1) + amplitude / 1;
-                const opacity = (1 - i / numCircles) * 0.3;
+                const opacity = (1 - i / numCircles) * 0.2;
                 const strokeStyle = `hsla(${ hue }, 100%, 50%, ${ opacity })`;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
