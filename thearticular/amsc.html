@@ -97,7 +97,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 14px;
+            font-size: 12px;
             color: white;
             display: inline;
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -154,7 +154,7 @@
 
         footer {
             color: white;
-            font-size: 10px;
+            font-size: 12px;
             text-align: center;
             width: 100%;
             margin: 0 auto;
@@ -185,9 +185,10 @@
                     <select id="videoSelector"></select>
                 </div>
                 <div class="controls">
-                    <button id="prevBtn">Previous</button>
-                    <button id="playBtn">Play</button>
-                    <button id="nextBtn">Next</button>
+                    <button id="flatBtn">Flat</button>
+                    <button id="bassBtn">Bass</button>
+                    <button id="trebleBtn">Treble</button>
+                    <button id="panningBtn">Binuaral</button>
                 </div>
                 <div class="controls">
                     <button id="loopBtn">Loop</button>
@@ -196,10 +197,9 @@
                     <button id="stopBtn">Stop</button>
                 </div>
                 <div class="controls">
-                    <button id="flatBtn">Flat</button>
-                    <button id="bassBtn">Bass</button>
-                    <button id="trebleBtn">Treble</button>
-                    <button id="panningBtn">Binuaral</button>
+                    <button id="prevBtn">Previous</button>
+                    <button id="playBtn">Play</button>
+                    <button id="nextBtn">Next</button>
                 </div>
                 <div id="custom-seekbar">
                     <span></span>
@@ -706,6 +706,7 @@
             videoElement.load();
             currentIndex = 0;
             videoSelector.value = currentIndex;
+            $(seekbarSpan).css("width", 0 + "%");
             flatActive = true;
             bassActive = false;
             trebleActive = false;
