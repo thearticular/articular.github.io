@@ -111,9 +111,16 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 12px;
-            color: white;
+            color: #ffffff;
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
             z-index: 10;
+            animation: hueRotate 1s infinite linear;
+        }
+
+        @keyframes hueRotate {
+            0% { filter: brightness(0); }
+            50% { filter: brightness(1); }
+            100% { filter: brightness(0); }
         }
 
         #currentTime,
@@ -313,7 +320,6 @@
                     preload="none">
                     <source src="wp-content/uploads/nikkal.mp4">
                 </video>
-
                 <video class="video"
                     preload="none">
                     <source src="wp-content/uploads/aaroha.mp4">
