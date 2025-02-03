@@ -804,7 +804,7 @@
         let amplitudeData = [];
         const sampleInterval = 100;
         let samplingIntervalId = null;
-        const MAX_SAMPLES = 80;
+        const MAX_SAMPLES = 100;
         function sampleAudioData()
         {
             const bufferLength = analyser.frequencyBinCount;
@@ -833,8 +833,8 @@
             audioMapCtx.beginPath();
             for (let i = 0; i < len; i++)
             {
-                const normalizedValue = (amplitudeData[i] / 255) ** 1.1;
-                const y = audioMapCanvas.height - normalizedValue * audioMapCanvas.height * 2.5;
+                const normalizedValue = (amplitudeData[i] / 255) ** 1;
+                const y = audioMapCanvas.height - normalizedValue * audioMapCanvas.height * 2;
                 const x = i * sampleWidth;
                 if (i === 0)
                 {
