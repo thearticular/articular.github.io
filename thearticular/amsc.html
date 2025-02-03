@@ -35,12 +35,13 @@
             font-size: 12px;
             border: 1px solid #fff;
             padding: 4px;
-            margin: 0 !important;
+            width: fit-content;
+            margin: 0 auto !important;
         }
 
         .video-container {
             position: relative;
-            margin: 10px;
+            margin: 1px;
             aspect-ratio: 1/1;
         }
 
@@ -53,7 +54,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 10px;
+            margin: 1px;
         }
 
         select,
@@ -96,6 +97,14 @@
         #custom-seekbar span {
             background-color: rgb(255, 255, 255);
             height: 25px;
+        }
+
+        #cursor {
+            position: absolute;
+            width: 4px;
+            height: 23px;
+            background-color: red;
+            transition: left 0.05s linear;
         }
 
         #timeDisplay {
@@ -164,7 +173,7 @@
             font-size: 12px;
             text-align: center;
             width: 100%;
-            margin: 2px auto;
+            margin: 1px auto;
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
         }
     </style>
@@ -210,10 +219,19 @@
                 </div>
                 <div id="custom-seekbar">
                     <span></span>
+                    <div id="cursor"></div>
                     <div id="timeDisplay">
                         <div id="currentTime">00:00</div>/<div id="totalTime">00:00</div>
                     </div>
                     <div id="loadingText">Loading Please Wait...</div>
+                </div>
+                <div id="audioMapContainer"
+                    style="width:100%; border: 1px solid #fff; position: relative; display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 1px auto;">
+                    <canvas id="audioMapCanvas"
+                        style="width:100%; height:25px; display:block;"></canvas>
                 </div>
                 <div class="video-container">
                     <video class="video"
@@ -246,6 +264,7 @@
         const panningBtn = document.getElementById('panningBtn');
         const seekbar = document.getElementById('custom-seekbar');
         const seekbarSpan = seekbar.querySelector('span');
+        const cursor = document.getElementById('cursor');
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const analyser = audioContext.createAnalyser();
         const canvas = document.getElementById("backgroundCanvas");
@@ -437,6 +456,7 @@
                 requestAnimationFrame(() =>
                 {
                     $(seekbarSpan).css("width", percentage + "%");
+                    $(cursor).css("left", `calc(${ percentage }% - 1px)`);
                 });
                 currentTimeElement.textContent = formatTime(videoElement.currentTime);
             };
@@ -449,6 +469,7 @@
                 var vidTime = videoElement.duration * percentage;
                 videoElement.currentTime = vidTime;
                 $(seekbarSpan).css("width", percentage * 100 + "%");
+                $(cursor).css("left", `calc(${ percentage * 100 }% - 1px)`);
             });
         }
         function setupAudioSource(video)
@@ -715,6 +736,7 @@
             currentIndex = 0;
             videoSelector.value = currentIndex;
             $(seekbarSpan).css("width", 0 + "%");
+            $(cursor).css("left", `calc(${ 0 }% - 1px)`);
             flatActive = true;
             bassActive = false;
             trebleActive = false;
@@ -770,6 +792,81 @@
         updateVideoSelector();
         playVideo(currentIndex);
         animate();
+        const audioMapCanvas = document.getElementById("audioMapCanvas");
+        const audioMapCtx = audioMapCanvas.getContext("2d");
+        function resizeAudioMapCanvas()
+        {
+            audioMapCanvas.width = audioMapCanvas.offsetWidth;
+            audioMapCanvas.height = audioMapCanvas.offsetHeight;
+        }
+        resizeAudioMapCanvas();
+        window.addEventListener("resize", resizeAudioMapCanvas);
+        let amplitudeData = [];
+        const sampleInterval = 100;
+        let samplingIntervalId = null;
+        const MAX_SAMPLES = 80;
+        function sampleAudioData()
+        {
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for (let i = 0; i < bufferLength; i++)
+            {
+                sum += dataArray[i];
+            }
+            const averageAmplitude = sum / bufferLength;
+            if (amplitudeData.length >= MAX_SAMPLES)
+            {
+                amplitudeData.shift();
+            }
+            amplitudeData.push(averageAmplitude);
+        }
+        function drawAudioMap()
+        {
+            audioMapCtx.clearRect(0, 0, audioMapCanvas.width, audioMapCanvas.height);
+            const len = amplitudeData.length;
+            if (len === 0) return;
+            const sampleWidth = audioMapCanvas.width / MAX_SAMPLES;
+            audioMapCtx.strokeStyle = "#fff";
+            audioMapCtx.lineWidth = 1;
+            audioMapCtx.beginPath();
+            for (let i = 0; i < len; i++)
+            {
+                const normalizedValue = (amplitudeData[i] / 255) ** 1.1;
+                const y = audioMapCanvas.height - normalizedValue * audioMapCanvas.height * 2.5;
+                const x = i * sampleWidth;
+                if (i === 0)
+                {
+                    audioMapCtx.moveTo(x, y);
+                }
+                else
+                {
+                    audioMapCtx.lineTo(x, y);
+                }
+            }
+            audioMapCtx.stroke();
+        }
+        videoElement.addEventListener("play", () =>
+        {
+            amplitudeData = [];
+            if (samplingIntervalId) clearInterval(samplingIntervalId);
+            samplingIntervalId = setInterval(sampleAudioData, sampleInterval);
+        });
+        videoElement.addEventListener("pause", () =>
+        {
+            if (samplingIntervalId) clearInterval(samplingIntervalId);
+        });
+        videoElement.addEventListener("ended", () =>
+        {
+            if (samplingIntervalId) clearInterval(samplingIntervalId);
+        });
+        function animateAudioMap()
+        {
+            drawAudioMap();
+            requestAnimationFrame(animateAudioMap);
+        }
+        animateAudioMap();
     </script>
 </body>
 
